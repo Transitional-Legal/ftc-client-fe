@@ -1,0 +1,33 @@
+@import "../constants/mixins";
+@import "../constants/colors";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+
+.dashboard {
+  
+  height: 100%;
+  width: 100%;
+  padding-top: 4rem;
+  position: relative;
+
+  .overlay {
+    display: none;
+
+    &.active {
+      display: block;
+      position: absolute;
+      background-color: rgba($body-bg, 0.5);
+      z-index: 99;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  section {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+}

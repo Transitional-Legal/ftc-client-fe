@@ -1,0 +1,9 @@
+@import "../../constants/mixins";
+
+.navbar {
+  @include boxShadowShallow();
+}
+
+.GPIBLogo {
+  max-height: 36px;
+}
