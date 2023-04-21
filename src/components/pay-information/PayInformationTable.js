@@ -3,8 +3,7 @@ import LabelledTable from "components/LabelledTable";
 import { AuthContext } from "components/auth/Auth";
 
 export default function PayInformationTable({
-  bankDetails,
-  userDetails
+  bankDetails
 }) {
   const { user } = useContext(AuthContext);
   // const ref = "REF 123";

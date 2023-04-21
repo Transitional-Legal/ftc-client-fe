@@ -1,9 +1,8 @@
 import React, { useContext, useState, useRef } from "react";
 import useSWR from "swr";
 import Layout from "components/layout/Layout";
+import DocumentTable from "components/documents/DocumentTable";
 import TransactionTable from "components/transactions/TransactionTable";
-// import AddressTotals from "components/addresses/AddressTotals";
-// import AddressPercentBar from "components/addresses/AddressPercentBar";
 import UserStats from "components/users/UserStats";
 import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
@@ -55,12 +54,9 @@ const Dashboard = () => {
     `/interactions/`
   );
 
-  // const { data: userStats, error: fetchStatsError } = useSWR(
-  //   "/stats/all"
-  // );
-
-  const userStats = {
-  };
+  const { data: documents, error: fetchDocumentsError } = useSWR(
+    `/documents/`
+  );
 
   // const { data: addressTotals, error: fetchAddressTotalsError } = useSWR(
   //   isVerified && `/user/${user.id}/address/totals`
@@ -92,12 +88,6 @@ const Dashboard = () => {
     `/user/1/trust/`
   );
 
-  // const bankDetails = {
-  //   name: "Test",
-  //   number: "123456789",
-  //   bsb: "123456"
-  // };
-
   const isFetching = false;
   const currentYear = new Date().getFullYear();
 
@@ -122,8 +112,6 @@ const Dashboard = () => {
     }
   };
 
-  // const isVerified = true;
-
   return (
     <Layout activeTab="Dashboard">
       <div className="dashboard container-fluid py-4">
@@ -136,7 +124,7 @@ const Dashboard = () => {
                 <h4>Account Details</h4>
                 <ErrorMessage error={fetchDetailsError} />
                 <Loader loading={isFetching} />
-                <UserStats stats={userStats} />
+                <UserStats stats={userDetails} />
               </Card>
             </section>
             <section>
@@ -165,7 +153,6 @@ const Dashboard = () => {
                 />
                 <PayInformationTable
                   bankDetails={bankDetails}
-                  userDetails={userDetails}
                 />
               </Card>
             </section>
@@ -256,11 +243,19 @@ const Dashboard = () => {
                 <Loader loading={isFetching} />
                 <TransactionTable transactions={transactions} />
               </Card>
-              {/* <Card>
-                <h4>Payments</h4> */}
-                {/* <ErrorMessage error={fetchReferralTransfersError} /> */}
-                {/* <Loader loading={isFetching} />
-              </Card> */}
+              <Card>
+                <div className="d-flex flex-row">
+                  <div className="mr-auto p-2">
+                    <h4>Documents</h4>
+                  </div>
+                  <div className="p-2">
+                    <Button onClick={handleDownload}>Upload Documents</Button>
+                  </div>
+                </div>
+                <ErrorMessage error={fetchDocumentsError} />
+                <Loader loading={isFetching} />
+                <DocumentTable transactions={documents} />
+              </Card>
             </section>
           </section>
         </section>
