@@ -12,14 +12,14 @@ const columnConfig = {
   type: {
     children: "Type"
   },
-  reference: {
+  description: {
     children: "Description"
   },
-  amount: {
-    children: "Amount",
-    tdStyle: { textAlign: "right" },
-    thStyle: { textAlign: "right" }
-  }
+  // amount: {
+  //   children: "Amount",
+  //   tdStyle: { textAlign: "right" },
+  //   thStyle: { textAlign: "right" }
+  // }
 };
 
 const tableOptions = {

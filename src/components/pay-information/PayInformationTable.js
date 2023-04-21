@@ -7,13 +7,13 @@ export default function PayInformationTable({
   userDetails
 }) {
   const { user } = useContext(AuthContext);
-  const ref = "REF 123";
+  // const ref = "REF 123";
 
   const columnConfig = [
     ["Account Name", bankDetails?.name],
-    ["Account Number", bankDetails?.number],
+    ["Account Number", bankDetails?.account],
     ["BSB", bankDetails?.bsb],
-    ["Reference", ref]
+    ["Reference", bankDetails?.ref]
   ];
   return <LabelledTable hover={false} columns={columnConfig} />;
 }

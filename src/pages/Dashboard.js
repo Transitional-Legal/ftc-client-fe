@@ -10,7 +10,7 @@ import Loader from "components/Loader";
 import { AuthContext } from "components/auth/Auth";
 import PayInformationTable from "components/pay-information/PayInformationTable";
 import Card from "components/Card";
-import PayInformationActions from "components/pay-information/PayInformationActions";
+
 import "./Dashboard.scss";
 
 import { CSVLink } from "react-csv";
@@ -88,11 +88,15 @@ const Dashboard = () => {
   // const isFetchingTransactions =
   //   isVerified && !transactions && !fetchTransactionsError;
 
-  const bankDetails = {
-    name: "Test",
-    number: "123456789",
-    bsb: "123456"
-  };
+  const { data: bankDetails, error: fetchTustDetailsError } = useSWR(
+    `/user/1/trust/`
+  );
+
+  // const bankDetails = {
+  //   name: "Test",
+  //   number: "123456789",
+  //   bsb: "123456"
+  // };
 
   const isFetching = false;
   const currentYear = new Date().getFullYear();
@@ -145,13 +149,13 @@ const Dashboard = () => {
                 Book a call
               </Button>
             </section>
-          </aside>
-          <section className="content col-lg-7">
-            <section style={{ position: "relative" }}>
+
+            {/* <section style={{ position: "relative" }}> */}
+            <section>
               <Card>
                 <h4>Trust Details</h4>
                 <p>
-                  Transitional Legal Trust Details.
+                  Transitional Legal Trust Details
                 </p>
                 <ErrorMessage error={fetchDetailsError} />
                 <Loader
@@ -163,10 +167,59 @@ const Dashboard = () => {
                   bankDetails={bankDetails}
                   userDetails={userDetails}
                 />
-                <PayInformationActions />
               </Card>
             </section>
+            <section>
+            <Button
+                block
+                className="mt-2"
+                // onClick={() => history.push("/login")}
+              >
+                Deposit Crypto
+              </Button>
+              {/* <Button
+                block
+                className="mt-2"
+              >
+                View payments
+              </Button> */}
+              <Button
+                block
+                className="mt-2"
+                // onClick={() => history.push("/login")}
+              >
+                Apply for a loan
+              </Button>
+            </section>
+          </aside>
+          <section className="content col-lg-7">
+            {/* <section style={{ position: "relative" }}>
+              <Card>
+                <h4>Trust Details</h4>
+                <p>
+                  Transitional Legal Trust Details
+                </p>
+                <ErrorMessage error={fetchDetailsError} />
+                <Loader
+                  loading={
+                    isFetching
+                  }
+                />
+                <PayInformationTable
+                  bankDetails={bankDetails}
+                  userDetails={userDetails}
+                />
+              </Card>
+            </section> */}
             <section style={{ position: "relative" }}>
+              <h3>Next interaction</h3>
+              <p>Your next Court hearing is with Judge Smith on Thursday, 1st May 2023 via Teams.</p>
+              <Button 
+                block
+                className="mt-2">
+                Save to calendar
+              </Button>
+              <br></br>
               <Card>
                 <div className="d-flex flex-row">
                   <div className="mr-auto p-2">
@@ -203,11 +256,11 @@ const Dashboard = () => {
                 <Loader loading={isFetching} />
                 <TransactionTable transactions={transactions} />
               </Card>
-              <Card>
-                <h4>Payments</h4>
+              {/* <Card>
+                <h4>Payments</h4> */}
                 {/* <ErrorMessage error={fetchReferralTransfersError} /> */}
-                <Loader loading={isFetching} />
-              </Card>
+                {/* <Loader loading={isFetching} />
+              </Card> */}
             </section>
           </section>
         </section>
