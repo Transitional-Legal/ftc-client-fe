@@ -4,41 +4,31 @@ import LabelledTable from "components/LabelledTable";
 
 const flattenData = (stats) => {
   return {
-    totalBTC: stats?.stats?.transfers?.total || 0,
-    totalAUD: stats?.stats?.deposits?.total || 0,
-    depositCount: stats?.stats?.deposits?.count || 0,
-    averageRate: stats?.stats?.transfers?.averageRate || 0,
-    maxRate: stats?.stats?.transfers?.maxRate || 0,
-    minRate: stats?.stats?.transfers?.minRate || 0
+    name: stats?.stats?.name || "Mr John Doe",
+    matter: stats?.stats?.matter || "Smith & Co",
+    brc: stats?.stats?.brc || "BRC123/2023",
+    trust: stats?.stats?.trust || 5000,
   };
 };
 
 const getColumns = (data) => {
   const map = {
-    totalBTC: {
-      label: "Total BTC Transferred",
+    name: {
+      label: "Name",
       format: (v) => `${v || 0} BTC`
     },
-    totalAUD: {
-      label: "Total Fiat Deposited (AUD)",
-      format: (v) => format$(v, { code: "AUD" })
-    },
-    depositCount: {
-      label: "Deposit Count",
+    matter: {
+      label: "Matter",
       format: (v) => v
     },
-    averageRate: {
-      label: "Average Purchase Price ($/BTC)",
+    brc: {
+      label: "BRC Number / Client Number",
+      format: (v) => v
+    },
+    trust: {
+      label: "Monies in Trust (AUD)",
       format: (v) => format$(v, { code: "AUD" })
     },
-    maxRate: {
-      label: "Max Price ($/BTC)",
-      format: (v) => format$(v, { code: "AUD" })
-    },
-    minRate: {
-      label: "Min Price ($/BTC)",
-      format: (v) => format$(v, { code: "AUD" })
-    }
   };
 
   return Object.keys(data).map((key) => {

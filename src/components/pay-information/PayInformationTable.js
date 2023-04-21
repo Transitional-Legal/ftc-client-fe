@@ -7,7 +7,7 @@ export default function PayInformationTable({
   userDetails
 }) {
   const { user } = useContext(AuthContext);
-  const ref = user?.id.slice(0, 6).toUpperCase();
+  const ref = "REF 123";
 
   const columnConfig = [
     ["Account Name", bankDetails?.name],

@@ -20,17 +20,29 @@ const Dashboard = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { data: depositHints, error: fetchDepositHintsError } = useSWR(
-    `/user/${user.id}/deposithints`
-  );
+  // const { data: depositHints, error: fetchDepositHintsError } = useSWR(
+  //   `/user/${user.id}/deposithints`
+  // );
 
-  const isFetchingDepositHints = !depositHints && !fetchDepositHintsError;
+  const depositHints = {
+  };
 
-  const { data: userDetails, error: fetchDetailsError } = useSWR(
-    `/user/${user.id}`
-  );
+  const errorMessage = "Error fetching data";
 
-  const isFetchingDetails = !userDetails && !fetchDetailsError;
+  const isFetchingDepositHints = false; // !depositHints && !fetchDepositHintsError;
+
+  // const { data: userDetails, error: fetchDetailsError } = useSWR(
+  //   `/user/${user.id}`
+  // );
+
+  const userDetails = {
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": ""
+  };
+
+  const isFetchingDetails = "false"; // !userDetails && !fetchDetailsError;
 
   const { data: settings, error: fetchSettingsError } = useSWR(
     `/settings/${user.id}`
@@ -169,7 +181,7 @@ const Dashboard = () => {
               <ion-icon name="create-outline" />
             </Button>
           </div>
-          <ErrorMessage error={fetchDetailsError} />
+          <ErrorMessage error={errorMessage} />
           <Loader loading={isFetchingDetails} />
           <LabelledTable columns={profileColumns} />
           <p style={{ fontSize: "95%" }}>
@@ -187,7 +199,7 @@ const Dashboard = () => {
               <ion-icon name="create-outline" />
             </Button>
           </div>
-          <ErrorMessage error={fetchDepositHintsError} />
+          <ErrorMessage error={fetchAccountInfoError} />
           <Loader loading={isFetchingDepositHints} />
           <LabelledTable columns={payrollColumns} />
         </Card>
@@ -211,7 +223,7 @@ const Dashboard = () => {
               <ion-icon name="create-outline" />
             </Button>
           </div>
-          <ErrorMessage error={fetchDepositHintsError} />
+          <ErrorMessage error={fetchAccountInfoError} />
           <Loader loading={isFetchingDepositHints} />
           <LabelledTable columns={referralColumns} />
         </Card>

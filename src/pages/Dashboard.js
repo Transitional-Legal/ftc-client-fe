@@ -2,8 +2,8 @@ import React, { useContext, useState, useRef } from "react";
 import useSWR from "swr";
 import Layout from "components/layout/Layout";
 import TransactionTable from "components/transactions/TransactionTable";
-import AddressTotals from "components/addresses/AddressTotals";
-import AddressPercentBar from "components/addresses/AddressPercentBar";
+// import AddressTotals from "components/addresses/AddressTotals";
+// import AddressPercentBar from "components/addresses/AddressPercentBar";
 import UserStats from "components/users/UserStats";
 import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
@@ -52,12 +52,15 @@ const Dashboard = () => {
   // );
 
   const { data: transactions, error: fetchTransactionsError } = useSWR(
-    `/transaction`
+    `/interactions/`
   );
 
-  const { data: userStats, error: fetchStatsError } = useSWR(
-    "/stats/all"
-  );
+  // const { data: userStats, error: fetchStatsError } = useSWR(
+  //   "/stats/all"
+  // );
+
+  const userStats = {
+  };
 
   // const { data: addressTotals, error: fetchAddressTotalsError } = useSWR(
   //   isVerified && `/user/${user.id}/address/totals`
@@ -114,30 +117,41 @@ const Dashboard = () => {
       setDownloadError({ show: true, message: error.message });
     }
   };
+
+  // const isVerified = true;
+
   return (
     <Layout activeTab="Dashboard">
       <div className="dashboard container-fluid py-4">
-        <Loader loading={!hasVerified} />
+        <Loader loading={false} />
         <section className="main row">
-          <div className={isVerified ? "overlay" : "overlay active"} />
+          {/* <div className={isVerified ? "overlay" : "overlay active"} /> */}
           <aside className="col-lg-5">
             <section>
               <Card>
-                <h4>Stats</h4>
-                <ErrorMessage error={fetchStatsError} />
+                <h4>Account Details</h4>
+                <ErrorMessage error={fetchDetailsError} />
                 <Loader loading={isFetching} />
                 <UserStats stats={userStats} />
               </Card>
+            </section>
+            <section>
+              <Button
+                block
+                // variant="link"
+                className="mt-2"
+                // onClick={() => history.push("/login")}
+              >
+                Book a call
+              </Button>
             </section>
           </aside>
           <section className="content col-lg-7">
             <section style={{ position: "relative" }}>
               <Card>
-                <h4>Unique Bitcoin Pay Information</h4>
+                <h4>Trust Details</h4>
                 <p>
-                  Please provide the following Unique Bitcoin Pay Information to
-                  your employer for processing the part of your salary to be
-                  paid in bitcoin.
+                  Transitional Legal Trust Details.
                 </p>
                 <ErrorMessage error={fetchDetailsError} />
                 <Loader
@@ -156,7 +170,7 @@ const Dashboard = () => {
               <Card>
                 <div className="d-flex flex-row">
                   <div className="mr-auto p-2">
-                    <h4>Transactions</h4>
+                    <h4>Interactions</h4>
                   </div>
                   <div className="p-2">
                     <select
