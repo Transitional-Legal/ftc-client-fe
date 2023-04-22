@@ -13,7 +13,7 @@ import Card from "components/Card";
 import "./Dashboard.scss";
 
 import { CSVLink } from "react-csv";
-import { Alert, Button } from "react-bootstrap";
+import { Alert, Button, Container } from "react-bootstrap";
 import api from "../apis/api";
 
 const Dashboard = () => {
@@ -50,13 +50,10 @@ const Dashboard = () => {
   //   isVerified && `/user/${user.id}/bankdetails`
   // );
 
-  const { data: transactions, error: fetchTransactionsError } = useSWR(
-    `/interactions/`
-  );
+  const { data: transactions, error: fetchTransactionsError } =
+    useSWR(`/interactions/`);
 
-  const { data: documents, error: fetchDocumentsError } = useSWR(
-    `/documents/`
-  );
+  const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/`);
 
   // const { data: addressTotals, error: fetchAddressTotalsError } = useSWR(
   //   isVerified && `/user/${user.id}/address/totals`
@@ -84,9 +81,8 @@ const Dashboard = () => {
   // const isFetchingTransactions =
   //   isVerified && !transactions && !fetchTransactionsError;
 
-  const { data: bankDetails, error: fetchTustDetailsError } = useSWR(
-    `/user/1/trust/`
-  );
+  const { data: bankDetails, error: fetchTustDetailsError } =
+    useSWR(`/user/1/trust/`);
 
   const isFetching = false;
   const currentYear = new Date().getFullYear();
@@ -116,6 +112,19 @@ const Dashboard = () => {
     <Layout activeTab="Dashboard">
       <div className="dashboard container-fluid py-4">
         <Loader loading={false} />
+
+        <div class="container">
+          <div class="row text-center justify-content-center mb-5">
+            <div class="col-xl-12 col-lg-12">
+              <h2 class="font-weight-bold">Your Matter</h2>
+              <p class="text-muted">
+                Your next Court hearing is with Judge Smith on Thursday, 1st May
+                2023 via Teams.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <section className="main row">
           {/* <div className={isVerified ? "overlay" : "overlay active"} /> */}
           <aside className="col-lg-5">
@@ -142,22 +151,14 @@ const Dashboard = () => {
             <section>
               <Card>
                 <h4>Trust Details</h4>
-                <p>
-                  Transitional Legal Trust Details
-                </p>
+                <p>Transitional Legal Trust Details</p>
                 <ErrorMessage error={fetchDetailsError} />
-                <Loader
-                  loading={
-                    isFetching
-                  }
-                />
-                <PayInformationTable
-                  bankDetails={bankDetails}
-                />
+                <Loader loading={isFetching} />
+                <PayInformationTable bankDetails={bankDetails} />
               </Card>
             </section>
             <section>
-            <Button
+              <Button
                 block
                 className="mt-2"
                 // onClick={() => history.push("/login")}
@@ -199,14 +200,73 @@ const Dashboard = () => {
               </Card>
             </section> */}
             <section style={{ position: "relative" }}>
-              <h3>Next interaction</h3>
-              <p>Your next Court hearing is with Judge Smith on Thursday, 1st May 2023 via Teams.</p>
-              <Button 
-                block
-                className="mt-2">
+              <Container>
+                <div class="row">
+                  <div class="col">
+                    <div
+                      class="timeline-steps aos-init aos-animate"
+                      data-aos="fade-up"
+                    >
+                      <div class="timeline-step">
+                        <div
+                          class="timeline-content"
+                          data-toggle="popover"
+                          data-trigger="hover"
+                          data-placement="top"
+                          title=""
+                          data-content=""
+                          data-original-title="2003"
+                        >
+                          <div class="inner-circle"></div>
+                          <p class="h6 mt-3 mb-1">1/1/2023</p>
+                          <p class="h6 text-muted mb-0 mb-lg-0">Application</p>
+                        </div>
+                      </div>
+                      <div class="timeline-step">
+                        <div
+                          class="timeline-content"
+                          data-toggle="popover"
+                          data-trigger="hover"
+                          data-placement="top"
+                          title=""
+                          data-content=""
+                          data-original-title="2004"
+                        >
+                          <div class="inner-circle"></div>
+                          <p class="h6 mt-3 mb-1">1/2/2023</p>
+                          <p class="h6 text-muted mb-0 mb-lg-0">Hearing</p>
+                        </div>
+                      </div>
+                      <div class="timeline-step">
+                        <div
+                          class="timeline-content"
+                          data-toggle="popover"
+                          data-trigger="hover"
+                          data-placement="top"
+                          title=""
+                          data-content=""
+                          data-original-title="2005"
+                        >
+                          <div class="inner-circle"></div>
+                          <p class="h6 mt-3 mb-1">1/12/2023</p>
+                          <p class="h6 text-muted mb-0 mb-lg-0">Trial</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Container>
+
+              {/* <h3>Next interaction</h3>
+              <p>
+                Your next Court hearing is with Judge Smith on Thursday, 1st May
+                2023 via Teams.
+              </p> */}
+              {/* <Button block className="mt-2">
                 Save to calendar
               </Button>
-              <br></br>
+              <br></br> */}
+
               <Card>
                 <div className="d-flex flex-row">
                   <div className="mr-auto p-2">
@@ -223,6 +283,7 @@ const Dashboard = () => {
                       <option>{currentYear}</option>
                       <option>{currentYear - 1}</option>
                       <option>{currentYear - 2}</option>
+                      <option>{currentYear - 3}</option>
                     </select>
                   </div>
                   <div className="p-2">
