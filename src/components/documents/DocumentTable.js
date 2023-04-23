@@ -9,11 +9,11 @@ const columnConfig = {
     children: "Date",
     dataFormat: (cell) => cell && moment(cell).format("DD-MM-YYYY")
   },
-  file_name: {
+  fileName: {
     children: "File Name"
   },
-  description: {
-    children: "Description"
+  name: {
+    children: "Name"
   },
 };
 

@@ -26,60 +26,15 @@ const Dashboard = () => {
   });
 
   const csvRef = useRef();
-  // const { data: referralCredits, error: fetchReferralCreditsError } = useSWR(
-  //   "/referralCredits"
-  // );
-
-  // const {
-  //   data: referralTransfers,
-  //   error: fetchReferralTransfersError
-  // } = useSWR("/referralTransfer");
-
-  // const { data: depositHints, error: fetchDepositHintsError } = useSWR(
-  //   `/user/${user.id}/deposithints`
-  // );
 
   const { data: userDetails, error: fetchDetailsError } = useSWR(
     `/user/${user.id}`
   );
 
-  // const { data: userAddress } = useSWR(user && `/user/${user.id}/address`);
-
-  // // Only if verified
-  // const { data: bankDetails, error: fetchBankDetailsError } = useSWR(
-  //   isVerified && `/user/${user.id}/bankdetails`
-  // );
-
-  const { data: transactions, error: fetchTransactionsError } =
+  const { data: interactions, error: fetchInteractionsError } =
     useSWR(`/interactions/`);
 
   const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/`);
-
-  // const { data: addressTotals, error: fetchAddressTotalsError } = useSWR(
-  //   isVerified && `/user/${user.id}/address/totals`
-  // );
-
-  // const { data: archivedAddresses, error: fetchArchivedAddressError } = useSWR(
-  //   isVerified && `/user/${user.id}/address?deleted=true`
-  // );
-
-  // const { data: activeAddresses, error: fetchActiveAddressError } = useSWR(
-  //   isVerified && `/user/${user.id}/address`
-  // );
-
-  // const { data: referrals, error: referralsError } = useSWR(
-  //   user.id && `/user/${user.id}/referral`
-  // );
-
-  // Loading status
-  // const isFetchingDepositHints = !depositHints && !fetchDepositHintsError;
-  // const isFetchingStats = isVerified && !userStats && !fetchStatsError;
-
-  // const isFetchingBankDetails =
-  //   isVerified && !bankDetails && !fetchBankDetailsError;
-  // const isFetchingDetails = isVerified && !userDetails && !fetchDetailsError;
-  // const isFetchingTransactions =
-  //   isVerified && !transactions && !fetchTransactionsError;
 
   const { data: bankDetails, error: fetchTustDetailsError } =
     useSWR(`/user/1/trust/`);
@@ -251,7 +206,7 @@ const Dashboard = () => {
                           <p class="h6 mt-3 mb-1">1/12/2023</p>
                           <p class="h6 text-muted mb-0 mb-lg-0">Trial</p>
                         </div>
-                      </div>
+                      </div>fetchInteractionsError
                     </div>
                   </div>
                 </div>
@@ -300,9 +255,9 @@ const Dashboard = () => {
                 {downloadError.show && (
                   <Alert variant="danger">{downloadError.message}</Alert>
                 )}
-                <ErrorMessage error={fetchTransactionsError} />
+                <ErrorMessage error={fetchInteractionsError} />
                 <Loader loading={isFetching} />
-                <TransactionTable transactions={transactions} />
+                <TransactionTable transactions={interactions} />
               </Card>
               <Card>
                 <div className="d-flex flex-row">
