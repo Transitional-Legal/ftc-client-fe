@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import { open, secure } from "apis/api";
 
 // Create a form that allows users to enter their name, DOB, Address, and Phone Number.
 
@@ -31,6 +32,21 @@ const UserDetailsForm = () => {
         onSubmit: values => {
             console.log("This is cool")
             // todo: submit to api
+            // open.post('/users', values)
+            const apiUrl = "https://king-prawn-app-pb3h2.ondigitalocean.app/api";
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (response.ok) {
+                        console.log("API is working");
+                    } else {
+                        console.log("API is not working");
+                    }
+                })
+                .catch(error => {
+                    console.log("Error occurred while testing API:", error);
+                });
+            
             alert(JSON.stringify(values, null, 2));
         }
     });
