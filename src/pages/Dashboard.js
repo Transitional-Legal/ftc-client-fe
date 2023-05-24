@@ -12,6 +12,8 @@ import Card from "components/Card";
 
 import "./Dashboard.scss";
 
+import UserDetailsForm from "components/forms/UserDetailsForm";
+
 import { CSVLink } from "react-csv";
 import { Alert, Button, Container } from "react-bootstrap";
 import api from "../apis/api";
@@ -92,11 +94,14 @@ const Dashboard = () => {
               </Card>
             </section>
             <section>
+              <UserDetailsForm />
+            </section>
+            <section>
               <Button
                 block
                 // variant="link"
                 className="mt-2"
-                // onClick={() => history.push("/login")}
+              // onClick={() => history.push("/login")}
               >
                 Book a call
               </Button>
@@ -116,7 +121,7 @@ const Dashboard = () => {
               <Button
                 block
                 className="mt-2"
-                // onClick={() => history.push("/login")}
+              // onClick={() => history.push("/login")}
               >
                 Deposit Crypto
               </Button>
@@ -129,7 +134,7 @@ const Dashboard = () => {
               <Button
                 block
                 className="mt-2"
-                // onClick={() => history.push("/login")}
+              // onClick={() => history.push("/login")}
               >
                 Apply for a loan
               </Button>
