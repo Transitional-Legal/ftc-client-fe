@@ -96,7 +96,7 @@ const Dashboard = () => {
                 className="mt-2"
                 // onClick={() => history.push("/login")}
               >
-                Update My Details
+                Update my details
               </Button>
               <Button
                 block
