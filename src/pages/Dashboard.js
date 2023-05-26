@@ -9,10 +9,7 @@ import Loader from "components/Loader";
 import { AuthContext } from "components/auth/Auth";
 import PayInformationTable from "components/pay-information/PayInformationTable";
 import Card from "components/Card";
-
 import "./Dashboard.scss";
-
-import UserDetailsForm from "components/forms/UserDetailsForm";
 
 import { CSVLink } from "react-csv";
 import { Alert, Button, Container } from "react-bootstrap";
@@ -94,14 +91,18 @@ const Dashboard = () => {
               </Card>
             </section>
             <section>
-              <UserDetailsForm />
-            </section>
-            <section>
+              <Button
+                block
+                className="mt-2"
+                // onClick={() => history.push("/login")}
+              >
+                Update My Details
+              </Button>
               <Button
                 block
                 // variant="link"
                 className="mt-2"
-              // onClick={() => history.push("/login")}
+                // onClick={() => history.push("/login")}
               >
                 Book a call
               </Button>
@@ -121,7 +122,7 @@ const Dashboard = () => {
               <Button
                 block
                 className="mt-2"
-              // onClick={() => history.push("/login")}
+                // onClick={() => history.push("/login")}
               >
                 Deposit Crypto
               </Button>
@@ -134,7 +135,7 @@ const Dashboard = () => {
               <Button
                 block
                 className="mt-2"
-              // onClick={() => history.push("/login")}
+                // onClick={() => history.push("/login")}
               >
                 Apply for a loan
               </Button>
@@ -179,7 +180,9 @@ const Dashboard = () => {
                         >
                           <div className="inner-circle"></div>
                           <p className="h6 mt-3 mb-1">1/1/2023</p>
-                          <p className="h6 text-muted mb-0 mb-lg-0">Application</p>
+                          <p className="h6 text-muted mb-0 mb-lg-0">
+                            Application
+                          </p>
                         </div>
                       </div>
                       <div className="timeline-step">
@@ -211,7 +214,8 @@ const Dashboard = () => {
                           <p className="h6 mt-3 mb-1">1/12/2023</p>
                           <p className="h6 text-muted mb-0 mb-lg-0">Trial</p>
                         </div>
-                      </div>fetchInteractionsError
+                      </div>
+                      fetchInteractionsError
                     </div>
                   </div>
                 </div>
