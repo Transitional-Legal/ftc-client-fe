@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 const LabelledTable = ({ columns, ...props }) => {
+  console.log(columns, "columns")
   return (
     <Table hover {...props}>
       <tbody>
