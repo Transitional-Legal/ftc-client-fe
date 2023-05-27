@@ -87,15 +87,19 @@ const Dashboard = () => {
           <aside className="col-lg-5">
             <section>
               <Card>
+                <UserDetailsForm />
+              </Card>
+            </section>
+
+            <section>
+              <Card>
                 <h4>Account Details</h4>
                 <ErrorMessage error={fetchDetailsError} />
                 <Loader loading={isFetching} />
                 <UserStats stats={userDetails} />
               </Card>
             </section>
-            <section>
-              <UserDetailsForm />
-            </section>
+
             <section>
               <Button
                 block

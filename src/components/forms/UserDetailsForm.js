@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import api, { open, secure } from "apis/api";
+import { Button, Card } from "react-bootstrap";
 
 // Create a form that allows users to enter their name, DOB, Address, and Phone Number.
 
@@ -44,20 +45,6 @@ const UserDetailsForm = () => {
                 });
             // open.post('/users', values)
             const apiUrl = "https://king-prawn-app-pb3h2.ondigitalocean.app/api";
-
-            // fetch(apiUrl)
-            //     .then(response => {
-            //         if (response.ok) {
-            //             console.log("API is working");
-            //         } else {
-            //             console.log("API is not working");
-            //         }
-            //     })
-            //     .catch(error => {
-            //         console.log("Error occurred while testing API:", error);
-            //     });
-            
-            // alert(JSON.stringify(values, null, 2));
         }
     });
 
@@ -65,7 +52,7 @@ const UserDetailsForm = () => {
     return (<>
 
         <div>
-            <h1>User Details Form</h1>
+            <h4>Client Details</h4>
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="firstName">First Name</label>
                 <input
@@ -112,7 +99,7 @@ const UserDetailsForm = () => {
                     value={formik.values.phoneNumber}
                 />
 
-                <button type="submit">Submit</button>
+                <Button block className="mt-2" type="submit">Save</Button>
                 {/* <div> */}
             </form>
 
