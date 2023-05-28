@@ -15,7 +15,7 @@ const getColumns = (data) => {
   const map = {
     name: {
       label: "Name",
-      format: (v) => `${v || 0} BTC`
+      format: (v) => v
     },
     matter: {
       label: "Matter",

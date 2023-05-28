@@ -3,7 +3,7 @@ import useSWR from "swr";
 import Layout from "components/layout/Layout";
 import DocumentTable from "components/documents/DocumentTable";
 import TransactionTable from "components/transactions/TransactionTable";
-import UserStats from "components/users/UserStats";
+import UserDetails from "components/users/UserDetails";
 import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
 import { AuthContext } from "components/auth/Auth";
@@ -88,7 +88,7 @@ const Dashboard = () => {
                 <h4>Account Details</h4>
                 <ErrorMessage error={fetchDetailsError} />
                 <Loader loading={isFetching} />
-                <UserStats stats={userDetails} />
+                <UserDetails stats={userDetails} />
               </Card>
             </section>
             <section>
