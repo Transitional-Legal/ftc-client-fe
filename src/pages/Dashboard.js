@@ -9,7 +9,6 @@ import Loader from "components/Loader";
 import { AuthContext } from "components/auth/Auth";
 import PayInformationTable from "components/pay-information/PayInformationTable";
 import Card from "components/Card";
-
 import "./Dashboard.scss";
 
 import { CSVLink } from "react-csv";
@@ -68,11 +67,11 @@ const Dashboard = () => {
       <div className="dashboard container-fluid py-4">
         <Loader loading={false} />
 
-        <div class="container">
-          <div class="row text-center justify-content-center mb-5">
-            <div class="col-xl-12 col-lg-12">
-              <h2 class="font-weight-bold">Your Matter</h2>
-              <p class="text-muted">
+        <div className="container">
+          <div className="row text-center justify-content-center mb-5">
+            <div className="col-xl-12 col-lg-12">
+              <h2 className="font-weight-bold">Your Matter</h2>
+              <p className="text-muted">
                 Your next Court hearing is with Judge Smith on Thursday, 1st May
                 2023 via Teams.
               </p>
@@ -92,6 +91,13 @@ const Dashboard = () => {
               </Card>
             </section>
             <section>
+              <Button
+                block
+                className="mt-2"
+                // onClick={() => history.push("/login")}
+              >
+                Update my details
+              </Button>
               <Button
                 block
                 // variant="link"
@@ -156,15 +162,15 @@ const Dashboard = () => {
             </section> */}
             <section style={{ position: "relative" }}>
               <Container>
-                <div class="row">
-                  <div class="col">
+                <div className="row">
+                  <div className="col">
                     <div
-                      class="timeline-steps aos-init aos-animate"
+                      className="timeline-steps aos-init aos-animate"
                       data-aos="fade-up"
                     >
-                      <div class="timeline-step">
+                      <div className="timeline-step">
                         <div
-                          class="timeline-content"
+                          className="timeline-content"
                           data-toggle="popover"
                           data-trigger="hover"
                           data-placement="top"
@@ -172,14 +178,16 @@ const Dashboard = () => {
                           data-content=""
                           data-original-title="2003"
                         >
-                          <div class="inner-circle"></div>
-                          <p class="h6 mt-3 mb-1">1/1/2023</p>
-                          <p class="h6 text-muted mb-0 mb-lg-0">Application</p>
+                          <div className="inner-circle"></div>
+                          <p className="h6 mt-3 mb-1">1/1/2023</p>
+                          <p className="h6 text-muted mb-0 mb-lg-0">
+                            Application
+                          </p>
                         </div>
                       </div>
-                      <div class="timeline-step">
+                      <div className="timeline-step">
                         <div
-                          class="timeline-content"
+                          className="timeline-content"
                           data-toggle="popover"
                           data-trigger="hover"
                           data-placement="top"
@@ -187,14 +195,14 @@ const Dashboard = () => {
                           data-content=""
                           data-original-title="2004"
                         >
-                          <div class="inner-circle"></div>
-                          <p class="h6 mt-3 mb-1">1/2/2023</p>
-                          <p class="h6 text-muted mb-0 mb-lg-0">Hearing</p>
+                          <div className="inner-circle"></div>
+                          <p className="h6 mt-3 mb-1">1/2/2023</p>
+                          <p className="h6 text-muted mb-0 mb-lg-0">Hearing</p>
                         </div>
                       </div>
-                      <div class="timeline-step">
+                      <div className="timeline-step">
                         <div
-                          class="timeline-content"
+                          className="timeline-content"
                           data-toggle="popover"
                           data-trigger="hover"
                           data-placement="top"
@@ -202,11 +210,12 @@ const Dashboard = () => {
                           data-content=""
                           data-original-title="2005"
                         >
-                          <div class="inner-circle"></div>
-                          <p class="h6 mt-3 mb-1">1/12/2023</p>
-                          <p class="h6 text-muted mb-0 mb-lg-0">Trial</p>
+                          <div className="inner-circle"></div>
+                          <p className="h6 mt-3 mb-1">1/12/2023</p>
+                          <p className="h6 text-muted mb-0 mb-lg-0">Trial</p>
                         </div>
-                      </div>fetchInteractionsError
+                      </div>
+                      fetchInteractionsError
                     </div>
                   </div>
                 </div>
