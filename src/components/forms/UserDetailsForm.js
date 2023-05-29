@@ -1,82 +1,57 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import api, { open, secure } from "apis/api";
+import api from "apis/api";
 import { Button, Card, Modal } from "react-bootstrap";
 import LabelledTable from "components/LabelledTable";
-import { format as format$ } from "currency-formatter";
-
-// todo: put initial values into the react state and pass it to the formik
-// todo: add validation to the formik
-// todo: add submit handler to the formik
-let initialValues = {
-    fName: "Johnsddfs",
-    lName: "Smith",
-    dob: "14/9/1975",
-    address: "11 Smith Street, Sydney, NSW 2000",
-    phone: "0459877564",
-}
-
-
-// const flattenData = () => {
-//     return {
-//         fName: "John",
-//         lName: "Smith",
-//         dob: "14/9/1975",
-//         address: "11 Smith Street, Sydney, NSW 2000",
-//         phone: "0459877564",
-//     };
-// };
-
-const getColumns = (data) => {
-    const map = {
-        fName: {
-            label: "First Name",
-            format: (v) => v,
-        },
-        lName: {
-            label: "Last Name",
-            format: (v) => v,
-        },
-        dob: {
-            label: "DOB",
-            format: (v) => v,
-        },
-        address: {
-            label: "Address",
-            format: (v) => v,
-        },
-        phone: {
-            label: "Phone Number",
-            format: (v) => v,
-        },
-    };
-
-    return Object.keys(data).map((key) => {
-        return [map[key].label, map[key].format(data[key])];
-    });
-};
-
-// Create a form that allows users to enter their name, DOB, Address, and Phone Number.
 
 const UserDetailsForm = () => {
     const [showModal, setShowModal] = useState(false);
 
-    // State variables for form values
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [dob, setDob] = useState("");
-    const [address, setAddress] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [firstName, setFirstName] = useState("John");
+    const [lastName, setLastName] = useState("Smith");
+    const [dob, setDob] = useState("14/9/1975");
+    const [address, setAddress] = useState("11 Smith Street, Sydney, NSW 2000");
+    const [phoneNumber, setPhoneNumber] = useState("0459877564");
+
+    let initialValues = {
+        fName: firstName,
+        lName: lastName,
+        dob: dob,
+        address: address,
+        phone: phoneNumber,
+    };
+
+    const getColumns = (data) => {
+        const map = {
+            fName: {
+                label: "First Name",
+                format: (v) => v,
+            },
+            lName: {
+                label: "Last Name",
+                format: (v) => v,
+            },
+            dob: {
+                label: "DOB",
+                format: (v) => v,
+            },
+            address: {
+                label: "Address",
+                format: (v) => v,
+            },
+            phone: {
+                label: "Phone Number",
+                format: (v) => v,
+            },
+        };
+
+        return Object.keys(data).map((key) => {
+            return [map[key].label, map[key].format(data[key])];
+        });
+    };
 
     const handleOpenModal = () => {
-        const data = flattenData();
-        setFirstName(data.name);
-        setLastName(data.matter);
-        setDob(data.brc);
-        setAddress(data.trust);
-        setPhoneNumber(data.brc);
-
         setShowModal(true);
     };
 
@@ -84,29 +59,6 @@ const UserDetailsForm = () => {
         setShowModal(false);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // Update the client details in the LabelledTable component using the form values
-        const updatedData = {
-            name: firstName,
-            matter: lastName,
-            brc: dob,
-            trust: address,
-            brc: phoneNumber,
-        };
-
-        // todo: update the client details in the database
-        // todo: update the client details in the LabelledTable component using the form values (updatedData) 
-        // const updatedColumns = getColumns(updatedData);
-        // // setColumns(updatedColumns);
-
-        // Close the modal
-        setShowModal(false);
-    };
-
-    const data = initialValues;
-    const columns = getColumns(data);
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -129,22 +81,29 @@ const UserDetailsForm = () => {
             phoneNumber: Yup.number().required("Required"),
         }),
         onSubmit: (values) => {
-            console.log("This is cool");
+            console.log("NextSteps ?=> Submit to AS and backend.");
             console.log(values);
+            setFirstName(values.firstName);
+            setLastName(values.lastName);
+            setDob(values.dob);
+            setAddress(values.address);
+            setPhoneNumber(values.phoneNumber);
 
-            // todo: submit to api
-            api
-                .post("/user", values)
-                .then((response) => {
-                    console.log(response.data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            // open.post('/users', values)
-            const apiUrl = "https://king-prawn-app-pb3h2.ondigitalocean.app/api";
+            // todo: submit to api and action step
+            // api.post("/user", values)
+            //     .then((response) => {
+            //         console.log(response.data, "response good");
+            //     })
+            //     .catch((error) => {
+            //         console.log(error, "error");
+            //     });
+
+            setShowModal(false);
         },
     });
+
+    const data = initialValues;
+    const columns = getColumns(data);
 
     return (
         <>
@@ -163,7 +122,7 @@ const UserDetailsForm = () => {
                     <Modal.Title>Edit Client Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={formik.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="firstName">First Name</label>
                             <input
@@ -171,9 +130,13 @@ const UserDetailsForm = () => {
                                 name="firstName"
                                 type="text"
                                 className="form-control"
-                                onChange={(e) => setFirstName(e.target.value)}
-                                value={firstName}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.firstName}
                             />
+                            {formik.touched.firstName && formik.errors.firstName && (
+                                <div className="error">{formik.errors.firstName}</div>
+                            )}
                         </div>
 
                         <div className="form-group">
@@ -183,9 +146,13 @@ const UserDetailsForm = () => {
                                 name="lastName"
                                 type="text"
                                 className="form-control"
-                                onChange={(e) => setLastName(e.target.value)}
-                                value={lastName}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.lastName}
                             />
+                            {formik.touched.lastName && formik.errors.lastName && (
+                                <div className="error">{formik.errors.lastName}</div>
+                            )}
                         </div>
 
                         <div className="form-group">
@@ -195,9 +162,13 @@ const UserDetailsForm = () => {
                                 name="dob"
                                 type="date"
                                 className="form-control"
-                                onChange={(e) => setDob(e.target.value)}
-                                value={dob}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.dob}
                             />
+                            {formik.touched.dob && formik.errors.dob && (
+                                <div className="error">{formik.errors.dob}</div>
+                            )}
                         </div>
 
                         <div className="form-group">
@@ -207,9 +178,13 @@ const UserDetailsForm = () => {
                                 name="address"
                                 type="text"
                                 className="form-control"
-                                onChange={(e) => setAddress(e.target.value)}
-                                value={address}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.address}
                             />
+                            {formik.touched.address && formik.errors.address && (
+                                <div className="error">{formik.errors.address}</div>
+                            )}
                         </div>
 
                         <div className="form-group">
@@ -219,9 +194,13 @@ const UserDetailsForm = () => {
                                 name="phoneNumber"
                                 type="text"
                                 className="form-control"
-                                onChange={(e) => setPhoneNumber(e.target.value)}
-                                value={phoneNumber}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.phoneNumber}
                             />
+                            {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+                                <div className="error">{formik.errors.phoneNumber}</div>
+                            )}
                         </div>
 
                         <div className="text-center">
