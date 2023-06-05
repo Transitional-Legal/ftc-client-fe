@@ -16,7 +16,7 @@ import "./Dashboard.scss";
 const AddressesPage = () => {
   const { user } = useContext(AuthContext);
   const history = useHistory();
-  const getAddressesUrl = `/user/${user.id}/address`;
+  const getAddressesUrl = `/users/${user.id}/address`;
   const [selected, , selectRowConfig] = useSelectedRow(null);
   const [selectedGroup, , selectGroupRowConfig] = useSelectedRow(null);
   const { data: addresses, error: fetchAddressError } = useSWR(getAddressesUrl);

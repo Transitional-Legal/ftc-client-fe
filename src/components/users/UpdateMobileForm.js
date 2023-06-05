@@ -12,7 +12,7 @@ const UpdateMobileForm = ({ onSubmit, initialValues: _inititalValues }) => {
   const [hasSent, setSent] = useState(false);
   const sendSMS = async (values, actions) => {
     try {
-      await gpib.secure.get(`/user/verifymobile?mobile=${values.mobile}`);
+      await gpib.secure.get(`/users/verifymobile?mobile=${values.mobile}`);
       actions.setSubmitting(false);
       setSent(true);
     } catch (e) {

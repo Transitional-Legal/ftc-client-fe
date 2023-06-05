@@ -14,16 +14,16 @@ export const AuthProvider = ({ children }) => {
   const [skipKYC, setSkipKYC] = useState(false);
 
   const { data: userDetails, error: fetchDetailsError } = useSWR(
-    user && `/user/${user.id}`
+    user && `/users/${user.id}`
   );
 
   const isFetchingDetails = user && !userDetails && !fetchDetailsError;
 
   const { data: depositHints } = useSWR(
-    user && `/user/${user.id}/deposithints`
+    user && `/users/${user.id}/deposithints`
   );
 
-  const { data: userAddress } = useSWR(user && `/user/${user.id}/address`);
+  const { data: userAddress } = useSWR(user && `/users/${user.id}/address`);
   const { emailVerified, mobileVerified, idVerificationStatus } = userDetails || {};
   const { depositAmount } = depositHints || {};
 
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
       const user = {
         id: 1,
-        email: "test@example.com"
+        email: "lucas@lucascullen.com"
       };
 
       window.localStorage.setItem("user", JSON.stringify(user));

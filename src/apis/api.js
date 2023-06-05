@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const open = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080",
   headers: {
     "Cache-Control": "no-store"
   }
 });
 
 const secure = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080",
   headers: {
     "Cache-Control": "no-store"
   }

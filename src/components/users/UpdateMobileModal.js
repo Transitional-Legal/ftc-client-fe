@@ -18,7 +18,7 @@ const parseInitialValues = (fetchedData) =>
 const UpdateMobileModal = (props) => {
   const { user } = useContext(AuthContext);
   const { data, error, isValidating } = useSWR(
-    `/user/${user.id}/deposithints`,
+    `/users/${user.id}/deposithints`,
     { revalidateOnFocus: false }
   );
   const [message, setMessage] = useState();
@@ -28,7 +28,7 @@ const UpdateMobileModal = (props) => {
 
   const onSubmit = async (values, formActions, modalActions) => {
     try {
-      await gpib.secure.post("/user/verifymobile", {
+      await gpib.secure.post("/users/verifymobile", {
         code: parseInt(values.code)
       });
       setMessage("Your mobile has been verified");
