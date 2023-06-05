@@ -20,7 +20,7 @@ const ResetPasswordLinkForm = ({ initialValues = { email: "" } }) => {
 
   const onSubmit = async (values, actions) => {
     try {
-      await gpib.open.get(`/user/resetpassword?email=${values.email}`);
+      await gpib.open.get(`/users/resetpassword?email=${values.email}`);
       setShowAlert(true);
       setTimer(60);
       actions.setSubmitting(false);

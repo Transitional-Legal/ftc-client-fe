@@ -22,7 +22,7 @@ const AddressGroupModal = () => {
     formActions.setSubmitting(true);
     try {
       await gpib.secure.put(`/address/group/${id}`, values);
-      await mutate(`/user/${user.id}/address`);
+      await mutate(`/users/${user.id}/address`);
       modalActions.onDismiss();
     } catch (error) {
       console.log(error);

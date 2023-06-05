@@ -24,7 +24,7 @@ const AddressGroupModalAdd = () => {
       values.userID = user?.id;
       values.percent = Number(values.percent);
       await api.secure.post(`/address/group`, values);
-      await mutate(`/user/${user.id}/address`);
+      await mutate(`/users/${user.id}/address`);
       modalActions.onDismiss();
       formActions.setSubmitting(false);
     } catch (error) {

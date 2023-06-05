@@ -27,7 +27,7 @@ const Dashboard = () => {
   const csvRef = useRef();
 
   const { data: userDetails, error: fetchDetailsError } = useSWR(
-    `/user/${user.id}`
+    `/users/${user.email}`
   );
 
   const { data: interactions, error: fetchInteractionsError } =
@@ -36,7 +36,7 @@ const Dashboard = () => {
   const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/`);
 
   const { data: bankDetails, error: fetchTustDetailsError } =
-    useSWR(`/user/1/trust/`);
+    useSWR(`/users/1/trust/`);
 
   const isFetching = false;
   const currentYear = new Date().getFullYear();

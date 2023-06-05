@@ -16,7 +16,7 @@ const AddressModalEdit = () => {
   const history = useHistory();
   const heading = "Edit BTC Address";
   const submitText = "Save";
-  const getUrl = user && `/user/${user.id}/address`;
+  const getUrl = user && `/users/${user.id}/address`;
 
   const { data: addresses, error, isValidating } = useSWR(getUrl, {
     revalidateOnFocus: false

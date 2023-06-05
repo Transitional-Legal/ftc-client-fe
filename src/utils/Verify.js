@@ -26,7 +26,7 @@ const Verify = ({ setIdVerificationStatus, statuses, user }) => {
             return;
           }
           if (msg && msg.code !== "" && msg.transaction_id !== "") {
-            var response = await gpib.secure.post("/user/digitalId", {
+            var response = await gpib.secure.post("/users/digitalId", {
               code: msg.code,
               transactionID: msg.transaction_id
             });
@@ -37,7 +37,7 @@ const Verify = ({ setIdVerificationStatus, statuses, user }) => {
               setIdVerificationStatus(statuses.REJECTED);
             }
             await new Promise((resolve) => setTimeout(resolve, 3000));
-            await mutate(user && `/user/${user.id}`);
+            await mutate(user && `/users/${user.id}`);
           }
         }
       });

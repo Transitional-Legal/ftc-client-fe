@@ -54,7 +54,7 @@ const ResetPasswordForm = ({ onSuccess, onError, email, token }) => {
   const onSubmit = async (values, actions) => {
     try {
       await gpib.open.post(
-        "/user/resetpassword",
+        "/users/resetpassword",
         {
           password: values.password
         },

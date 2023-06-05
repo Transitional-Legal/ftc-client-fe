@@ -20,7 +20,7 @@ const VerifyEmailPage = () => {
     const verifytoken = async () => {
       try {
         await api.open.post(
-          "/user/verifyemail",
+          "/users/verifyemail",
           {},
           {
             headers: {
@@ -28,7 +28,7 @@ const VerifyEmailPage = () => {
             }
           }
         );
-        await mutate(`/user/${user?.id}`, (state) => ({
+        await mutate(`/users/${user?.id}`, (state) => ({
           ...state,
           emailVerified: true
         }));
