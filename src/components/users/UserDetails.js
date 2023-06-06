@@ -38,7 +38,7 @@ const getColumns = (data) => {
 
 const UserDetails = ({ stats = {} }) => {
   const data = flattenData(stats);
-  const columns = getColumns(data);)
+  const columns = getColumns(data);
 
   return <LabelledTable columns={columns} hover={false} />;
 };
