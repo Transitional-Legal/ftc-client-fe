@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SubmitSpinnerButton from "components/forms/SubmitSpinnerButton";
 import { Formik } from "formik";
 import SingleInputForm from "components/forms/SingleInputForm";
-import gpib from "apis/api";
+import api from "apis/api";
 import ErrorMessage from "components/ErrorMessage";
 import { Button } from "react-bootstrap";
 import validatePhoneCode from "components/forms/form-inputs/validate-mobile/validatePhoneCode";
@@ -12,7 +12,7 @@ const UpdateMobileForm = ({ onSubmit, initialValues: _inititalValues }) => {
   const [hasSent, setSent] = useState(false);
   const sendSMS = async (values, actions) => {
     try {
-      await gpib.secure.get(`/users/verifymobile?mobile=${values.mobile}`);
+      await api.secure.get(`/users/verifymobile?mobile=${values.mobile}`);
       actions.setSubmitting(false);
       setSent(true);
     } catch (e) {

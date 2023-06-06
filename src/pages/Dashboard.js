@@ -82,11 +82,11 @@ const Dashboard = () => {
         <section className="main row">
           {/* <div className={isVerified ? "overlay" : "overlay active"} /> */}
           <aside className="col-lg-5">
-            <section>
+            {/* <section>
               <Card>
-                <UserDetailsForm />
+                <userDetails />
               </Card>
-            </section>
+            </section> */}
 
             <section>
               <Card>

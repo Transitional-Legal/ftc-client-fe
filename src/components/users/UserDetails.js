@@ -2,12 +2,12 @@ import React from "react";
 import { format as format$ } from "currency-formatter";
 import LabelledTable from "components/LabelledTable";
 
-const flattenData = (stats) => {
+const flattenData = (data) => {
   return {
-    name: stats?.stats?.name || "Mr John Doe",
-    matter: stats?.stats?.matter || "Smith & Co",
-    brc: stats?.stats?.brc || "BRC123/2023",
-    trust: stats?.stats?.trust || 5000,
+    name: data?.name,
+    email: data?.email,
+    brc: data?.brc || "BRC123/2023",
+    trust: data?.trust || 5000,
   };
 };
 
@@ -17,8 +17,8 @@ const getColumns = (data) => {
       label: "Name",
       format: (v) => v
     },
-    matter: {
-      label: "Matter",
+    email: {
+      label: "Email",
       format: (v) => v
     },
     brc: {
@@ -36,13 +36,11 @@ const getColumns = (data) => {
   });
 };
 
-const UserStats = ({ stats = {} }) => {
-  // console.log(stats, "stats");
+const UserDetails = ({ stats = {} }) => {
   const data = flattenData(stats);
-  const columns = getColumns(data);
-  // console.log(columns, "columns")
+  const columns = getColumns(data);)
 
   return <LabelledTable columns={columns} hover={false} />;
 };
 
-export default UserStats;
+export default UserDetails;

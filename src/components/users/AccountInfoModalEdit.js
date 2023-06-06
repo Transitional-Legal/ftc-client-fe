@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import useSWR, { mutate } from "swr";
 import { useHistory, useLocation } from "react-router-dom";
-import gpib from "apis/api";
+import api from "apis/api";
 import Modal from "components/Modal";
 import AccountInfoForm from "./AccountInfoForm";
 import { AuthContext } from "components/auth/Auth";
@@ -21,7 +21,7 @@ const AccountInfoModal = (props) => {
   const onSubmit = async (values, formActions, modalActions) => {
     try {
       formActions.setSubmitting(true);
-      await gpib.secure.post(
+      await api.secure.post(
         `/accountInfoes/user/${user.id}/${values.btcThreshold}`
       );
       mutate(`/accountInfoes/user/${user.id}`);
