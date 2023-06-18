@@ -38,6 +38,12 @@ const Dashboard = () => {
   const { data: bankDetails, error: fetchTustDetailsError } =
     useSWR(`/users/1/trust/`);
 
+  const { data: summary, error: fetchSummaryError } = useSWR(`/users/1/summary`);
+  // const summary = {
+  //   summmary: "",
+  //   next_action: ""
+  // };
+
   const isFetching = false;
   const currentYear = new Date().getFullYear();
 
@@ -70,10 +76,10 @@ const Dashboard = () => {
         <div className="container">
           <div className="row text-center justify-content-center mb-5">
             <div className="col-xl-12 col-lg-12">
-              <h2 className="font-weight-bold">Your Matter</h2>
+              <h2>Skinner v Perkins</h2>
               <p className="text-muted">
                 Your next Court hearing is with Judge Smith on Thursday, 1st May
-                2023 via Teams.
+                2023 via Teams. <b>Click here to download an iCal</b>
               </p>
             </div>
           </div>
@@ -117,11 +123,28 @@ const Dashboard = () => {
             {/* <section style={{ position: "relative" }}> */}
             <section>
               <Card>
-                <h4>Trust Details</h4>
-                <p>Transitional Legal Trust Details</p>
+                <h4>Financial update</h4>
                 <ErrorMessage error={fetchDetailsError} />
                 <Loader loading={isFetching} />
-                <PayInformationTable bankDetails={bankDetails} />
+                {/* <PayInformationTable bankDetails={bankDetails} /> */}
+
+                <p>
+                  <b>RE: Invoice Number [number] dated [date]</b>
+                </p>
+                <p>Please find enclosed your invoice #1234 dated today, [date].</p>
+                <p>Your invoice is $[amount] and includes an itemised listing of the work undertaken.</p>
+                <p>We would be grateful if you immediately pay the outstanding balance of $[amount] owed.</p>
+
+
+{/* By way of update, we advise the following:
+
+Work conducted this week
+
+Next Steps
+
+Progression of matter
+Work to be conducted
+Anticipated Costs</p> */}
               </Card>
             </section>
             <section>
@@ -168,7 +191,14 @@ const Dashboard = () => {
             </section> */}
             <section style={{ position: "relative" }}>
               <Container>
-                <div className="row">
+                <h2>Where things are at...</h2>
+                <p>{summary.summary}</p>
+                <h2>Next steps...</h2>
+                <p>
+                  {summary.next_action}
+                  <b>Click here to add to your calander.</b>
+                </p>
+                {/* <div className="row">
                   <div className="col">
                     <div
                       className="timeline-steps aos-init aos-animate"
@@ -221,10 +251,9 @@ const Dashboard = () => {
                           <p className="h6 text-muted mb-0 mb-lg-0">Trial</p>
                         </div>
                       </div>
-                      fetchInteractionsError
                     </div>
                   </div>
-                </div>
+                </div> */}
               </Container>
 
               {/* <h3>Next interaction</h3>
