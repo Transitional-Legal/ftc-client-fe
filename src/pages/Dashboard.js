@@ -7,7 +7,7 @@ import UserDetails from "components/users/UserDetails";
 import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
 import { AuthContext } from "components/auth/Auth";
-import PayInformationTable from "components/pay-information/PayInformationTable";
+
 import Card from "components/Card";
 import "./Dashboard.scss";
 
@@ -38,7 +38,10 @@ const Dashboard = () => {
   const { data: bankDetails, error: fetchTustDetailsError } =
     useSWR(`/users/1/trust/`);
 
-  const { data: summary, error: fetchSummaryError } = useSWR(`/users/1/summary`);
+  const { data: summary, error: fetchSummaryError } =
+    useSWR(`/users/1/summary`);
+
+  console.log(summary);
   // const summary = {
   //   summmary: "",
   //   next_action: ""
@@ -132,12 +135,19 @@ const Dashboard = () => {
                 <p>
                   <b>RE: Invoice Number [number] dated [date]</b>
                 </p>
-                <p>Please find enclosed your invoice #1234 dated today, [date].</p>
-                <p>Your invoice is $[amount] and includes an itemised listing of the work undertaken.</p>
-                <p>We would be grateful if you immediately pay the outstanding balance of $[amount] owed.</p>
+                <p>
+                  Please find enclosed your invoice #1234 dated today, [date].
+                </p>
+                <p>
+                  Your invoice is $[amount] and includes an itemised listing of
+                  the work undertaken.
+                </p>
+                <p>
+                  We would be grateful if you immediately pay the outstanding
+                  balance of $[amount] owed.
+                </p>
 
-
-{/* By way of update, we advise the following:
+                {/* By way of update, we advise the following:
 
 Work conducted this week
 
@@ -193,10 +203,10 @@ Anticipated Costs</p> */}
             <section style={{ position: "relative" }}>
               <Container>
                 <h2>Where things are at...</h2>
-                <p>{summary.summary}</p>
+                <p>{summary?.summary}</p>
                 <h2>Next steps...</h2>
                 <p>
-                  {summary.next_action}
+                  {summary?.next_action}
                   <b>Click here to add to your calander.</b>
                 </p>
                 {/* <div className="row">
