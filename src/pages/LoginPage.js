@@ -17,7 +17,7 @@ const LoginPage = () => {
           className="d-flex flex-column justify-content-center align-items-center"
           style={{ flex: 1, maxWidth: "40rem", minHeight: "30rem" }}
         >
-          <h2>Transitional Legal Client Portal</h2>
+          <h3>Transitional Legal Client Portal</h3>
           <LoginForm style={{ flex: undefined }} />
           <Button
             block
