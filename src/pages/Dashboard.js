@@ -127,7 +127,6 @@ const Dashboard = () => {
             <section>
               <Card>
                 <h4>Invoices</h4>
-                <p>Transitional Legal Trust Details</p>
                 <ErrorMessage error={fetchDetailsError} />
                 <Loader loading={isFetching} />
                 {/* <PayInformationTable bankDetails={bankDetails} /> */}
@@ -146,16 +145,20 @@ const Dashboard = () => {
                   We would be grateful if you immediately pay the outstanding
                   balance of $[amount] owed.
                 </p>
-
-                {/* By way of update, we advise the following:
-
-Work conducted this week
-
-Next Steps
-
-Progression of matter
-Work to be conducted
-Anticipated Costs</p> */}
+                <p>
+                  By way of update, we advise the following:
+                  <ul>
+                    <li>Work conducted this week</li>
+                  </ul>
+                </p>
+                <p>Next Steps</p>
+                <p>
+                  <ul>
+                    <li>Progression of matter</li>
+                    <li>Work to be conducted</li>
+                    <li>Anticipated Costs</li>
+                  </ul>
+                </p>
               </Card>
             </section>
             <section>
@@ -177,7 +180,7 @@ Anticipated Costs</p> */}
                 className="mt-2"
                 // onClick={() => history.push("/login")}
               >
-                Apply for a loan
+                Apply for finance
               </Button>
             </section>
           </aside>
@@ -202,9 +205,9 @@ Anticipated Costs</p> */}
             </section> */}
             <section style={{ position: "relative" }}>
               <Container>
-                <h2>Where things are at...</h2>
+                <h2>Where things are at ...</h2>
                 <p>{summary?.summary}</p>
-                <h2>Next steps...</h2>
+                <h2>Next steps ...</h2>
                 <p>
                   {summary?.next_action}
                   <b>Click here to add to your calander.</b>
