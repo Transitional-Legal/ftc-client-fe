@@ -123,7 +123,8 @@ const Dashboard = () => {
             {/* <section style={{ position: "relative" }}> */}
             <section>
               <Card>
-                <h4>Financial update</h4>
+                <h4>Invoices</h4>
+                <p>Transitional Legal Trust Details</p>
                 <ErrorMessage error={fetchDetailsError} />
                 <Loader loading={isFetching} />
                 {/* <PayInformationTable bankDetails={bankDetails} /> */}
