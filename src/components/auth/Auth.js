@@ -11,7 +11,6 @@ export const AuthProvider = ({ children }) => {
   const [loginError, setLoginError] = useState(null);
   const [isVerified, setVerified] = useState(false);
   const [hasVerified, setHasVerified] = useState(false);
-  const [skipKYC, setSkipKYC] = useState(false);
 
   const { data: userDetails, error: fetchDetailsError } = useSWR(
     user && `/users/${user.id}`
