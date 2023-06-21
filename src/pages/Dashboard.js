@@ -122,8 +122,7 @@ const Dashboard = () => {
 										RE: Invoice #{invoices?.number} dated {invoices?.issued}
 									</b>
 								</p>
-								<p>Please find enclosed your invoice #{invoices?.number} dated {invoices?.issued}.</p>
-								<p>Your invoice is ${invoices?.amount} and includes an itemised listing of the work undertaken.</p>
+								<p>Please find enclosed your invoice #{invoices?.number} dated {invoices?.issued}.  Your invoice is ${invoices?.amount} and includes an itemised listing of the work undertaken.</p>
 								<p>We would be grateful if you immediately pay the outstanding balance of ${invoices?.amount} owed.</p>
 								<p>
 									By way of update, we advise the following:
