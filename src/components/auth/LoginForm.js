@@ -7,15 +7,15 @@ import Input from "components/forms/Input";
 import SubmitSpinnerButton from "components/forms/SubmitSpinnerButton";
 import { AuthContext } from "components/auth/Auth";
 
-const validate = ({ username, password }) => {
+const validate = ({ email, password }) => {
   const errors = {};
-  if (!isEmail(trim(username))) errors.username = "Please enter a valid email";
+  if (!isEmail(trim(email))) errors.username = "Please enter a valid email";
   if (!password) errors.password = "Please enter a password";
   return errors;
 };
 
 const LoginForm = ({
-  initialValues = { username: "", password: "" },
+  initialValues = { email: "", password: "" },
   onLogin,
   noReset,
   style = {}
@@ -47,7 +47,7 @@ const LoginForm = ({
           className="login-form"
           style={{ flex: 1, width: "100%", ...style }}
         >
-          <Input name="username" placeholder="Email" />
+          <Input name="email" placeholder="Email" />
           <Input name="password" type="password" placeholder="Password" />
           <SubmitSpinnerButton
             submitText="Log in"

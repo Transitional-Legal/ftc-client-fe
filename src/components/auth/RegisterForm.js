@@ -70,7 +70,7 @@ const RegisterForm = ({ initialValues: _iv, logo }) => {
 					<Input name="email" placeholder="Your email address" disabled={initialValues?.email} />
 					<Input name="password" type="password" placeholder="Password" />
 					<ErrorMessage error={errors.hidden} />
-					<SubmitSpinnerButton submitText="Join" isSubmitting={isSubmitting} />
+					<SubmitSpinnerButton submitText="Register" isSubmitting={isSubmitting} />
 				</Form>
 			)}
 		</Formik>

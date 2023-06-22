@@ -44,7 +44,7 @@ const ResetPasswordForm = ({ onSuccess, onError, email, token }) => {
     if (user) history.push("/");
     try {
       setLoginError(null);
-      if (email && password) await login({ username: email, password });
+      if (email && password) await login({ email: email, password });
       history.push("/");
     } catch (e) {
       setLoginError(e);
