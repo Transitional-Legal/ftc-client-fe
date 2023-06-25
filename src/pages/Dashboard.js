@@ -32,11 +32,11 @@ const Dashboard = () => {
 
 	const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/${user.email}`);
 
-	const { data: bankDetails, error: fetchTustDetailsError } = useSWR(`/users/1/trust/`);
+	const { data: bankDetails, error: fetchTustDetailsError } = useSWR(`/users/${user.id}/trust/`);
 
-	const { data: summary, error: fetchSummaryError } = useSWR(`/users/1/summary`);
+	const { data: summary, error: fetchSummaryError } = useSWR(`/users/${user.email}/summary`);
 
-	const { data: invoices } = useSWR(`/users/1/invoices`);
+	const { data: invoices } = useSWR(`/users/${user.id}/invoices`);
 
 	const isFetching = false;
 	const currentYear = new Date().getFullYear();
