@@ -288,7 +288,7 @@ const Dashboard = () => {
 								</div>
 								<ErrorMessage error={fetchDocumentsError} />
 								<Loader loading={isFetching} />
-								<DocumentTable transactions={documents} />
+								<DocumentTable documents={documents} />
 							</Card>
 						</section>
 					</section>
