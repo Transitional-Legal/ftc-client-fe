@@ -28,7 +28,7 @@ const Dashboard = () => {
 
 	const { data: userDetails, error: fetchDetailsError } = useSWR(`/users/${user.email}`);
 
-	const { data: interactions, error: fetchInteractionsError } = useSWR(`/interactions/${user.email}}`);
+	const { data: interactions, error: fetchInteractionsError } = useSWR(`/interactions/${user.email}`);
 
 	const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/${user.email}`);
 
