@@ -16,11 +16,12 @@ export const AuthProvider = ({ children }) => {
 
 	const isFetchingDetails = user && !userDetails && !fetchDetailsError;
 
-	const { data: depositHints } = useSWR(user && `/users/${user.id}/deposithints`);
+	// const { data: depositHints } = useSWR(user && `/users/${user.id}/deposithints`);
 
 	const { data: userAddress } = useSWR(user && `/users/${user.id}/address`);
 	const { emailVerified, mobileVerified, idVerificationStatus } = userDetails || {};
-	const { depositAmount } = depositHints || {};
+	// const { depositAmount } = depositHints || {};
+	const depositAmount = 0;
 
 	useEffect(() => {
 		const isVerified = userAddress && userAddress.length > 0 && emailVerified && mobileVerified && depositAmount !== undefined && idVerificationStatus === 3;

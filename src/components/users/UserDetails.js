@@ -6,7 +6,7 @@ const flattenData = (data) => {
   return {
     name: data?.name,
     email: data?.email,
-    brc: data?.brc || "BRC123/2023",
+    brc: data?.brc || "Loading...",
     trust: data?.trust || 5000,
   };
 };
