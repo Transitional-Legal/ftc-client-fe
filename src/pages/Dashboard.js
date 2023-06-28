@@ -27,15 +27,10 @@ const Dashboard = () => {
 	const csvRef = useRef();
 
 	const { data: userDetails, error: fetchDetailsError } = useSWR(`/users/${user.email}`);
-
 	const { data: interactions, error: fetchInteractionsError } = useSWR(`/interactions/${user.email}`);
-
 	const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/${user.email}`);
-
 	const { data: bankDetails, error: fetchTustDetailsError } = useSWR(`/users/${user.id}/trust/`);
-
 	const { data: summary, error: fetchSummaryError } = useSWR(`/users/${user.email}/summary`);
-
 	const { data: invoices } = useSWR(`/users/${user.id}/invoices`);
 
 	const isFetching = false;
@@ -68,7 +63,7 @@ const Dashboard = () => {
 				<div className="container">
 					<div className="row text-center justify-content-center mb-5">
 						<div className="col-xl-12 col-lg-12">
-							<h2>Skinner v Perkins</h2>
+							<h2>{summary?.matter}</h2>
 							<p className="text-muted">
 								Your next Court hearing is with Judge Smith on Thursday, 1st May 2023 via Teams. <b>Click here to download an iCal</b>
 							</p>
