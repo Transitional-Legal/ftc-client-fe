@@ -65,7 +65,7 @@ const Dashboard = () => {
 						<div className="col-xl-12 col-lg-12">
 							<h2>{summary?.matter}</h2>
 							<p className="text-muted">
-								Your next Court hearing is with Judge Smith on Thursday, 1st May 2023 via Teams. <b>Click here to download an iCal</b>
+								Loading... <b>Click here to download an iCal</b>
 							</p>
 						</div>
 					</div>
@@ -74,12 +74,6 @@ const Dashboard = () => {
 				<section className="main row">
 					{/* <div className={isVerified ? "overlay" : "overlay active"} /> */}
 					<aside className="col-lg-5">
-						{/* <section>
-              <Card>
-                <userDetails />
-              </Card>
-            </section> */}
-
 						<section>
 							<Card>
 								<h4>Account Details</h4>
@@ -117,7 +111,10 @@ const Dashboard = () => {
 										RE: Invoice #{invoices?.number} dated {invoices?.issued}
 									</b>
 								</p>
-								<p>Please find enclosed your invoice #{invoices?.number} dated {invoices?.issued}.  Your invoice is ${invoices?.amount} and includes an itemised listing of the work undertaken.</p>
+								<p>
+									Please find enclosed your invoice #{invoices?.number} dated {invoices?.issued}. Your invoice is ${invoices?.amount} and includes an itemised
+									listing of the work undertaken.
+								</p>
 								<p>We would be grateful if you immediately pay the outstanding balance of ${invoices?.amount} owed.</p>
 								<p>
 									By way of update, we advise the following:
@@ -159,24 +156,6 @@ const Dashboard = () => {
 						</section>
 					</aside>
 					<section className="content col-lg-7">
-						{/* <section style={{ position: "relative" }}>
-              <Card>
-                <h4>Trust Details</h4>
-                <p>
-                  Transitional Legal Trust Details
-                </p>
-                <ErrorMessage error={fetchDetailsError} />
-                <Loader
-                  loading={
-                    isFetching
-                  }
-                />
-                <PayInformationTable
-                  bankDetails={bankDetails}
-                  userDetails={userDetails}
-                />
-              </Card>
-            </section> */}
 						<section style={{ position: "relative" }}>
 							<Container>
 								<h3>Where things are at ...</h3>
@@ -186,62 +165,6 @@ const Dashboard = () => {
 									{summary?.next_action}
 									<b>Click here to add to your calander.</b>
 								</p>
-								{/* <div className="row">
-                  <div className="col">
-                    <div
-                      className="timeline-steps aos-init aos-animate"
-                      data-aos="fade-up"
-                    >
-                      <div className="timeline-step">
-                        <div
-                          className="timeline-content"
-                          data-toggle="popover"
-                          data-trigger="hover"
-                          data-placement="top"
-                          title=""
-                          data-content=""
-                          data-original-title="2003"
-                        >
-                          <div className="inner-circle"></div>
-                          <p className="h6 mt-3 mb-1">1/1/2023</p>
-                          <p className="h6 text-muted mb-0 mb-lg-0">
-                            Application
-                          </p>
-                        </div>
-                      </div>
-                      <div className="timeline-step">
-                        <div
-                          className="timeline-content"
-                          data-toggle="popover"
-                          data-trigger="hover"
-                          data-placement="top"
-                          title=""
-                          data-content=""
-                          data-original-title="2004"
-                        >
-                          <div className="inner-circle"></div>
-                          <p className="h6 mt-3 mb-1">1/2/2023</p>
-                          <p className="h6 text-muted mb-0 mb-lg-0">Hearing</p>
-                        </div>
-                      </div>
-                      <div className="timeline-step">
-                        <div
-                          className="timeline-content"
-                          data-toggle="popover"
-                          data-trigger="hover"
-                          data-placement="top"
-                          title=""
-                          data-content=""
-                          data-original-title="2005"
-                        >
-                          <div className="inner-circle"></div>
-                          <p className="h6 mt-3 mb-1">1/12/2023</p>
-                          <p className="h6 text-muted mb-0 mb-lg-0">Trial</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
 							</Container>
 							<Card>
 								<div className="d-flex flex-row">
