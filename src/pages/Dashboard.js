@@ -118,8 +118,8 @@ const Dashboard = () => {
 									</b>
 								</p>
 								<p>
-									Please find enclosed your invoice #{invoices?.invoice?.number} dated {invoices?.invoice?.issued}. Your invoice is ${invoices?.invoice?.amount} and includes an itemised
-									listing of the work undertaken.
+									Please find enclosed your invoice #{invoices?.invoice?.number} dated {invoices?.invoice?.issued}. Your invoice is ${invoices?.invoice?.amount}{" "}
+									and includes an itemised listing of the work undertaken.
 								</p>
 								<p>We would be grateful if you immediately pay the outstanding balance of ${invoices?.invoice?.amount} owed.</p>
 								<p>
@@ -129,17 +129,13 @@ const Dashboard = () => {
 											<li>{update}</li>
 										))}
 									</ul>
-									<ul>
-										// <li>Work conducted this week</li>
-										//{" "}
-									</ul>
 								</p>
 								<p>Next Steps:</p>
 								<p>
 									<ul>
-										<li>Progression of matter</li>
-										<li>Work to be conducted</li>
-										<li>Anticipated costs</li>
+										{invoices?.next_steps.map((step) => (
+											<li>{step}</li>
+										))}
 									</ul>
 								</p>
 							</Card>
