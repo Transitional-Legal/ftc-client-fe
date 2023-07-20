@@ -114,15 +114,24 @@ const Dashboard = () => {
 								<Loader loading={isFetching} />
 								<p>
 									<b>
-										RE: Invoice #{invoices?.number} dated {invoices?.issued}
+										RE: Invoice #{invoices?.invoice?.number} dated {invoices?.invoice?.issued}
 									</b>
 								</p>
-								<p>Please find enclosed your invoice #{invoices?.number} dated {invoices?.issued}.  Your invoice is ${invoices?.amount} and includes an itemised listing of the work undertaken.</p>
-								<p>We would be grateful if you immediately pay the outstanding balance of ${invoices?.amount} owed.</p>
+								<p>
+									Please find enclosed your invoice #{invoices?.invoice?.number} dated {invoices?.invoice?.issued}. Your invoice is ${invoices?.invoice?.amount} and includes an itemised
+									listing of the work undertaken.
+								</p>
+								<p>We would be grateful if you immediately pay the outstanding balance of ${invoices?.invoice?.amount} owed.</p>
 								<p>
 									By way of update, we advise the following:
 									<ul>
-										<li>Work conducted this week</li>
+										{invoices?.updates.map((update) => (
+											<li>{update}</li>
+										))}
+									</ul>
+									<ul>
+										// <li>Work conducted this week</li>
+										//{" "}
 									</ul>
 								</p>
 								<p>Next Steps:</p>
