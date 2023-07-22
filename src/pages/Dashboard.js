@@ -74,12 +74,6 @@ const Dashboard = () => {
 				<section className="main row">
 					{/* <div className={isVerified ? "overlay" : "overlay active"} /> */}
 					<aside className="col-lg-5">
-						{/* <section>
-              <Card>
-                <userDetails />
-              </Card>
-            </section> */}
-
 						<section>
 							<Card>
 								<h4>Account Details</h4>
@@ -122,22 +116,18 @@ const Dashboard = () => {
 									and includes an itemised listing of the work undertaken.
 								</p>
 								<p>We would be grateful if you immediately pay the outstanding balance of ${invoices?.invoice?.amount} owed.</p>
-								<p>
-									By way of update, we advise the following:
-									<ul>
-										{invoices?.updates.map((update) => (
-											<li>{update}</li>
-										))}
-									</ul>
-								</p>
+								By way of update, we advise the following:
+								<ul>
+									{invoices?.updates.map((update) => (
+										<li>{update}</li>
+									))}
+								</ul>
 								<p>Next Steps:</p>
-								<p>
-									<ul>
-										{invoices?.next_steps.map((step) => (
-											<li>{step}</li>
-										))}
-									</ul>
-								</p>
+								<ul>
+									{invoices?.next_steps.map((step) => (
+										<li>{step}</li>
+									))}
+								</ul>
 							</Card>
 						</section>
 						<section>
