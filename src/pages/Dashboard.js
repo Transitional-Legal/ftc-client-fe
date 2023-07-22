@@ -31,7 +31,7 @@ const Dashboard = () => {
 	const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/${user.email}`);
 	const { data: bankDetails, error: fetchTustDetailsError } = useSWR(`/users/${user.id}/trust/`);
 	const { data: summary, error: fetchSummaryError } = useSWR(`/users/${user.email}/summary`);
-	const { data: invoices } = useSWR(`/users/${user.id}/invoices`);
+	const { data: invoices } = useSWR(`/invoices/${user.email}`);
 
 	const isFetching = false;
 	const currentYear = new Date().getFullYear();
@@ -106,30 +106,31 @@ const Dashboard = () => {
 								<h4>Invoices</h4>
 								<ErrorMessage error={fetchDetailsError} />
 								<Loader loading={isFetching} />
-								<p>
-									<b>
-										RE: Invoice #{invoices?.number} dated {invoices?.issued}
-									</b>
-								</p>
-								<p>
-									Please find enclosed your invoice #{invoices?.number} dated {invoices?.issued}. Your invoice is ${invoices?.amount} and includes an itemised
-									listing of the work undertaken.
-								</p>
-								<p>We would be grateful if you immediately pay the outstanding balance of ${invoices?.amount} owed.</p>
-								<p>
-									By way of update, we advise the following:
-									<ul>
-										<li>Work conducted this week</li>
-									</ul>
-								</p>
-								<p>Next Steps:</p>
-								<p>
-									<ul>
-										<li>Progression of matter</li>
-										<li>Work to be conducted</li>
-										<li>Anticipated costs</li>
-									</ul>
-								</p>
+								{/* {invoices.length > 0 */}
+									<p>
+										<b>
+											RE: Invoice #{invoices?.last?.id} dated {invoices?.last?.date}
+										</b>
+									</p>
+									<p>
+										Please find enclosed your invoice #{invoices?.last?.id} dated {invoices?.last?.date}. Your invoice is ${invoices?.last?.amount} and includes
+										an itemised listing of the work undertaken.
+									</p>
+
+									<p>We would be grateful if you immediately pay the outstanding balance of ${invoices?.last?.amount} owed.</p>
+									<p>
+										By way of update, we advise the following:
+										<ul>
+											<li>Work conducted this week</li>
+										</ul>
+									</p>
+									<p>Next Steps:</p>
+									<p>
+										<ul>
+											<li>...</li>
+										</ul>
+									</p>
+								{/* } */}
 							</Card>
 						</section>
 						<section>
