@@ -3,6 +3,7 @@ import useSWR from "swr";
 import Layout from "components/layout/Layout";
 import DocumentTable from "components/documents/DocumentTable";
 import TransactionTable from "components/transactions/TransactionTable";
+import CurrentInvoice from "components/invoice/CurrentInvoice";
 import UserDetails from "components/users/UserDetails";
 import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
@@ -14,6 +15,7 @@ import "./Dashboard.scss";
 import { CSVLink } from "react-csv";
 import { Alert, Button, Container } from "react-bootstrap";
 import api from "../apis/api";
+import Summary from "components/Summary";
 
 const Dashboard = () => {
 	const { user, isVerified, hasVerified } = useContext(AuthContext);
@@ -106,31 +108,15 @@ const Dashboard = () => {
 								<h4>Invoices</h4>
 								<ErrorMessage error={fetchDetailsError} />
 								<Loader loading={isFetching} />
-								{/* {invoices.length > 0 */}
-									<p>
-										<b>
-											RE: Invoice #{invoices?.last?.id} dated {invoices?.last?.date}
-										</b>
-									</p>
-									<p>
-										Please find enclosed your invoice #{invoices?.last?.id} dated {invoices?.last?.date}. Your invoice is ${invoices?.last?.amount} and includes
-										an itemised listing of the work undertaken.
-									</p>
 
-									<p>We would be grateful if you immediately pay the outstanding balance of ${invoices?.last?.amount} owed.</p>
-									<p>
-										By way of update, we advise the following:
-										<ul>
-											<li>Work conducted this week</li>
-										</ul>
-									</p>
-									<p>Next Steps:</p>
-									<p>
-										<ul>
-											<li>...</li>
-										</ul>
-									</p>
-								{/* } */}
+								<CurrentInvoice invoice={invoices?.last}></CurrentInvoice>
+
+								<p>Next Steps:</p>
+								<p>
+									<ul>
+										<li>...</li>
+									</ul>
+								</p>
 							</Card>
 						</section>
 						<section>
@@ -158,15 +144,7 @@ const Dashboard = () => {
 					</aside>
 					<section className="content col-lg-7">
 						<section style={{ position: "relative" }}>
-							<Container>
-								<h3>Where things are at ...</h3>
-								<p>{summary?.summary}</p>
-								<h3>Next steps ...</h3>
-								<p>
-									{summary?.next_action}
-									<b>Click here to add to your calander.</b>
-								</p>
-							</Container>
+							<Summary summary={summary}></Summary>
 							<Card>
 								<div className="d-flex flex-row">
 									<div className="mr-auto p-2">
