@@ -1,6 +1,11 @@
 import React from "react";
 
 export default function CurrentInvoice({ invoice }) {
+
+	if (!invoice) {
+        return <div>You have no outstanding invoices.</div>
+    }
+
 	return (
 		<div>
 			<p>

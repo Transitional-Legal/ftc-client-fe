@@ -1,14 +1,21 @@
 import React from "react";
 
 export default function WorkUpdate({ update }) {
+	if (update?.length === 0) {
+		return <div></div>;
+	}
+
 	return (
 		<div>
 			<p>Next Steps:</p>
-			<p>
+
+			{update?.length > 0 && (
 				<ul>
-					<li>...</li>
+					{update?.map((update) => {
+						return <li>{update}</li>;
+					})}
 				</ul>
-			</p>
+			)}
 		</div>
 	);
 }

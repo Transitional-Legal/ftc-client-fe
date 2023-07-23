@@ -4,6 +4,7 @@ import Layout from "components/layout/Layout";
 import DocumentTable from "components/documents/DocumentTable";
 import TransactionTable from "components/transactions/TransactionTable";
 import CurrentInvoice from "components/invoice/CurrentInvoice";
+import WorkUpdate from "components/invoice/WorkUpdate";
 import UserDetails from "components/users/UserDetails";
 import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
@@ -110,13 +111,7 @@ const Dashboard = () => {
 								<Loader loading={isFetching} />
 
 								<CurrentInvoice invoice={invoices?.last}></CurrentInvoice>
-
-								<p>Next Steps:</p>
-								<p>
-									<ul>
-										<li>...</li>
-									</ul>
-								</p>
+								<WorkUpdate update={invoices?.update}></WorkUpdate>
 							</Card>
 						</section>
 						<section>
