@@ -66,10 +66,7 @@ const Dashboard = () => {
 				<div className="container">
 					<div className="row text-center justify-content-center mb-5">
 						<div className="col-xl-12 col-lg-12">
-							<h2>{summary?.matter}</h2>
-							<p className="text-muted">
-								Loading... <b>Click here to download an iCal</b>
-							</p>
+							<h2>{summary?.matter || "No matter assigned"}</h2>
 						</div>
 					</div>
 				</div>
