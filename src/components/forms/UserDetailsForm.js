@@ -2,121 +2,97 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import api, { open, secure } from "apis/api";
+import "./UserDetailsForm.scss";
+import { Button } from "react-bootstrap";
 
 // Create a form that allows users to enter their name, DOB, Address, and Phone Number.
 
-const UserDetailsForm = () => {
+
+// Validation Schema
+const validationSchema = Yup.object({
+  firstName: Yup.string()
+    .max(15, "Must be 15 characters or less")
+    .required("Required"),
+  middleName: Yup.string()
+    .max(15, "Must be 15 characters or less"),
+  lastName: Yup.string()
+    .max(20, "Must be 20 characters or less")
+    .required("Required"),
+  dob: Yup.date()
+    .max(new Date(), "Must be a valid date and not in the future")
+    .required("Required"),
+  address: Yup.string().required("Required"),
+  city: Yup.string().required("Required"),
+  phoneNumber: Yup.number().required("Required")
+});
+
+const renderField = (name, label, type, formik) => (
+  <div className="form-field">
+    <label htmlFor={name}>{label}</label>
+    <input
+      id={name}
+      name={name}
+      type={type}
+      onChange={formik.handleChange}
+      value={formik.values[name]}
+      className={formik.errors[name] && formik.touched[name] ? 'error' : ''}
+    />
+    {formik.errors[name] && formik.touched[name] ? (
+      <div className="error-message">{formik.errors[name]}</div>
+    ) : null}
+  </div>
+);
+
+const UserDetailsForm = ({ afterSubmit }) => {
   const formik = useFormik({
     initialValues: {
       firstName: "",
+      middleName: "",
       lastName: "",
       dob: "",
       address: "",
+      city: "",
       phoneNumber: ""
     },
-    validationSchema: Yup.object({
-      firstName: Yup.string()
-        .max(15, "Must be 15 characters or less")
-        .required("Required"),
-      lastName: Yup.string()
-        .max(20, "Must be 20 characters or less")
-        .required("Required"),
-      dob: Yup.date()
-        .max(new Date(), "Must be a valid date and not in the future")
-        .required("Required"),
-      address: Yup.string().required("Required"),
-      phoneNumber: Yup.number().required("Required")
-    }),
-    onSubmit: (values) => {
-      console.log("This is cool");
-      console.log(values);
-
-      // todo: submit to api
-      api
-        .post("/user", values)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-        
-      // open.post('/users', values)
-      const apiUrl = "";
-
-      // fetch(apiUrl)
-      //     .then(response => {
-      //         if (response.ok) {
-      //             console.log("API is working");
-      //         } else {
-      //             console.log("API is not working");
-      //         }
-      //     })
-      //     .catch(error => {
-      //         console.log("Error occurred while testing API:", error);
-      //     });
-
-      // alert(JSON.stringify(values, null, 2));
-    }
+    validationSchema,
+    onSubmit: values => submitToAPI(values)
   });
 
+  // Function to handle API submission
+  const submitToAPI = (values) => {
+    console.log(values)
+
+    // todo build a backend function that will update the users details at action step.
+    api.post("/user", values)
+      .then(response => {
+        console.log(response.data);
+        // Close the modal after successful data submission
+        afterSubmit();
+      })
+      .catch(error => {
+        console.error(error);
+        // Handle errors (like showing a notification to the user)
+      });
+  };
+
   return (
-    <>
-      <div>
-        <h1>User Details</h1>
-        <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.firstName}
-          />
+    <div className="form-container">
+      <form onSubmit={formik.handleSubmit} className="user-details-form">
 
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.lastName}
-          />
+        {renderField("firstName", "First Name", "text", formik)}
+        {renderField("middleName", "Middle Name", "text", formik)}
+        {renderField("lastName", "Last Name", "text", formik)}
+        {renderField("dob", "DOB", "date", formik)}
+        {renderField("address", "Street Address", "text", formik)}
+        {renderField("city", "City/Suburb", "text", formik)}
+        {renderField("phoneNumber", "Phone Number", "text", formik)}
 
-          <label htmlFor="dob">DOB</label>
-          <input
-            id="dob"
-            name="dob"
-            type="date"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-          />
-
-          <label htmlFor="address">Address</label>
-          <input
-            id="address"
-            name="address"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.address}
-          />
-
-          <label htmlFor="phoneNumber">Phone Number</label>
-          <input
-            id="phoneNumber"
-            name="phoneNumber"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.phoneNumber}
-          />
-
-          <button type="submit">Submit</button>
-          {/* <div> */}
-        </form>
-      </div>
-    </>
+        <Button type="submit">Save Changes</Button>
+        
+      </form>
+    </div>
   );
-};
 
+
+}
 export default UserDetailsForm;

@@ -9,12 +9,14 @@ import UserDetails from "components/users/UserDetails";
 import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
 import { AuthContext } from "components/auth/Auth";
+import UserDetailsForm from "../components/forms/UserDetailsForm";
+
 
 import Card from "components/Card";
 import "./Dashboard.scss";
 
 import { CSVLink } from "react-csv";
-import { Alert, Button, Container } from "react-bootstrap";
+import { Alert, Button, Container, Modal } from "react-bootstrap";
 import api from "../apis/api";
 import Summary from "components/Summary";
 
@@ -35,6 +37,16 @@ const Dashboard = () => {
 	const { data: bankDetails, error: fetchTustDetailsError } = useSWR(`/users/${user.id}/trust/`);
 	const { data: summary, error: fetchSummaryError } = useSWR(`/users/${user.email}/summary`);
 	const { data: invoices } = useSWR(`/invoices/${user.email}`);
+
+	// model for update details
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+
+	// todo: query the user and if they have saved their user details, then set the model to true so it shows them the UpdateDetailsForm
+
+
 
 	const isFetching = false;
 	const currentYear = new Date().getFullYear();
@@ -82,19 +94,35 @@ const Dashboard = () => {
 								<UserDetails stats={userDetails} />
 							</Card>
 						</section>
+
+
 						<section>
-							<Button
-								block
-								className="mt-2"
-								// onClick={() => history.push("/login")}
-							>
+
+							<Button block variant="primary" onClick={handleShow} className="mt-2" >
 								Update my details
 							</Button>
+
+							<Modal show={show} onHide={handleClose}>
+								<Modal.Header closeButton>
+									<Modal.Title> <h1>User Details</h1></Modal.Title>
+								</Modal.Header>
+								<Modal.Body>
+									<UserDetailsForm afterSubmit={handleClose}/>
+								</Modal.Body>
+								<Modal.Footer>
+									<Button variant="secondary" onClick={handleClose}>
+										Close
+									</Button>
+									
+								</Modal.Footer>
+							</Modal>
+
+
 							<Button
 								block
 								// variant="link"
 								className="mt-2"
-								// onClick={() => history.push("/login")}
+							// onClick={() => history.push("/login")}
 							>
 								Book a call
 							</Button>
@@ -115,7 +143,7 @@ const Dashboard = () => {
 							<Button
 								block
 								className="mt-2"
-								// onClick={() => history.push("/login")}
+							// onClick={() => history.push("/login")}
 							>
 								Deposit Crypto
 							</Button>
@@ -128,7 +156,7 @@ const Dashboard = () => {
 							<Button
 								block
 								className="mt-2"
-								// onClick={() => history.push("/login")}
+							// onClick={() => history.push("/login")}
 							>
 								Apply for finance
 							</Button>
@@ -182,8 +210,8 @@ const Dashboard = () => {
 						</section>
 					</section>
 				</section>
-			</div>
-		</Layout>
+			</div >
+		</Layout >
 	);
 };
 
