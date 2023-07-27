@@ -11,7 +11,6 @@ import Loader from "components/Loader";
 import { AuthContext } from "components/auth/Auth";
 import UserDetailsForm from "../components/forms/UserDetailsForm";
 
-
 import Card from "components/Card";
 import "./Dashboard.scss";
 
@@ -45,8 +44,6 @@ const Dashboard = () => {
 	const handleShow = () => setShow(true);
 
 	// todo: query the user and if they have saved their user details, then set the model to true so it shows them the UpdateDetailsForm
-
-
 
 	const isFetching = false;
 	const currentYear = new Date().getFullYear();
@@ -95,34 +92,33 @@ const Dashboard = () => {
 							</Card>
 						</section>
 
-
 						<section>
-
-							<Button block variant="primary" onClick={handleShow} className="mt-2" >
+							<Button block variant="primary" onClick={handleShow} className="mt-2">
 								Update my details
 							</Button>
 
 							<Modal show={show} onHide={handleClose}>
 								<Modal.Header closeButton>
-									<Modal.Title> <h1>User Details</h1></Modal.Title>
+									<Modal.Title>
+										{" "}
+										<h1>User Details</h1>
+									</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
-									<UserDetailsForm afterSubmit={handleClose}/>
+									<UserDetailsForm afterSubmit={handleClose} />
 								</Modal.Body>
 								<Modal.Footer>
 									<Button variant="secondary" onClick={handleClose}>
 										Close
 									</Button>
-									
 								</Modal.Footer>
 							</Modal>
-
 
 							<Button
 								block
 								// variant="link"
 								className="mt-2"
-							// onClick={() => history.push("/login")}
+								// onClick={() => history.push("/login")}
 							>
 								Book a call
 							</Button>
@@ -143,7 +139,7 @@ const Dashboard = () => {
 							<Button
 								block
 								className="mt-2"
-							// onClick={() => history.push("/login")}
+								// onClick={() => history.push("/login")}
 							>
 								Deposit Crypto
 							</Button>
@@ -156,7 +152,7 @@ const Dashboard = () => {
 							<Button
 								block
 								className="mt-2"
-							// onClick={() => history.push("/login")}
+								// onClick={() => history.push("/login")}
 							>
 								Apply for finance
 							</Button>
@@ -210,8 +206,8 @@ const Dashboard = () => {
 						</section>
 					</section>
 				</section>
-			</div >
-		</Layout >
+			</div>
+		</Layout>
 	);
 };
 
