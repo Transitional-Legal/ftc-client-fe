@@ -20,7 +20,7 @@ import api from "../apis/api";
 import Summary from "components/Summary";
 
 const Dashboard = () => {
-	const { user, isVerified, hasVerified } = useContext(AuthContext);
+	const { user } = useContext(AuthContext);
 	const [year, setYear] = useState(new Date().getFullYear());
 	const [transactionsDownload, setTransactionsDowload] = useState([]);
 	const [downloadError, setDownloadError] = useState({
@@ -33,7 +33,6 @@ const Dashboard = () => {
 	const { data: userDetails, error: fetchDetailsError } = useSWR(`/users/${user.email}`);
 	const { data: interactions, error: fetchInteractionsError } = useSWR(`/interactions/${user.email}`);
 	const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/${user.email}`);
-	const { data: bankDetails, error: fetchTustDetailsError } = useSWR(`/users/${user.id}/trust/`);
 	const { data: summary, error: fetchSummaryError } = useSWR(`/users/${user.email}/summary`);
 	const { data: invoices } = useSWR(`/invoices/${user.email}`);
 
