@@ -87,7 +87,7 @@ const Dashboard = () => {
 								<h4>Account Details</h4>
 								<ErrorMessage error={fetchDetailsError} />
 								<Loader loading={isFetching} />
-								<UserDetails stats={userDetails} />
+								<UserDetails details={userDetails} />
 							</Card>
 						</section>
 
