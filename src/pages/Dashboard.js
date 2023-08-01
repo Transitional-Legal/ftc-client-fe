@@ -104,7 +104,7 @@ const Dashboard = () => {
 									</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
-									<UserDetailsForm afterSubmit={handleClose} />
+									<UserDetailsForm iv={userDetails} afterSubmit={handleClose} />
 								</Modal.Body>
 								<Modal.Footer>
 									<Button variant="secondary" onClick={handleClose}>

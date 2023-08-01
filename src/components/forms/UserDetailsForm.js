@@ -33,10 +33,10 @@ const renderField = (name, label, type, formik) => (
 	</div>
 );
 
-const UserDetailsForm = ({ afterSubmit }) => {
+const UserDetailsForm = ({ afterSubmit, iv }) => {
 	const formik = useFormik({
 		initialValues: {
-			firstName: "",
+			firstName: iv?.name || "",
 			middleName: "",
 			lastName: "",
 			dob: "",
