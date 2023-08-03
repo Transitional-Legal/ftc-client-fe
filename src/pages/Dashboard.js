@@ -38,9 +38,13 @@ const Dashboard = () => {
 
 	// model for update details
 	const [show, setShow] = useState(false);
+	const [showFinance, setShowFinance] = useState(false);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+
+	const handleFinanceClose = () => setShowFinance(false);
+	const handleFinanceShow = () => setShowFinance(true);
 
 	// todo: query the user and if they have saved their user details, then set the model to true so it shows them the UpdateDetailsForm
 
@@ -148,13 +152,28 @@ const Dashboard = () => {
               >
                 View payments
               </Button> */}
-							<Button
-								block
-								className="mt-2"
-								// onClick={() => history.push("/login")}
-							>
-								Apply for finance
+							<Button block className="mt-2" onClick={handleFinanceShow}>
+								Apply for Finance
 							</Button>
+
+							<Modal show={showFinance} onHide={handleFinanceClose}>
+								<Modal.Header closeButton>
+									<Modal.Title>
+										{" "}
+										<h1>Apply for Finance</h1>
+									</Modal.Title>
+								</Modal.Header>
+								<Modal.Body>
+									<div>
+										<p>Applications to finance your matter up to $50,000 are coming in 2024. Should you want to discuss your invoice, email admin@transitionallegal.com.au</p>
+									</div>
+								</Modal.Body>
+								<Modal.Footer>
+									<Button variant="secondary" onClick={handleFinanceClose}>
+										Close
+									</Button>
+								</Modal.Footer>
+							</Modal>
 						</section>
 					</aside>
 					<section className="content col-lg-7">
