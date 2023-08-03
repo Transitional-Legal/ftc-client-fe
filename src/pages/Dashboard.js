@@ -31,7 +31,7 @@ const Dashboard = () => {
 	const csvRef = useRef();
 
 	const { data: userDetails, error: fetchDetailsError } = useSWR(`/users/${user.email}`);
-	const { data: interactions, error: fetchInteractionsError } = useSWR(`/interactions/${user.email}`);
+	const { data: interactions, error: fetchInteractionsError } = useSWR(`/email/${user.email}`);
 	const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/${user.email}`);
 	const { data: summary, error: fetchSummaryError } = useSWR(`/users/${user.email}/summary`);
 	const { data: invoices } = useSWR(`/invoices/${user.email}`);
