@@ -46,10 +46,41 @@ const Dashboard = () => {
 	const handleFinanceClose = () => setShowFinance(false);
 	const handleFinanceShow = () => setShowFinance(true);
 
+	// State to control the appearance of the success notification
+	const [uploadSuccess, setUploadSuccess] = useState(false);
+
 	// todo: query the user and if they have saved their user details, then set the model to true so it shows them the UpdateDetailsForm
 
 	const isFetching = false;
 	const currentYear = new Date().getFullYear();
+
+
+	// New state to hold the selected file
+	const [file, setFile] = useState(null);
+
+	// Function to handle file selection and upload
+	const handleUploadDocuments = (e) => {
+		const selectedFile = e.target.files[0];
+		setFile(selectedFile);
+		setUploadSuccess(false); // Reset success state when a new file is selected
+
+		if (selectedFile) {
+			const formData = new FormData();
+			formData.append('upload', selectedFile, selectedFile.name);
+			const uploadUrl = `/documents/${user.email}`;
+
+			api.secure.post(uploadUrl, formData, {
+				headers: {
+					"Content-Type": "multipart/form-data"
+				}
+			}).then(response => {
+				console.log('File uploaded successfully:', response.data);
+				setUploadSuccess(true); // Set success state when upload is successful
+			}).catch(error => {
+				console.error('Error uploading file:', error);
+			});
+		}
+	};
 
 	const handleDownload = async () => {
 		setDownloadError({ show: false, message: "" });
@@ -121,7 +152,7 @@ const Dashboard = () => {
 								block
 								// variant="link"
 								className="mt-2"
-								// onClick={() => history.push("/login")}
+							// onClick={() => history.push("/login")}
 							>
 								Book a call
 							</Button>
@@ -142,7 +173,7 @@ const Dashboard = () => {
 							<Button
 								block
 								className="mt-2"
-								// onClick={() => history.push("/login")}
+							// onClick={() => history.push("/login")}
 							>
 								Deposit Crypto
 							</Button>
@@ -214,9 +245,13 @@ const Dashboard = () => {
 										<h4>Documents</h4>
 									</div>
 									<div className="p-2">
-										<Button onClick={handleDownload}>Upload Documents</Button>
+										{/* Modified code for file upload button */}
+										<input type="file" id="fileUpload" hidden onChange={handleUploadDocuments} />
+										<label htmlFor="fileUpload" className="btn btn-primary">Upload Documents</label>
 									</div>
 								</div>
+								{/* New code to display success notification */}
+								{uploadSuccess && <Alert variant="success">File was successfully uploaded!</Alert>}
 								<ErrorMessage error={fetchDocumentsError} />
 								<Loader loading={isFetching} />
 								<DocumentTable documents={documents} />
