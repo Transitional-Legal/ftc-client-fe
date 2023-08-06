@@ -38,6 +38,7 @@ const Dashboard = () => {
 
 	// model for update details
 	const [show, setShow] = useState(false);
+	const [showCrypto, setShowCrypto] = useState(false);
 	const [showFinance, setShowFinance] = useState(false);
 
 	const handleClose = () => setShow(false);
@@ -46,6 +47,9 @@ const Dashboard = () => {
 	const handleFinanceClose = () => setShowFinance(false);
 	const handleFinanceShow = () => setShowFinance(true);
 
+	const handleCryptoClose = () => setShowCrypto(false);
+	const handleCryptoShow = () => setShowCrypto(true);
+
 	// State to control the appearance of the success notification
 	const [uploadSuccess, setUploadSuccess] = useState(false);
 
@@ -53,7 +57,6 @@ const Dashboard = () => {
 
 	const isFetching = false;
 	const currentYear = new Date().getFullYear();
-
 
 	// New state to hold the selected file
 	const [file, setFile] = useState(null);
@@ -66,19 +69,22 @@ const Dashboard = () => {
 
 		if (selectedFile) {
 			const formData = new FormData();
-			formData.append('upload', selectedFile, selectedFile.name);
+			formData.append("upload", selectedFile, selectedFile.name);
 			const uploadUrl = `/documents/${user.email}`;
 
-			api.secure.post(uploadUrl, formData, {
-				headers: {
-					"Content-Type": "multipart/form-data"
-				}
-			}).then(response => {
-				console.log('File uploaded successfully:', response.data);
-				setUploadSuccess(true); // Set success state when upload is successful
-			}).catch(error => {
-				console.error('Error uploading file:', error);
-			});
+			api.secure
+				.post(uploadUrl, formData, {
+					headers: {
+						"Content-Type": "multipart/form-data"
+					}
+				})
+				.then((response) => {
+					console.log("File uploaded successfully:", response.data);
+					setUploadSuccess(true); // Set success state when upload is successful
+				})
+				.catch((error) => {
+					console.error("Error uploading file:", error);
+				});
 		}
 	};
 
@@ -152,7 +158,7 @@ const Dashboard = () => {
 								block
 								// variant="link"
 								className="mt-2"
-							// onClick={() => history.push("/login")}
+								// onClick={() => history.push("/login")}
 							>
 								Book a call
 							</Button>
@@ -170,19 +176,29 @@ const Dashboard = () => {
 							</Card>
 						</section>
 						<section>
-							<Button
-								block
-								className="mt-2"
-							// onClick={() => history.push("/login")}
-							>
+							<Button block className="mt-2" onClick={handleCryptoShow}>
 								Deposit Crypto
 							</Button>
-							{/* <Button
-                block
-                className="mt-2"
-              >
-                View payments
-              </Button> */}
+							<Modal show={showCrypto} onHide={handleCryptoClose}>
+								<Modal.Header closeButton>
+									<Modal.Title>
+										{" "}
+										<h1>Deposit Crypto</h1>
+									</Modal.Title>
+								</Modal.Header>
+								<Modal.Body>
+									<div>
+										<p>
+											We accept Bitcoin, USDT and USDC. Please send your crypto to the following address:
+										</p>
+									</div>
+								</Modal.Body>
+								<Modal.Footer>
+									<Button variant="secondary" onClick={handleCryptoClose}>
+										Close
+									</Button>
+								</Modal.Footer>
+							</Modal>
 							<Button block className="mt-2" onClick={handleFinanceShow}>
 								Apply for Finance
 							</Button>
@@ -196,7 +212,10 @@ const Dashboard = () => {
 								</Modal.Header>
 								<Modal.Body>
 									<div>
-										<p>Applications to finance your matter up to $50,000 are coming in 2024. Should you want to discuss your invoice, email admin@transitionallegal.com.au</p>
+										<p>
+											Applications to finance your matter up to $50,000 are coming in 2024. Should you want to discuss your invoice, email
+											admin@transitionallegal.com.au
+										</p>
 									</div>
 								</Modal.Body>
 								<Modal.Footer>
@@ -247,7 +266,9 @@ const Dashboard = () => {
 									<div className="p-2">
 										{/* Modified code for file upload button */}
 										<input type="file" id="fileUpload" hidden onChange={handleUploadDocuments} />
-										<label htmlFor="fileUpload" className="btn btn-primary">Upload Documents</label>
+										<label htmlFor="fileUpload" className="btn btn-primary">
+											Upload Documents
+										</label>
 									</div>
 								</div>
 								{/* New code to display success notification */}
