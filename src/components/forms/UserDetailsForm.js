@@ -54,7 +54,7 @@ const UserDetailsForm = ({ afterSubmit, iv }) => {
 
 		// todo build a backend function that will update the users details at action step.
 		api
-			.post("/user", values)
+			.put("/contact", values)
 			.then((response) => {
 				console.log(response.data);
 				// Close the modal after successful data submission

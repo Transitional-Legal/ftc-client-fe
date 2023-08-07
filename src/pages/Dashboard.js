@@ -149,7 +149,7 @@ const Dashboard = () => {
 								</Modal.Body>
 								<Modal.Footer>
 									<Button variant="secondary" onClick={handleClose}>
-										Close
+										Cancel
 									</Button>
 								</Modal.Footer>
 							</Modal>
