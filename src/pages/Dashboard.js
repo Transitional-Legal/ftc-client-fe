@@ -14,8 +14,10 @@ import UserDetailsForm from "../components/forms/UserDetailsForm";
 import Card from "components/Card";
 import "./Dashboard.scss";
 
+// import ethWallet from '../assets/images/usdt-usdc.png';
+
 import { CSVLink } from "react-csv";
-import { Alert, Button, Container, Modal } from "react-bootstrap";
+import { Alert, Button, Modal, Image } from "react-bootstrap";
 import api from "../apis/api";
 import Summary from "components/Summary";
 
@@ -128,7 +130,7 @@ const Dashboard = () => {
 								<h4>Account Details</h4>
 								<ErrorMessage error={fetchDetailsError} />
 								<Loader loading={isFetching} />
-								<UserDetails stats={userDetails} />
+								<UserDetails details={userDetails} />
 							</Card>
 						</section>
 
@@ -145,23 +147,20 @@ const Dashboard = () => {
 									</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
-									<UserDetailsForm afterSubmit={handleClose} />
+									<UserDetailsForm iv={userDetails} afterSubmit={handleClose} />
 								</Modal.Body>
 								<Modal.Footer>
 									<Button variant="secondary" onClick={handleClose}>
-										Close
+										Cancel
 									</Button>
 								</Modal.Footer>
 							</Modal>
 
-							<Button
-								block
-								// variant="link"
-								className="mt-2"
-								// onClick={() => history.push("/login")}
-							>
-								Book a call
-							</Button>
+							<a href="https://transitionallegal.com.au/index.php/consult/" target="_blank" rel="noopener noreferrer">
+								<Button block className="mt-2">
+									Book a call
+								</Button>
+							</a>
 						</section>
 
 						{/* <section style={{ position: "relative" }}> */}
@@ -189,8 +188,15 @@ const Dashboard = () => {
 								<Modal.Body>
 									<div>
 										<p>
-											We accept Bitcoin, USDT and USDC. Please send your crypto to the following address:
+											We accept USDT and USDC. Please send your crypto to the following address:
 										</p>
+										<p>
+											USDT and USDC: 0x8EE80b216BE5dE9c78e683D5Ed4f4A5BfDdfbcca
+										</p>
+										{/* todo: work out why this image is not showing. */}
+
+										{/* <Image src="../assets/images/usdt_usdc.png" alt="Description of image" /> */}
+
 									</div>
 								</Modal.Body>
 								<Modal.Footer>
@@ -228,7 +234,7 @@ const Dashboard = () => {
 					</aside>
 					<section className="content col-lg-7">
 						<section style={{ position: "relative" }}>
-							<Summary summary={summary}></Summary>
+							<Summary summary={summary} setShow={setShow}></Summary>
 							<Card>
 								<div className="d-flex flex-row">
 									<div className="mr-auto p-2">

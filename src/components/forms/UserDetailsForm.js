@@ -33,16 +33,17 @@ const renderField = (name, label, type, formik) => (
 	</div>
 );
 
-const UserDetailsForm = ({ afterSubmit }) => {
+const UserDetailsForm = ({ afterSubmit, iv }) => {
+	console.log(iv)
 	const formik = useFormik({
 		initialValues: {
-			firstName: "",
-			middleName: "",
-			lastName: "",
-			dob: "",
-			address: "",
-			city: "",
-			phoneNumber: ""
+			firstName: iv?.firstName || "",
+			middleName: iv?.middleName || "",
+			lastName: iv?.lastName || "",
+			dob: iv?.dob || "",
+			address: iv?.address || "",
+			city: iv?.city || "",
+			phoneNumber: iv?.phoneNumber || ""
 		},
 		validationSchema,
 		onSubmit: (values) => submitToAPI(values)
@@ -54,7 +55,7 @@ const UserDetailsForm = ({ afterSubmit }) => {
 
 		// todo build a backend function that will update the users details at action step.
 		api
-			.post("/user", values)
+			.post("/contact", values)
 			.then((response) => {
 				console.log(response.data);
 				// Close the modal after successful data submission

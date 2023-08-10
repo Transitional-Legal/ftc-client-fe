@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import useSWR, { cache } from "swr";
+import { cache } from "swr";
 import api from "apis/api";
 
 export const AuthContext = createContext(null);
@@ -9,24 +9,17 @@ export const AuthProvider = ({ children }) => {
 	const [isLoading, setLoading] = useState(true);
 	const [isLoggingIn, setLoggingIn] = useState(false);
 	const [loginError, setLoginError] = useState(null);
-	const [isVerified, setVerified] = useState(false);
-	const [hasVerified, setHasVerified] = useState(false);
+	// const [isVerified, setVerified] = useState(false);
+	// const [hasVerified, setHasVerified] = useState(false);
 
-	const { data: userDetails, error: fetchDetailsError } = useSWR(user && `/users/${user.id}`);
+	// const { data: userDetails, error: fetchDetailsError } = useSWR(user && `/users/${user.id}`);
+	// const isFetchingDetails = user && !userDetails && !fetchDetailsError;
+	// const { emailVerified, mobileVerified, idVerificationStatus } = userDetails || {};
 
-	const isFetchingDetails = user && !userDetails && !fetchDetailsError;
-
-	// const { data: depositHints } = useSWR(user && `/users/${user.id}/deposithints`);
-
-	const { data: userAddress } = useSWR(user && `/users/${user.id}/address`);
-	const { emailVerified, mobileVerified, idVerificationStatus } = userDetails || {};
-	// const { depositAmount } = depositHints || {};
-	const depositAmount = 0;
-
-	useEffect(() => {
-		const isVerified = userAddress && userAddress.length > 0 && emailVerified && mobileVerified && depositAmount !== undefined && idVerificationStatus === 3;
-		setVerified(isVerified);
-	}, [userAddress, emailVerified, mobileVerified, depositAmount, idVerificationStatus, setVerified]);
+	// useEffect(() => {
+	// 	const isVerified = emailVerified && mobileVerified;
+	// 	setVerified(isVerified);
+	// }, [emailVerified, mobileVerified, idVerificationStatus, setVerified]);
 
 	useEffect(() => {
 		cache.clear();
@@ -55,25 +48,19 @@ export const AuthProvider = ({ children }) => {
 		window.localStorage.removeItem("user");
 		cache.clear();
 		setUser(null);
-		setHasVerified(false);
 	};
 
 	return (
 		<AuthContext.Provider
 			value={{
 				user: user && {
-					...userDetails,
 					...user
 				},
-				isLoggingIn: isLoggingIn || isFetchingDetails,
+				isLoggingIn: isLoggingIn,
 				isLoading,
 				login,
 				logout,
 				loginError,
-				isVerified,
-				setVerified,
-				hasVerified,
-				setHasVerified
 			}}
 		>
 			{children}
