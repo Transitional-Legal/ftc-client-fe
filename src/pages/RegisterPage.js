@@ -25,11 +25,11 @@ const Register = () => {
       <div className="d-flex flex-column justify-content-center container align-items-center">
         <div className="p-3 mt-4">
           <h3>
-          Welcome to the distinguished TransitionalLegal Client Portal.
+          Welcome to the distinguished Transitional Legal Client Portal.
           </h3>
           <br></br>
           <p>
-          A sophisticated platform designed to empower you with a comprehensive view of your case's progress...<br></br>
+          A sophisticated platform designed to empower you with a comprehensive view of your case's progress.<br></br>
           </p>
         </div>
         <div className="d-flex justify-content-center container align-items-center">

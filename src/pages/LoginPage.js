@@ -25,7 +25,7 @@ const LoginPage = () => {
             className="mt-2"
             onClick={() => history.push("/register")}
           >
-            Don't have an account? Register
+            Don't have an account? Click here to register.
           </Button>
         </Card>
       </div>
