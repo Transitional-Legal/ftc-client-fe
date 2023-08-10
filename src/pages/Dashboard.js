@@ -234,7 +234,7 @@ const Dashboard = () => {
 					</aside>
 					<section className="content col-lg-7">
 						<section style={{ position: "relative" }}>
-							<Summary summary={summary}></Summary>
+							<Summary summary={summary} setShow={setShow}></Summary>
 							<Card>
 								<div className="d-flex flex-row">
 									<div className="mr-auto p-2">
