@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, ProgressBar } from "react-bootstrap";
 
 export default function Summary({ summary, setShow }) {
 	const [tasks, setTasks] = useState({
@@ -12,6 +12,16 @@ export default function Summary({ summary, setShow }) {
 		7: false,
 		8: false,
 	});
+
+	const progressStages = [
+		"Case Formalisation",
+		"Collect Evidence",
+		"Submit Appliaction to Court",
+		"Finalise Case"
+	];
+
+	// You can modify this value to represent the current progress stage (0 to 4)
+	const currentStage = 1;
 
 	const handleCheckboxChange = (taskNumber) => (event) => {
 		setTasks({
@@ -27,7 +37,14 @@ export default function Summary({ summary, setShow }) {
 	return (
 		<Container>
 			<h3>Where things are at ...</h3>
-			<p>Pending Case Formalisation</p>
+			<div>
+				<ProgressBar now={(currentStage / 4) * 100} label="Case Formalisation" />
+				<div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', marginTop: '4px' }}>
+					{progressStages.map((stage, index) => (
+						<span key={index}>{stage}</span>
+					))}
+				</div>
+			</div>
 			<p>{summary?.summary}</p>
 			<h3>Next steps ...</h3>
 			<Form.Group>
