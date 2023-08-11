@@ -1,14 +1,18 @@
 import axios from "axios";
 
+const baseURL = process.env.NODE_ENV === 'development'
+  ? "http://localhost:8080"
+  : process.env.REACT_APP_API_URL;
+
 const open = axios.create({
-	baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080",
+	baseURL: baseURL,
 	headers: {
 		"Cache-Control": "no-store"
 	}
 });
 
 const secure = axios.create({
-	baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080",
+	baseURL: baseURL,
 	headers: {
 		"Cache-Control": "no-store"
 	}
