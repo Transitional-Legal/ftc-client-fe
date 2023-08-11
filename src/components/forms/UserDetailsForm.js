@@ -34,38 +34,59 @@ const renderField = (name, label, type, formik) => (
 );
 
 const UserDetailsForm = ({ afterSubmit, iv }) => {
+	const [userDetailFromAS, setUserDetailsFromAS] = React.useState({});
+	const [initialValues, setInitialValues] = React.useState({
+		firstName: iv?.firstName || "",
+		middleName: iv?.middleName || "",
+		lastName: iv?.lastName || "",
+		dob: iv?.dob || "",
+		address: "",
+		city: iv?.city || "",
+		phoneNumber: iv?.phoneNumber || ""
+	});
 	const userEmail = iv.email;
 
+	React.useEffect(() => {
+		const instance = api.open;
+		instance
+			.get("/contacts", { params: { email: userEmail } })
+			.then((response) => {
+				setUserDetailsFromAS(response.data);
+				console.log(response.data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, [userEmail]);
+
+	React.useEffect(() => {
+		setInitialValues({
+			...initialValues,
+			address: userDetailFromAS.physicalAddressLine1 || "",
+			city: userDetailFromAS.physicalCity || "",
+			phoneNumber: userDetailFromAS.phone1Number || ""
+
+		});
+	}, [userDetailFromAS]);
+
 	const formik = useFormik({
-		initialValues: {
-			firstName: iv?.firstName || "",
-			middleName: iv?.middleName || "",
-			lastName: iv?.lastName || "",
-			dob: iv?.dob || "",
-			address: iv?.address || "",
-			city: iv?.city || "",
-			phoneNumber: iv?.phoneNumber || ""
-		},
+		initialValues,
+		enableReinitialize: true,
 		validationSchema,
 		onSubmit: (values) => submitToAPI(values)
 	});
 
-	// Function to handle API submission
 	const submitToAPI = (values) => {
-		// Attach the userEmail to the values object
 		values.userEmail = userEmail;
-		const instance = api.open; 
+		const instance = api.open;
 
 		instance
 			.put("/contacts", values)
 			.then((response) => {
-				console.log(response.data);
-				// todl: Close the modal after successful data submission - error here
 				afterSubmit();
 			})
 			.catch((error) => {
 				console.error(error);
-				// Handle errors (like showing a notification to the user)
 			});
 	};
 
@@ -79,10 +100,10 @@ const UserDetailsForm = ({ afterSubmit, iv }) => {
 				{renderField("address", "Street Address", "text", formik)}
 				{renderField("city", "City/Suburb", "text", formik)}
 				{renderField("phoneNumber", "Phone Number", "text", formik)}
-
 				<Button type="submit">Save Changes</Button>
 			</form>
 		</div>
 	);
 };
+
 export default UserDetailsForm;
