@@ -7,7 +7,7 @@ import "./TransactionTable.scss";
 const columnConfig = {
 	date: {
 		children: "Created",
-		dataFormat: (cell) => cell && moment(cell).format("DD-MM-YYYY")
+		dataFormat: (cell) => cell && moment(cell).format("dddd, DD/MM/YYYY hh:mm A")
 	},
 	type: {
 		children: "Type"
