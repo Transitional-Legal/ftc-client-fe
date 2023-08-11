@@ -44,7 +44,6 @@ const Dashboard = () => {
 	const [showCrypto, setShowCrypto] = useState(false);
 	const [showFinance, setShowFinance] = useState(false);
 
-
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
@@ -110,8 +109,6 @@ const Dashboard = () => {
 			setDownloadError({ show: true, message: error.message });
 		}
 	};
-
-	
 
 	return (
 		<Layout activeTab="Dashboard">
@@ -192,11 +189,8 @@ const Dashboard = () => {
 								</Modal.Header>
 
 								<Modal.Body>
-
 									<div>
-										<p>
-											We accept USDT and USDC. Please send your crypto to the following address:
-										</p>
+										<p>We accept USDT and USDC. Please send your crypto to the following address:</p>
 										<p>BTC: bc1q8y6n59szeew65hn8v3np428wfmgye8lzwg2txl</p>
 										<QRCode id="IdemQRCode" value="bc1q8y6n59szeew65hn8v3np428wfmgye8lzwg2txl" />
 										<hr></hr>
@@ -205,18 +199,11 @@ const Dashboard = () => {
 										<br></br>
 										<br></br>
 
-										<p>
-											USDT and USDC: 0xe59E0aE26a365cC0b580B73Cb626B78854Cb3856
-										</p>
+										<p>USDT and USDC: 0xe59E0aE26a365cC0b580B73Cb626B78854Cb3856</p>
 
 										<QRCode id="IdemQRCode" value="0xe59E0aE26a365cC0b580B73Cb626B78854Cb3856" />
-										
-
-
-
 									</div>
 								</Modal.Body>
-
 
 								<Modal.Footer>
 									<Button variant="secondary" onClick={handleCryptoClose}>
