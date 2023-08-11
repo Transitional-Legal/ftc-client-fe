@@ -10,6 +10,7 @@ import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
 import { AuthContext } from "components/auth/Auth";
 import UserDetailsForm from "../components/forms/UserDetailsForm";
+import QRCode from "qrcode.react";
 
 import Card from "components/Card";
 import "./Dashboard.scss";
@@ -185,20 +186,34 @@ const Dashboard = () => {
 										<h1>Deposit Crypto</h1>
 									</Modal.Title>
 								</Modal.Header>
+
 								<Modal.Body>
+
 									<div>
 										<p>
 											We accept USDT and USDC. Please send your crypto to the following address:
 										</p>
-										<p>
-											USDT and USDC: 0x8EE80b216BE5dE9c78e683D5Ed4f4A5BfDdfbcca
-										</p>
-										{/* todo: work out why this image is not showing. */}
+										<p>BTC: bc1q8y6n59szeew65hn8v3np428wfmgye8lzwg2txl</p>
+										<QRCode id="IdemQRCode" value="bc1q8y6n59szeew65hn8v3np428wfmgye8lzwg2txl" />
+										<hr></hr>
+										<br></br>
+										<br></br>
+										<br></br>
+										<br></br>
 
-										{/* <Image src="../assets/images/usdt_usdc.png" alt="Description of image" /> */}
+										<p>
+											USDT and USDC: 0xe59E0aE26a365cC0b580B73Cb626B78854Cb3856
+										</p>
+
+										<QRCode id="IdemQRCode" value="0xe59E0aE26a365cC0b580B73Cb626B78854Cb3856" />
+										
+
+
 
 									</div>
 								</Modal.Body>
+
+
 								<Modal.Footer>
 									<Button variant="secondary" onClick={handleCryptoClose}>
 										Close
