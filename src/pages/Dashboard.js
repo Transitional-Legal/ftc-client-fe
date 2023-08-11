@@ -44,6 +44,7 @@ const Dashboard = () => {
 	const [showCrypto, setShowCrypto] = useState(false);
 	const [showFinance, setShowFinance] = useState(false);
 
+
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
@@ -110,6 +111,8 @@ const Dashboard = () => {
 		}
 	};
 
+	
+
 	return (
 		<Layout activeTab="Dashboard">
 			<div className="dashboard container-fluid py-4">
@@ -148,6 +151,7 @@ const Dashboard = () => {
 									</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
+									{/* todo: userDetails does not contain physicalAddressLine1, phone1Number and physicalCity need up query AS to get these values to pre-populate the form. */}
 									<UserDetailsForm iv={userDetails} afterSubmit={handleClose} />
 								</Modal.Body>
 								<Modal.Footer>
