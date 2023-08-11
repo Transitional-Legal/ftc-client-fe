@@ -34,7 +34,8 @@ const renderField = (name, label, type, formik) => (
 );
 
 const UserDetailsForm = ({ afterSubmit, iv }) => {
-	console.log(iv)
+	const userEmail = iv.email;
+
 	const formik = useFormik({
 		initialValues: {
 			firstName: iv?.firstName || "",
@@ -51,14 +52,15 @@ const UserDetailsForm = ({ afterSubmit, iv }) => {
 
 	// Function to handle API submission
 	const submitToAPI = (values) => {
-		console.log(values);
+		// Attach the userEmail to the values object
+		values.userEmail = userEmail;
+		const instance = api.open; 
 
-		// todo build a backend function that will update the users details at action step.
-		api
-			.post("/contact", values)
+		instance
+			.put("/contacts", values)
 			.then((response) => {
 				console.log(response.data);
-				// Close the modal after successful data submission
+				// todl: Close the modal after successful data submission - error here
 				afterSubmit();
 			})
 			.catch((error) => {
