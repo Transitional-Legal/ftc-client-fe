@@ -21,7 +21,7 @@ import { CSVLink } from "react-csv";
 import { Alert, Button, Modal, Image } from "react-bootstrap";
 import api from "../apis/api";
 import Summary from "components/Summary";
-import ClientAgreement from "components/nextsteps/ClientAgreement";
+import NextSteps from "components/nextsteps/NextSteps";
 
 const Dashboard = () => {
 	const { user } = useContext(AuthContext);
@@ -241,7 +241,7 @@ const Dashboard = () => {
 					</aside>
 					<section className="content col-lg-7">
 						<section style={{ position: "relative" }}>
-							<ClientAgreement summary={summary} setShow={true}></ClientAgreement>
+							<NextSteps summary={summary}></NextSteps>
 							<Card>
 								<div className="d-flex flex-row">
 									<div className="mr-auto p-2">
