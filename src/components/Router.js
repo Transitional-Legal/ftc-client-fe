@@ -8,20 +8,22 @@ import ResetPasswordPage from "pages/ResetPasswordPage";
 import VerifyEmailPage from "pages/VerifyEmailPage";
 // import ProfilePage from "pages/ProfilePage";
 import RefreshLoginModal from "components/auth/RefreshLoginModal";
+import DocumentRequest from "pages/DocumentRequest";
 
 const Router = () => (
-  <BrowserRouter>
-    <RefreshLoginModal />
-    <Switch>
-      <Route path="/auth/resetpassword/:token" component={ResetPasswordPage} />
-      <Route path="/auth/resetpassword" component={ResetPasswordPage} />
-      <Route path="/verify/email/:token" component={VerifyEmailPage} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="*/register" component={RegisterPage} />
-      {/* <AuthRoute path="/profile" component={ProfilePage} /> */}
-      <AuthRoute path="/" component={Dashboard} allowUnverified />
-    </Switch>
-  </BrowserRouter>
+	<BrowserRouter>
+		<RefreshLoginModal />
+		<Switch>
+			<Route path="/auth/resetpassword/:token" component={ResetPasswordPage} />
+			<Route path="/auth/resetpassword" component={ResetPasswordPage} />
+			<Route path="/verify/email/:token" component={VerifyEmailPage} />
+			<Route path="/login" component={LoginPage} />
+			<Route path="*/register" component={RegisterPage} />
+			{/* <AuthRoute path="/profile" component={ProfilePage} /> */}
+			<Route path="/documentrequest" component={DocumentRequest} />
+			<AuthRoute path="/" component={Dashboard} allowUnverified />
+		</Switch>
+	</BrowserRouter>
 );
 
 export default Router;
