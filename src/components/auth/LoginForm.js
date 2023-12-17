@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Formik, Form } from "formik";
 import { Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { isEmail, trim } from "validator";
 import Input from "components/forms/Input";
 import SubmitSpinnerButton from "components/forms/SubmitSpinnerButton";
@@ -21,7 +21,7 @@ const LoginForm = ({
   style = {}
 }) => {
   const { login } = useContext(AuthContext);
-  const history = useHistory();
+  const history = useNavigate();
   const onSubmit = async (values, actions) => {
     try {
       await login(values);

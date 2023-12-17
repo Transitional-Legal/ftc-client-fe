@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useParams, useLocation, useHistory } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import useSWR, { mutate } from "swr";
 import { AuthContext } from "components/auth/Auth";
@@ -25,7 +25,7 @@ const addressFormAlert = (
 const AddressModalForm = () => {
   let id = parseInt(useParams().id);
   const location = useLocation();
-  const history = useHistory();
+  const history = useNavigate();
   const isEditForm = !!id;
   const heading = isEditForm ? "Edit Address" : "Add Address";
   const submitText = isEditForm ? "Save" : "Add Address";

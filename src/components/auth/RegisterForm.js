@@ -7,7 +7,7 @@ import api from "apis/api";
 import ErrorMessage from "components/ErrorMessage";
 import { AuthContext } from "components/auth/Auth";
 import { minPasswordLength } from "constants/index";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./RegisterForm.scss";
 
 const defaultValues = {
@@ -44,7 +44,7 @@ const validate = ({ email, password, firstName, lastName }) => {
 const RegisterForm = ({ initialValues: _iv, logo }) => {
 	const initialValues = { ...defaultValues, ..._iv };
 	const { login } = useContext(AuthContext);
-	const history = useHistory();
+	const history = useNavigate();
 	const onSubmit = async (values, actions) => {
 		try {
 			const parsedValues = parseSubmitValues(values);

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Modal from "components/Modal";
 import AddressGroupForm from "./AddressGroupForm";
-import { useLocation, useHistory, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSWR, { mutate } from "swr";
 import gpib from "apis/api";
 import { AuthContext } from "components/auth/Auth";
@@ -10,7 +10,7 @@ const AddressGroupModal = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const location = useLocation();
-  const history = useHistory();
+  const history = useNavigate();
   const heading = "Set Group Address";
   const { data: address } = useSWR(`/address/${id}`);
   const onDismiss = () => {

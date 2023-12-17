@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Modal from "components/Modal";
 import AddressGroupForm from "./AddressGroupForm";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useSWR, { mutate } from "swr";
 import api from "apis/api";
 import { AuthContext } from "components/auth/Auth";
@@ -9,7 +9,7 @@ import { AuthContext } from "components/auth/Auth";
 const AddressGroupModalAdd = () => {
   const { user } = useContext(AuthContext);
   const location = useLocation();
-  const history = useHistory();
+  const history = useNavigate();
   const heading = "Add Group Address";
   const onDismiss = () => {
     const base = location.pathname.replace(/(\/addresses)\/.*/, "$1");

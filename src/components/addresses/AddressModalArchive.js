@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useLocation, useHistory, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSWR, { mutate } from "swr";
 import { AuthContext } from "components/auth/Auth";
 import gpib from "apis/api";
@@ -14,7 +14,7 @@ const AddressModalAdd = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const location = useLocation();
-  const history = useHistory();
+  const history = useNavigate();
   const heading = "Archive BTC Address";
   const submitText = "Archive";
   const getUrl = user && `/users/${user.id}/address`;

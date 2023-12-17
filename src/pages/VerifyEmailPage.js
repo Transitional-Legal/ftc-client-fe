@@ -3,14 +3,14 @@ import { mutate } from "swr";
 import Layout from "components/layout/Layout";
 import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "apis/api";
 import { AuthContext } from "components/auth/Auth";
 
 const VerifyEmailPage = () => {
   const { token } = useParams();
   const { user } = useContext(AuthContext);
-  const history = useHistory();
+  const history = useNavigate();
   const [isVerifying, setVerifying] = useState(true);
   const [error, setError] = useState(null);
 

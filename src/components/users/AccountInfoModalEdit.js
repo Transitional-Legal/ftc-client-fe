@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import useSWR, { mutate } from "swr";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import api from "apis/api";
 import Modal from "components/Modal";
 import AccountInfoForm from "./AccountInfoForm";
@@ -9,7 +9,7 @@ import Loader from "components/Loader";
 import ErrorMessage from "components/ErrorMessage";
 
 const AccountInfoModal = (props) => {
-  const history = useHistory();
+  const history = useNavigate();
   const location = useLocation();
   const { user } = useContext(AuthContext);
   const {

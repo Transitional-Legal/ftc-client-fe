@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "pages/LoginPage";
 import RegisterPage from "pages/RegisterPage";
 import AuthRoute from "components/auth/AuthRoute";
@@ -13,7 +13,7 @@ import DocumentRequest from "pages/DocumentRequest";
 const Router = () => (
 	<BrowserRouter>
 		<RefreshLoginModal />
-		<Switch>
+		<Routes>
 			<Route path="/auth/resetpassword/:token" component={ResetPasswordPage} />
 			<Route path="/auth/resetpassword" component={ResetPasswordPage} />
 			<Route path="/verify/email/:token" component={VerifyEmailPage} />
@@ -22,7 +22,7 @@ const Router = () => (
 			{/* <AuthRoute path="/profile" component={ProfilePage} /> */}
 			<Route path="/documentrequest" component={DocumentRequest} />
 			<AuthRoute path="/" component={Dashboard} allowUnverified />
-		</Switch>
+		</Routes>
 	</BrowserRouter>
 );
 

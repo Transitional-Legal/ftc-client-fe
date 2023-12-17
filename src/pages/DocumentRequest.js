@@ -1,12 +1,12 @@
 import React from "react";
-import { useLocation, useHistory, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Layout from "components/layout/Layout";
 import Card from "components/Card";
 import DocumentRequestForm from "components/documents/DocumentRequestForm";
 import useSWR from "swr";
 
 const DocumentRequest = () => {
-	const history = useHistory();
+	const history = useNavigate();
 	const location = useLocation();
 
 	// GUID

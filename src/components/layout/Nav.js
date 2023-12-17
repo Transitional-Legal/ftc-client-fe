@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { AuthContext } from "components/auth/Auth";
 import "./Nav.scss";
 
 const _Nav = ({ links, noBrand = false, activeTab }) => {
 	const { logout, user, isVerified } = useContext(AuthContext);
-	const history = useHistory();
+	const history = useNavigate();
 	// Set default links
 
 	const loginLink = user ? { label: "Log Out", onClick: logout } : { label: "Log In", onClick: () => history.push("/login") };

@@ -4,7 +4,7 @@ import Input from "components/forms/Input";
 import SubmitSpinnerButton from "components/forms/SubmitSpinnerButton";
 import api from "apis/api";
 import ErrorMessage from "components/ErrorMessage";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./DocumentRequestForm.scss";
 
 const defaultValues = {
@@ -26,7 +26,7 @@ const validate = ({ date, notes }) => {
 
 const DocumentRequestForm = ({ initialValues: _iv }) => {
 	const initialValues = { ...defaultValues, ..._iv };
-	const history = useHistory();
+	const history = useNavigate();
 	const onSubmit = async (values, actions) => {
 		try {
 			const parsedValues = parseSubmitValues(values);

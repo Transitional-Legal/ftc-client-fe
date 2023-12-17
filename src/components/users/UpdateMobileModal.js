@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Modal from "components/Modal";
 import useSWR from "swr";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import gpib from "apis/api";
 import UpdateMobileForm from "./UpdateMobileForm";
 import { Button, Alert } from "react-bootstrap";
@@ -22,7 +22,7 @@ const UpdateMobileModal = (props) => {
     { revalidateOnFocus: false }
   );
   const [message, setMessage] = useState();
-  const history = useHistory();
+  const history = useNavigate();
   const location = useLocation();
   const initialValues = parseInitialValues(data);
 

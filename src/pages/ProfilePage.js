@@ -3,7 +3,7 @@ import useSWR, { mutate } from "swr";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { format as format$ } from "currency-formatter";
 import Layout from "components/layout/Layout";
 import ErrorMessage from "components/ErrorMessage";
@@ -17,7 +17,7 @@ import "./Dashboard.scss";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
-  const history = useHistory();
+  const history = useNavigate();
   const location = useLocation();
 
   // const { data: depositHints, error: fetchDepositHintsError } = useSWR(
