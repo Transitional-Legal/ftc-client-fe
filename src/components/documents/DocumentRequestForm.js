@@ -9,12 +9,12 @@ import "./DocumentRequestForm.scss";
 
 const defaultValues = {
 	date: "",
-	notes: ""
+	summary: ""
 };
 
 const parseSubmitValues = (v) => ({
 	date: v.date,
-	notes: v.notes
+	summary: v.summary
 });
 
 const validate = ({ date, notes }) => {
@@ -24,7 +24,7 @@ const validate = ({ date, notes }) => {
 	return errors;
 };
 
-const DocumentRequestForm = ({ initialValues: _iv, logo }) => {
+const DocumentRequestForm = ({ initialValues: _iv }) => {
 	const initialValues = { ...defaultValues, ..._iv };
 	const history = useHistory();
 	const onSubmit = async (values, actions) => {
@@ -46,7 +46,7 @@ const DocumentRequestForm = ({ initialValues: _iv, logo }) => {
 					<Input name="date" label="Document date if applicable" placeholder="2023/01/01" disabled={initialValues?.date} />
 					<Input name="notes" label="Notes" placeholder="" disabled={initialValues?.notes} />
 					<ErrorMessage error={errors.hidden} />
-					<SubmitSpinnerButton submitText="Select a file" isSubmitting={isSubmitting} />
+					<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
 					<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} />
 				</Form>
 			)}
