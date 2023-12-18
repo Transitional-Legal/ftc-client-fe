@@ -9,6 +9,7 @@ import VerifyEmailPage from "pages/VerifyEmailPage";
 // import ProfilePage from "pages/ProfilePage";
 import RefreshLoginModal from "components/auth/RefreshLoginModal";
 import DocumentRequest from "pages/DocumentRequest";
+import AdminDocumentRequest from "pages/AdminDocumentRequest";
 
 const Router = () => (
 	<BrowserRouter>
@@ -21,6 +22,7 @@ const Router = () => (
 
 			<Route path="*/register" element={<RegisterPage />} />
 			<Route path="/documentrequest" element={<DocumentRequest />} />
+			<Route path="/admin/doc" element={<AdminDocumentRequest />} />
 			{/* <AuthRoute path="/" component={Dashboard} allowUnverified /> */}
 		</Routes>
 	</BrowserRouter>

@@ -7,6 +7,7 @@ const defaultTdStyle = {
   whiteSpace: "normal",
   wordBreak: "break-word"
 };
+
 const Table = ({ columnConfig = {}, hidden = [], ...props }) => (
   <BootstrapTable
     striped

@@ -43,6 +43,7 @@ const DocumentRequest = () => {
 					<section className="content col-lg-6">
 						<Card>
 							<p>1. CBA Smart Access, Lucas Cullen & Sara Skinner, Account Ending 0498</p>
+							
 							<div className="p-2">
 								<Button>Upload</Button>
 							</div>
