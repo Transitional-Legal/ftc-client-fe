@@ -18,9 +18,9 @@ const Router = () => (
 			<Route path="/auth/resetpassword" element={ResetPasswordPage} />
 			<Route path="/verify/email/:token" element={VerifyEmailPage} />
 			<Route path="/login" element={LoginPage} /> */}
-			
-			<Route path="*/register" element={ <RegisterPage/> } />
-			<Route path="/documentrequest" element={ <DocumentRequest/> } />
+
+			<Route path="*/register" element={<RegisterPage />} />
+			<Route path="/documentrequest" element={<DocumentRequest />} />
 			{/* <AuthRoute path="/" component={Dashboard} allowUnverified /> */}
 		</Routes>
 	</BrowserRouter>
