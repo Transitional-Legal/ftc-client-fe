@@ -5,21 +5,38 @@ import Input from "components/forms/Input";
 import Layout from "components/layout/Layout";
 import Card from "components/Card";
 import { Alert, Button } from "react-bootstrap";
-import DocumentRequestForm from "components/documents/DocumentRequestForm";
-import useSWR from "swr";
+import api from "apis/api";
 
 const initialValues = {
-	date: "",
-	notes: ""
+	title: "",
+	their_ref: "",
+	issued: "",
+	deadline: ""
 };
+
+const parseSubmitValues = (v) => ({
+	title: v.title,
+	their_ref: v.their_ref,
+	issued: v.issued,
+	deadline: v.deadline
+});
 
 const AdminDocumentRequest = () => {
 	// get the document summary
 
+	const [data, setData] = React.useState(null);
+
+	const getSummary = async () => {
+		const { data } = await api.open.post(`/documents/parse`);
+		console.log(data);
+		setData(data);
+		return data;
+	};
+
 	const onSubmit = async (values, actions) => {
 		try {
-			// const parsedValues = parseSubmitValues(values);
-			// await api.open.post("/documents", parsedValues);
+			const parsedValues = parseSubmitValues(values);
+			await api.open.post("/documents", parsedValues);
 			// history.push("/");
 		} catch (e) {
 			console.log(e);
@@ -32,16 +49,16 @@ const AdminDocumentRequest = () => {
 		<Layout navLinks={[]}>
 			<div className="container py-5">
 				<h1>Create a new Document Request response</h1>
-				<Button>Attach Letter from the other side</Button>
+				<Button onClick={getSummary}>Attach Letter from the other side</Button>
 
 				<Formik initialValues={initialValues} onSubmit={onSubmit}>
 					{({ isSubmitting, errors }) => (
 						<Form style={{ flex: 1, width: "100%" }}>
-							<Input name="title" label="Document title" placeholder="" />
-							<Input name="their_ref" label="Their Ref" placeholder="" />
-							<Input name="issued" label="Issued Date" placeholder="" />
-							<Input name="deadline" label="Deadline" placeholder="" />
-							<Input name="summary" label="Summary" placeholder="" />
+							<Input name="title" label="Document title" value={data?.title} />
+							<Input name="their_ref" label="Their Ref" value={data?.their_ref} />
+							<Input name="issued" label="Issued Date" value={data?.issued} />
+							<Input name="deadline" label="Deadline" value={data?.deadline} />
+							<Input name="summary" label="Summary" value={data?.summary} />
 							{/* <ErrorMessage error={errors.hidden} />
 							<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
 							<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
