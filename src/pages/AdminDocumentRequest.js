@@ -1,5 +1,4 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
 import { Formik, Form } from "formik";
 import Input from "components/forms/Input";
 import Layout from "components/layout/Layout";
@@ -25,6 +24,7 @@ const AdminDocumentRequest = () => {
 	// get the document summary
 
 	const [data, setData] = React.useState(null);
+	const [isSubmitting, setIsSubmitting] = React.useState(false);
 
 	const getSummary = async () => {
 		const { data } = await api.open.post(`/documents/parse`);
@@ -58,7 +58,7 @@ const AdminDocumentRequest = () => {
 							<Input name="their_ref" label="Their Ref" value={data?.their_ref} />
 							<Input name="issued" label="Issued Date" value={data?.issued} />
 							<Input name="deadline" label="Deadline" value={data?.deadline} />
-							<Input name="summary" label="Summary" value={data?.summary} />
+							<Input name="summary" label="Summary of the request" value={data?.summary} />
 							{/* <ErrorMessage error={errors.hidden} />
 							<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
 							<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
