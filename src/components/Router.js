@@ -10,7 +10,7 @@ import VerifyEmailPage from "pages/VerifyEmailPage";
 import RefreshLoginModal from "components/auth/RefreshLoginModal";
 import DocumentRequest from "pages/DocumentRequest";
 import AdminDocumentRequest from "pages/AdminDocumentRequest";
-import AdminFinStatement from "pages/AdminFinStatement";
+import FinStatement from "pages/FinStatement";
 
 const Router = () => (
 	<BrowserRouter>
@@ -23,7 +23,7 @@ const Router = () => (
 			
 			<Route path="/" element={<Dashboard/>} />
 			<Route path="*/register" element={<RegisterPage />} />
-			<Route path="/finstatement" element={<AdminFinStatement />} />
+			<Route path="/finstatement" element={<FinStatement />} />
 			<Route path="/documentrequest" element={<DocumentRequest />} />
 			<Route path="/admin/doc" element={<AdminDocumentRequest />} />
 			

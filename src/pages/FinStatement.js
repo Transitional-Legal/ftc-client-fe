@@ -6,6 +6,7 @@ import Card from "components/Card";
 import { Alert, Button } from "react-bootstrap";
 import api from "apis/api";
 import useSWR, { mutate } from "swr";
+import Table from "components/Table";
 
 const initialValues = {
 	title: "",
@@ -21,7 +22,24 @@ const parseSubmitValues = (v) => ({
 	deadline: v.deadline
 });
 
-const AdminDocumentRequest = () => {
+// dataField (key) props (value)
+const columnConfig = {
+	name: {
+		children: "Name",
+		width: "30%"
+	},
+	age: {
+		children: "Age"
+	},
+	relationship: {
+		children: "Relationship"
+	},
+	amount: {
+		children: "Average Weekly Amount"
+	},
+};
+
+const FinStatement = () => {
 	// get the document summary
 
 	const [data, setData] = React.useState(null);
@@ -49,18 +67,27 @@ const AdminDocumentRequest = () => {
 		}
 	];
 
+	const _earners = [
+		{
+			name: "John Smith",
+			age: "30",
+			relationship: "Partner",
+			amount: "1000"
+		}
+	];
+
+	const [earners, setEarners] = React.useState(_earners);
+
 	// Post the .csv to the backend to parse
 	const getData = async () => {
 		const { data } = await api.open.post(`/finstatement/parse`);
-		console.log(data);
 		setData(data);
 		return data;
 	};
 
 	const query = async () => {
 		const prompt = "What is Sarah's current occupation?";
-		const { data } = await api.open.get(`http://localhost:8000/query/${prompt}`);
-		console.log(data);
+		const { data } = await api.open.get(`/query/${prompt}`);
 		setData(data.response);
 		return data;
 	};
@@ -79,7 +106,6 @@ const AdminDocumentRequest = () => {
 
 	const { data: income } = useSWR(`http://localhost:8000/query/test`);
 	console.log(income);
-
 
 	return (
 		<Layout navLinks={[]}>
@@ -130,8 +156,6 @@ const AdminDocumentRequest = () => {
 								<Input name="family_name" label="3: What is your current occupation" value={income?.response} />
 								<Input name="given_names" label="4: Are you employed?" />
 
-								<Field name="radio" label="Type of employment" />
-
 								{/* <ErrorMessage error={errors.hidden} />
 							<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
 							<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
@@ -140,12 +164,38 @@ const AdminDocumentRequest = () => {
 					</Formik>
 				</Card>
 
+				<Card>
+					<Alert variant="info">
+						<Alert.Heading>Part E: Other income earners in your household</Alert.Heading>
+						<p>Give the name, age and relationship to you and gross income of each other occupant in your house hold</p>
+					</Alert>
+
+					<Table>
+						data={earners}
+						columnConfig={columnConfig}
+						keyField="id" className="address-table"
+					</Table>
+
+					<Formik initialValues={initialValues} onSubmit={onSubmit}>
+						{({ isSubmitting, errors }) => (
+							<Form style={{ flex: 1, width: "100%" }}>
+								<Input name="name" label="Name" value={income?.response} />
+								<Input name="age" label="Age" />
+								<Input name="relationship" label="Relationship to you" />
+								<Input name="amount" label="Average weekly amount" />
+							</Form>
+						)}
+					</Formik>
+
+					<Button>Add</Button>
+				</Card>
+
 				{/* <Button>Next</Button> */}
 
-				<Button onClick={query}>Query documents</Button>
+				<Button onClick={query}>Query documents with AI</Button>
 			</div>
 		</Layout>
 	);
 };
 
-export default AdminDocumentRequest;
+export default FinStatement;
