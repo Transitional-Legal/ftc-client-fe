@@ -6,6 +6,7 @@ import Card from "components/Card";
 import { Alert, Button } from "react-bootstrap";
 import api from "apis/api";
 import useSWR, { mutate } from "swr";
+import Toggle from "components/forms/Toggle";
 
 const initialValues = {
 	title: "",
@@ -29,6 +30,9 @@ const AdminDocumentRequest = () => {
 	const [isSubmitting, setIsSubmitting] = React.useState(false);
 	const [step, setStep] = React.useState(0);
 
+	const [employed, setEmployed] = React.useState(false);
+	const [selfEmployed, setSelfEmployed] = React.useState(false);
+
 	const part_a = {
 		family_name: "Smith",
 		given_names: "John",
@@ -40,17 +44,18 @@ const AdminDocumentRequest = () => {
 
 	const part_c = {
 		occupation: "Software Engineer",
+		employed: true,
 		income: "100000"
 	};
 
 	const prompts = [
 		{
-			c_3: "What is your current occupation"
+			c_3: "What is your current occupation?"
 		}
 	];
 
 	// Post the .csv to the backend to parse
-	const getData = async () => {
+	const parseData = async () => {
 		const { data } = await api.open.post(`/finstatement/parse`);
 		console.log(data);
 		setData(data);
@@ -79,7 +84,6 @@ const AdminDocumentRequest = () => {
 
 	const { data: income } = useSWR(`http://localhost:8000/query/test`);
 	console.log(income);
-
 
 	return (
 		<Layout navLinks={[]}>
@@ -127,14 +131,23 @@ const AdminDocumentRequest = () => {
 					<Formik initialValues={initialValues} onSubmit={onSubmit}>
 						{({ isSubmitting, errors }) => (
 							<Form style={{ flex: 1, width: "100%" }}>
-								<Input name="family_name" label="3: What is your current occupation" value={income?.response} />
-								<Input name="given_names" label="4: Are you employed?" />
+								<Input name="family_name" label="3: What is your current occupation?" value={income?.response} />
 
-								<Field name="radio" label="Type of employment" />
+								<p>4: Are you employed?</p>
+								<Toggle className="float-right" value={employed} setValue={() => setEmployed(!employed)} />
 
+								<Input disabled={!employed} name="employer_name" label="5: What is the name of your employer?" />
+								<Input disabled={!employed} name="employer_address" label="6: What is the address of your employer?" />
+
+								<Input name="employer_duration" label="7: How long have you been at this place?" />
+
+								<p>8: Are you self-employed?</p>
+								<Toggle className="float-right" value={selfEmployed} setValue={() => setSelfEmployed(!selfEmployed)} />
+
+								<Input disabled={!selfEmployed} name="self_employed" label="STATE THE NAME OF THE BUSINESS / COMPANY / PARTNERSHIP / TRUST" />
 								{/* <ErrorMessage error={errors.hidden} />
-							<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
-							<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
+								<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
+								<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
 							</Form>
 						)}
 					</Formik>
