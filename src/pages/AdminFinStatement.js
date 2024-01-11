@@ -153,6 +153,37 @@ const AdminDocumentRequest = () => {
 					</Formik>
 				</Card>
 
+
+				<Card>
+					<Alert variant="info">
+						<Alert.Heading>Part D: Your income</Alert.Heading>
+					</Alert>
+
+					<Formik initialValues={initialValues} onSubmit={onSubmit}>
+						{({ isSubmitting, errors }) => (
+							<Form style={{ flex: 1, width: "100%" }}>
+								<Input name="family_name" label="3: What is your current occupation?" value={income?.response} />
+
+								<p>9: What is your total salary or wages before tax?</p>
+								<Toggle className="float-right" value={employed} setValue={() => setEmployed(!employed)} />
+
+								<Input disabled={!employed} name="employer_name" label="5: What is the name of your employer?" />
+								<Input disabled={!employed} name="employer_address" label="6: What is the address of your employer?" />
+
+								<Input name="employer_duration" label="7: How long have you been at this place?" />
+
+								<p>8: Are you self-employed?</p>
+								<Toggle className="float-right" value={selfEmployed} setValue={() => setSelfEmployed(!selfEmployed)} />
+
+								<Input disabled={!selfEmployed} name="self_employed" label="STATE THE NAME OF THE BUSINESS / COMPANY / PARTNERSHIP / TRUST" />
+								{/* <ErrorMessage error={errors.hidden} />
+								<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
+								<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
+							</Form>
+						)}
+					</Formik>
+				</Card>
+
 				{/* <Button>Next</Button> */}
 
 				<Button onClick={query}>Query documents</Button>
