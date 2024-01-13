@@ -1457,6 +1457,11 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@pdftron/webviewer@^10.6.0":
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/@pdftron/webviewer/-/webviewer-10.6.0.tgz#46fb4e48d86dcccb2b4df9502302b1072828a3b2"
+  integrity sha512-EjgmzyDuF75mxhYTlaBt6nc5jBM1gha4q82eow8xCIrCE/WCZ5ZJ6/sCf0NlL3dNwxvatp52z4gPgAa2Yv1ajA==
+
 "@popperjs/core@^2.8.6":
   version "2.11.5"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz#db5a11bf66bdab39569719555b0f76e138d7bd64"
