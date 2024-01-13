@@ -33,6 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "copy-webviewer": "cp -R ./node_modules/@pdftron/webviewer/public ./public/webviewer",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js --max-warnings 1",
