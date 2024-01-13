@@ -11,6 +11,7 @@ import RefreshLoginModal from "components/auth/RefreshLoginModal";
 import DocumentRequest from "pages/DocumentRequest";
 import AdminDocumentRequest from "pages/AdminDocumentRequest";
 import AdminFinStatement from "pages/AdminFinStatement";
+import PDFViewer from "pages/PDFViewer";
 
 const Router = () => (
 	<BrowserRouter>
@@ -26,6 +27,7 @@ const Router = () => (
 			<Route path="/finstatement" element={<AdminFinStatement />} />
 			<Route path="/documentrequest" element={<DocumentRequest />} />
 			<Route path="/admin/doc" element={<AdminDocumentRequest />} />
+			<Route path="/pdfviewer" element={<PDFViewer />} />
 			
 		</Routes>
 	</BrowserRouter>
