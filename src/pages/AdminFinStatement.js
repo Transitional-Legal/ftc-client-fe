@@ -23,6 +23,25 @@ const parseSubmitValues = (v) => ({
 });
 
 const AdminDocumentRequest = () => {
+	// Save scroll position before refreshing the page
+	window.addEventListener("beforeunload", () => {
+		console.log("saving scroll position")
+		
+		localStorage.setItem("scrollPosition", window.scrollY);
+		console.log(localStorage.getItem("scrollPosition"))
+	});
+
+	// Restore scroll position after the page is reloaded
+	window.addEventListener("load", () => {
+		console.log("restoring scroll position" )
+		const scrollPosition = localStorage.getItem("scrollPosition");
+		console.log(scrollPosition)
+		if (scrollPosition) {
+			window.scrollTo(0, parseInt(scrollPosition));
+			localStorage.removeItem("scrollPosition");
+		}
+	});
+
 	// get the document summary
 
 	const [data, setData] = React.useState(null);
@@ -162,13 +181,24 @@ const AdminDocumentRequest = () => {
 					<Formik initialValues={initialValues} onSubmit={onSubmit}>
 						{({ isSubmitting, errors }) => (
 							<Form style={{ flex: 1, width: "100%" }}>
-								<Input name="family_name" label="3: What is your current occupation?" value={income?.response} />
+								<Input name="salary_before_tax" label="9: What is your total salary or wages before tax?" value="E $45,000" />
 
-								<p>9: What is your total salary or wages before tax?</p>
-								<Toggle className="float-right" value={employed} setValue={() => setEmployed(!employed)} />
+								{/* <p>9: What is your total salary or wages before tax?</p> */}
+								{/* <Toggle className="float-right" value={employed} setValue={() => setEmployed(!employed)} /> */}
 
-								<Input disabled={!employed} name="employer_name" label="5: What is the name of your employer?" />
-								<Input disabled={!employed} name="employer_address" label="6: What is the address of your employer?" />
+								<Input name="investment_income_1" label="10. What is your weekly income from all your investments after tax? (e.g. rent, interest, divident)" />
+								<Input name="investment_income_1_paidby" label="Who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
+								<Input name="business_income_2" label="10.Do you have any other weekly inccome?" />
+								<Input name="business_income_2_paidby" label="If so who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
+
+								<Input name="investment_income_1" label="1. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident)" />
+								<Input name="investment_income_1_paidby" label="Who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
+								<Input name="business_income_2" label="10.Do you have any other weekly inccome?" />
+								<Input name="business_income_2_paidby" label="If so who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
+								
+								
+								
+								<Input name="employer_address" label="6: What is the address of your employer?" />
 
 								<Input name="employer_duration" label="7: How long have you been at this place?" />
 
