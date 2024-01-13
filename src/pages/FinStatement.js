@@ -46,6 +46,7 @@ const FinStatement = () => {
 	// const [query, setQuery] = React.useState(null);
 	const [isSubmitting, setIsSubmitting] = React.useState(false);
 	const [step, setStep] = React.useState(0);
+	const [partF, setPartF] = React.useState(null);
 
 	const part_a = {
 		family_name: "Smith",
@@ -60,6 +61,8 @@ const FinStatement = () => {
 		occupation: "Software Engineer",
 		income: "100000"
 	};
+
+	const part_e = [];
 
 	const prompts = [
 		{
@@ -104,8 +107,14 @@ const FinStatement = () => {
 		}
 	};
 
-	const { data: income } = useSWR(`http://localhost:8000/query/test`);
-	console.log(income);
+	const addEarner = () => {
+		setEarners([...earners, {
+			name: "John Smith",
+			age: "30",
+			relationship: "Partner",
+			amount: "1000"
+		}]);
+	}
 
 	return (
 		<Layout navLinks={[]}>
@@ -179,7 +188,7 @@ const FinStatement = () => {
 					<Formik initialValues={initialValues} onSubmit={onSubmit}>
 						{({ isSubmitting, errors }) => (
 							<Form style={{ flex: 1, width: "100%" }}>
-								<Input name="name" label="Name" value={income?.response} />
+								<Input name="name" label="Name" />
 								<Input name="age" label="Age" />
 								<Input name="relationship" label="Relationship to you" />
 								<Input name="amount" label="Average weekly amount" />
@@ -187,7 +196,7 @@ const FinStatement = () => {
 						)}
 					</Formik>
 
-					<Button>Add</Button>
+					<Button onClick={addEarner}>Add Earner</Button>
 				</Card>
 
 				{/* <Button>Next</Button> */}
