@@ -10,8 +10,6 @@ import Toggle from "components/forms/Toggle";
 
 import FinStatementPartD from "components/finstatementformsections/finStatementPartD";
 
-
-
 // Developer Note:
 // For consistent naming of form fields across all form sections, please follow this pattern:
 // fs_partA_field_name
@@ -20,7 +18,6 @@ import FinStatementPartD from "components/finstatementformsections/finStatementP
 // fs_partD_field_name
 // etc.
 // This pattern helps in maintaining uniformity and readability in our form field naming conventions.
-
 
 import "./AdminFinStatement.scss";
 
@@ -38,7 +35,7 @@ const parseSubmitValues = (v) => ({
 	deadline: v.deadline
 });
 
-const AdminDocumentRequest = () => {
+const FinStatement = () => {
 	// Save scroll position before refreshing the page
 	window.addEventListener("beforeunload", () => {
 		console.log("saving scroll position");
@@ -126,8 +123,6 @@ const AdminDocumentRequest = () => {
 			<div className="container py-5">
 				<h1>Create a new Financial Statement</h1>
 
-				
-
 				<Card>
 					<Alert variant="info">
 						<Alert.Heading>Part A: About you</Alert.Heading>
@@ -179,7 +174,6 @@ const AdminDocumentRequest = () => {
 				</Card>
 
 				<FinStatementPartD></FinStatementPartD>
-				
 
 				{/* <Button>Next</Button> */}
 
@@ -189,4 +183,4 @@ const AdminDocumentRequest = () => {
 	);
 };
 
-export default AdminDocumentRequest;
+export default FinStatement;
