@@ -23,8 +23,16 @@ export const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		cache.clear();
-		const initialUser = JSON.parse(window.localStorage.getItem("user"));
-		setUser(initialUser);
+		const storedUser = window.localStorage.getItem("user");
+		if (storedUser) {
+			try {
+				const initialUser = JSON.parse(storedUser);
+				setUser(initialUser);
+			} catch (error) {
+				console.error("Error parsing user data from localStorage:", error);
+				// Handle the error as appropriate for your application
+			}
+		}
 		setLoading(false);
 	}, []);
 

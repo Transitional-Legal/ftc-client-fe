@@ -3,10 +3,12 @@ import { Formik, Form, Field } from "formik";
 import Input from "components/forms/Input";
 import Layout from "components/layout/Layout";
 import Card from "components/Card";
-import { Alert, Button } from "react-bootstrap";
+import { Alert, Button, Row, Col } from "react-bootstrap";
 import api from "apis/api";
 import useSWR, { mutate } from "swr";
 import Toggle from "components/forms/Toggle";
+
+import "./AdminFinStatement.scss";
 
 const initialValues = {
 	title: "",
@@ -26,14 +28,14 @@ const AdminDocumentRequest = () => {
 	// Save scroll position before refreshing the page
 	window.addEventListener("beforeunload", () => {
 		console.log("saving scroll position")
-		
+
 		localStorage.setItem("scrollPosition", window.scrollY);
 		console.log(localStorage.getItem("scrollPosition"))
 	});
 
 	// Restore scroll position after the page is reloaded
 	window.addEventListener("load", () => {
-		console.log("restoring scroll position" )
+		console.log("restoring scroll position")
 		const scrollPosition = localStorage.getItem("scrollPosition");
 		console.log(scrollPosition)
 		if (scrollPosition) {
@@ -51,6 +53,7 @@ const AdminDocumentRequest = () => {
 
 	const [employed, setEmployed] = React.useState(false);
 	const [selfEmployed, setSelfEmployed] = React.useState(false);
+	const [incomeFromBusiness, setIncomeFromBusiness] = React.useState(false);
 
 	const part_a = {
 		family_name: "Smith",
@@ -187,17 +190,70 @@ const AdminDocumentRequest = () => {
 								{/* <Toggle className="float-right" value={employed} setValue={() => setEmployed(!employed)} /> */}
 
 								<Input name="investment_income_1" label="10. What is your weekly income from all your investments after tax? (e.g. rent, interest, divident)" />
+								<div className="indentLeft">
 								<Input name="investment_income_1_paidby" label="Who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
+
+
+
+								</div>
+								{/* <Input name="business_income_2" label="10.Do you have any other weekly inccome?" /> */}
+								<p>11. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident) </p>
+								<Toggle className="float-right" value={incomeFromBusiness} setValue={() => setIncomeFromBusiness(!incomeFromBusiness)} />
+
+								{/* <Input name="investment_income_1" label="11. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident)" /> */}
+
+								<div className="indentLeft">
+								<Input name="business_income_2_paidby" label="If so who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
+
+									<Input name="investment_income_1_paidby" label="What type of business does this income come from?" />
+									<Input
+										name="nameOfBusiness"
+										label="What is the name of this busines/company/partnership/trust?"
+									/>
+									
+									<Input
+										name="addressOfBusiness"
+										label="Waht is the address?"
+									/>
+									<Row>
+										<Col>
+											<Input
+												name="stateOfBusiness"
+												label="State"
+											/>
+										</Col>
+										<Col>
+											<Input
+												name="postcodeOfBusiness"
+												label="Postcode"
+											/>
+										</Col>
+									</Row>
+								</div>
+
+
+
+
+
+
+
+
+
+								<Input
+									name="incomeFromBusiness"
+									label="11. Do you get any weekly income from businesses, partnerships, companies or trusts? (e.g., rent, interest, dividend)"
+								/>
+								<Input
+									name="typeOfIncomeBusiness"
+									label="What type of business does this income come from?"
+								/>
+
+
 								<Input name="business_income_2" label="10.Do you have any other weekly inccome?" />
 								<Input name="business_income_2_paidby" label="If so who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
 
-								<Input name="investment_income_1" label="1. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident)" />
-								<Input name="investment_income_1_paidby" label="Who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
-								<Input name="business_income_2" label="10.Do you have any other weekly inccome?" />
-								<Input name="business_income_2_paidby" label="If so who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
-								
-								
-								
+
+
 								<Input name="employer_address" label="6: What is the address of your employer?" />
 
 								<Input name="employer_duration" label="7: How long have you been at this place?" />
