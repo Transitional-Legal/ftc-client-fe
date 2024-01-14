@@ -30,9 +30,13 @@ const parseSubmitValues = (v) => ({
 });
 
 const FinStatementPartD = () => {
-	const [partD_incomeFromBusiness, setIncomeFromBusiness] = React.useState(false);
+
 	const [partD_weeklyIncomeFromInvestments, setWeeklyIncomeFromInvestments] = React.useState(false);
+	const [partD_incomeFromBusiness, setIncomeFromBusiness] = React.useState(false);
 	const [partD_govBenefits, setGovBenefits] = React.useState(false);
+	const [partD_spousalMaintenceOrChildSupport, setSpousalMaintenceOrChildSupport] = React.useState(false);
+	const [partD_benefitsBusinessOrEmployment, setBenefitsBusinessOrEmployment] = React.useState(false);
+	const [partD_otherIncome, setOtherIncome] = React.useState(false);
 
 	const onSubmit = async (values, actions) => {
 		try {
@@ -59,13 +63,16 @@ const FinStatementPartD = () => {
 				<Formik initialValues={initialValues} onSubmit={onSubmit}>
 					{({ isSubmitting, errors }) => (
 						<Form style={{ flex: 1, width: "100%" }}>
-							<Input name="fs_partD_salary_before_tax" label="9: What is your total salary or wages before tax?" value="E $45,000" />
+							<div className="subSection">
+							<b><Input name="fs_partD_salary_before_tax" label="9: What is your total salary or wages before tax?" value="E $45,000" /></b>
 
-							<br />
-							<br />
+							</div>
+						
+						
+					
 
 							<div className="subSection">
-								<p>10. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident) </p>
+							<b>	<p>10. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident) </p></b>
 								<Toggle
 									className="float-right"
 									value={partD_weeklyIncomeFromInvestments}
@@ -106,28 +113,28 @@ const FinStatementPartD = () => {
 							</div>
 
 							<div className="subSection">
-								<p>11. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident) </p>
+								<b><p>11. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident) </p></b>
 								<Toggle className="float-right" value={partD_incomeFromBusiness} setValue={() => setIncomeFromBusiness(!partD_incomeFromBusiness)} />
 
 								<div className="indentLeft">
 									<Input
-										name="partD_business_income_2_paidby"
+										name="fs_partD_business_income_2_paidby"
 										label="If so who is this income paid by? (e.g. bank, mortgagor, company, tenant)"
 										disabled={!partD_incomeFromBusiness}
 									/>
 									<Input
-										name="partD_investment_income_1_paidby"
+										name="fs_partD_investment_income_1_paidby"
 										label="What type of business does this income come from?"
 										disabled={!partD_incomeFromBusiness}
 									/>
-									<Input name="partD_nameOfBusiness" label="What is the name of this busines/company/partnership/trust?" disabled={!partD_incomeFromBusiness} />
-									<Input name="partD_addressOfBusiness" label="What is the address?" disabled={!partD_incomeFromBusiness} />
+									<Input name="fs_partD_nameOfBusiness" label="What is the name of this busines/company/partnership/trust?" disabled={!partD_incomeFromBusiness} />
+									<Input name="fs_partD_addressOfBusiness" label="What is the address?" disabled={!partD_incomeFromBusiness} />
 									<Row>
 										<Col>
-											<Input name="partD_stateOfBusiness" label="State" disabled={!partD_incomeFromBusiness} />
+											<Input name="fs_partD_stateOfBusiness" label="State" disabled={!partD_incomeFromBusiness} />
 										</Col>
 										<Col>
-											<Input name="partD_postcodeOfBusiness" label="Postcode" disabled={!partD_incomeFromBusiness} />
+											<Input name="fs_partD_postcodeOfBusiness" label="Postcode" disabled={!partD_incomeFromBusiness} />
 										</Col>
 									</Row>
 								</div>
@@ -149,7 +156,7 @@ const FinStatementPartD = () => {
 
 
 							<div className="subSection">
-								<p>Do you get any type of government benefits? </p>
+								<b><p>12. Do you get any type of government benefits? </p></b>
 								<Toggle
 									className="float-right"
 									value={partD_govBenefits}
@@ -188,6 +195,143 @@ const FinStatementPartD = () => {
 								<br />
 								<br />
 							</div>
+
+
+
+
+
+
+
+
+
+
+
+							<div className="subSection">
+								<b><p>13. Do you get spousal maintence or child support? </p></b>
+								<Toggle
+									className="float-right"
+									value={partD_spousalMaintenceOrChildSupport}
+									setValue={() => setSpousalMaintenceOrChildSupport(!partD_spousalMaintenceOrChildSupport)}
+								/>
+
+								<div className="indentLeft">
+									<div>
+										<Input
+											disabled={!partD_spousalMaintenceOrChildSupport}
+											name="fs_partD_spousalMaintenceOrChildSupport_1_type"
+											label="What type of maintence do you get?"
+										/>
+										<Input
+											disabled={!partD_spousalMaintenceOrChildSupport}
+											name="fs_partD_spousalMaintenceOrChildSupport_1_amount"
+											label="How much do you get per week?"
+										/>
+									</div>
+									<br></br>
+									<br></br>
+									<div>
+										<Input
+											disabled={!partD_spousalMaintenceOrChildSupport}
+											name="fs_partD_spousalMaintenceOrChildSupport_2_type"
+											label="Any other types of maintence?"
+										/>
+										<Input
+											disabled={!partD_spousalMaintenceOrChildSupport}
+											name="fs_partD_spousalMaintenceOrChildSupport_2_amount"
+											label="And how much do you get per week?"
+										/>
+									</div>
+								</div>
+
+								<br />
+								<br />
+							</div>
+
+
+							<div className="subSection">
+								<b><p>14. Do you get any benefits from your employment or business? </p></b>
+								<Toggle
+									className="float-right"
+									value={partD_benefitsBusinessOrEmployment}
+									setValue={() => setBenefitsBusinessOrEmployment(!partD_benefitsBusinessOrEmployment)}
+								/>
+
+								<div className="indentLeft">
+									<div>
+										<Input
+											disabled={!partD_benefitsBusinessOrEmployment}
+											name="fs_partD_benefitsBusinessOrEmployment_1_type"
+											label="What type of benefits do you get?"
+										/>
+										<Input
+											disabled={!partD_benefitsBusinessOrEmployment}
+											name="fs_partD_benefitsBusinessOrEmployment_1_amount"
+											label="How much in benfits do you get?"
+										/>
+									</div>
+									<br></br>
+									<br></br>
+									<div>
+										<Input
+											disabled={!partD_benefitsBusinessOrEmployment}
+											name="fs_partD_benefitsBusinessOrEmployment_2_type"
+											label="Any other types of benefits?"
+										/>
+										<Input
+											disabled={!partD_benefitsBusinessOrEmployment}
+											name="fs_partD_benefitsBusinessOrEmployment_2_amount"
+											label="And how much do you get per week?"
+										/>
+									</div>
+								</div>
+
+								<br />
+								<br />
+							</div>
+
+
+
+							<div className="subSection">
+								<b><p>15. Is there any other types of income we have missed? </p></b>
+								<Toggle
+									className="float-right"
+									value={partD_otherIncome}
+									setValue={() => setOtherIncome(!partD_otherIncome)}
+								/>
+
+								<div className="indentLeft">
+									<div>
+										<Input
+											disabled={!partD_otherIncome}
+											name="fs_partD_otherIncome_1_type"
+											label="What other type of income is this?"
+										/>
+										<Input
+											disabled={!partD_otherIncome}
+											name="fs_partD_otherIncome_1_amount"
+											label="How much of this income do you get per week?"
+										/>
+									</div>
+									<br></br>
+									<br></br>
+									<div>
+										<Input
+											disabled={!partD_otherIncome}
+											name="fs_partD_otherIncome_2_type"
+											label="Any other types of income? antying else? (crypto currency, etc)"
+										/>
+										<Input
+											disabled={!partD_otherIncome}
+											name="fs_partD_otherIncome_2_amount"
+											label="And how much do you get per week?"
+										/>
+									</div>
+								</div>
+
+								<br />
+								<br />
+							</div>
+
 
 
 
