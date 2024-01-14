@@ -8,6 +8,20 @@ import api from "apis/api";
 import useSWR, { mutate } from "swr";
 import Toggle from "components/forms/Toggle";
 
+import FinStatementPartD from "components/finstatementformsections/finStatementPartD";
+
+
+
+// Developer Note:
+// For consistent naming of form fields across all form sections, please follow this pattern:
+// fs_partA_field_name
+// fs_partB_field_name
+// fs_partC_field_name
+// fs_partD_field_name
+// etc.
+// This pattern helps in maintaining uniformity and readability in our form field naming conventions.
+
+
 import "./AdminFinStatement.scss";
 
 const initialValues = {
@@ -27,17 +41,17 @@ const parseSubmitValues = (v) => ({
 const AdminDocumentRequest = () => {
 	// Save scroll position before refreshing the page
 	window.addEventListener("beforeunload", () => {
-		console.log("saving scroll position")
+		console.log("saving scroll position");
 
 		localStorage.setItem("scrollPosition", window.scrollY);
-		console.log(localStorage.getItem("scrollPosition"))
+		console.log(localStorage.getItem("scrollPosition"));
 	});
 
 	// Restore scroll position after the page is reloaded
 	window.addEventListener("load", () => {
-		console.log("restoring scroll position")
+		console.log("restoring scroll position");
 		const scrollPosition = localStorage.getItem("scrollPosition");
-		console.log(scrollPosition)
+		console.log(scrollPosition);
 		if (scrollPosition) {
 			window.scrollTo(0, parseInt(scrollPosition));
 			localStorage.removeItem("scrollPosition");
@@ -112,18 +126,7 @@ const AdminDocumentRequest = () => {
 			<div className="container py-5">
 				<h1>Create a new Financial Statement</h1>
 
-				{/* <Card>
-					<Card.Body>
-						<Card.Title>Part A</Card.Title>
-						<Card.Text>
-							<p>Part A is the personal details of the person who is filling out the form.</p>
-							<p>These details are used to identify the person who is filling out the form.</p>
-							<Alert variant="info">
-								<p>Data pulled from our file. Please confirm they're correct</p>
-							</Alert>
-						</Card.Text>
-					</Card.Body>
-				</Card> */}
+				
 
 				<Card>
 					<Alert variant="info">
@@ -175,100 +178,8 @@ const AdminDocumentRequest = () => {
 					</Formik>
 				</Card>
 
-
-				<Card>
-					<Alert variant="info">
-						<Alert.Heading>Part D: Your income</Alert.Heading>
-					</Alert>
-
-					<Formik initialValues={initialValues} onSubmit={onSubmit}>
-						{({ isSubmitting, errors }) => (
-							<Form style={{ flex: 1, width: "100%" }}>
-								<Input name="salary_before_tax" label="9: What is your total salary or wages before tax?" value="E $45,000" />
-
-								{/* <p>9: What is your total salary or wages before tax?</p> */}
-								{/* <Toggle className="float-right" value={employed} setValue={() => setEmployed(!employed)} /> */}
-
-								<Input name="investment_income_1" label="10. What is your weekly income from all your investments after tax? (e.g. rent, interest, divident)" />
-								<div className="indentLeft">
-								<Input name="investment_income_1_paidby" label="Who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
-
-
-
-								</div>
-								{/* <Input name="business_income_2" label="10.Do you have any other weekly inccome?" /> */}
-								<p>11. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident) </p>
-								<Toggle className="float-right" value={incomeFromBusiness} setValue={() => setIncomeFromBusiness(!incomeFromBusiness)} />
-
-								{/* <Input name="investment_income_1" label="11. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident)" /> */}
-
-								<div className="indentLeft">
-								<Input name="business_income_2_paidby" label="If so who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
-
-									<Input name="investment_income_1_paidby" label="What type of business does this income come from?" />
-									<Input
-										name="nameOfBusiness"
-										label="What is the name of this busines/company/partnership/trust?"
-									/>
-									
-									<Input
-										name="addressOfBusiness"
-										label="Waht is the address?"
-									/>
-									<Row>
-										<Col>
-											<Input
-												name="stateOfBusiness"
-												label="State"
-											/>
-										</Col>
-										<Col>
-											<Input
-												name="postcodeOfBusiness"
-												label="Postcode"
-											/>
-										</Col>
-									</Row>
-								</div>
-
-
-
-
-
-
-
-
-
-								<Input
-									name="incomeFromBusiness"
-									label="11. Do you get any weekly income from businesses, partnerships, companies or trusts? (e.g., rent, interest, dividend)"
-								/>
-								<Input
-									name="typeOfIncomeBusiness"
-									label="What type of business does this income come from?"
-								/>
-
-
-								<Input name="business_income_2" label="10.Do you have any other weekly inccome?" />
-								<Input name="business_income_2_paidby" label="If so who is this income paid by? (e.g. bank, mortgagor, company, tenant)" />
-
-
-
-								<Input name="employer_address" label="6: What is the address of your employer?" />
-
-								<Input name="employer_duration" label="7: How long have you been at this place?" />
-
-								<p>8: Are you self-employed?</p>
-								<Toggle className="float-right" value={selfEmployed} setValue={() => setSelfEmployed(!selfEmployed)} />
-
-								<Input disabled={!selfEmployed} name="self_employed" label="STATE THE NAME OF THE BUSINESS / COMPANY / PARTNERSHIP / TRUST" />
-								{/* <ErrorMessage error={errors.hidden} />
-								<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
-								<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
-							</Form>
-						)}
-					</Formik>
-				</Card>
+				<FinStatementPartD></FinStatementPartD>
+				
 
 				{/* <Button>Next</Button> */}
 
