@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import Input from "components/forms/Input";
 import Layout from "components/layout/Layout";
@@ -22,10 +22,28 @@ const parseSubmitValues = (v) => ({
 	deadline: v.deadline
 });
 
-const AdminDocumentRequest = () => {
+const FinStatement = () => {
 	// get the document summary
 
+	const part_c = {
+		employer: "", // 5 What is the name of your employer?
+		occupation: "", // 3 What is your current occupation?
+		employed: true, // 4 Are you employed?
+		employment_type: "",
+		employer_address: {
+			address_1: "",
+			address_2: "",
+			state: "",
+			postcode: "",
+			phone: ""
+		}, // What is the address of your employer?
+		employer_duration: 0,
+		self_employed: false, // 8 Are you self-employed?
+	};
+
 	const [data, setData] = React.useState(null);
+	const [partC, setPartC] = React.useState(part_c);
+
 	// const [query, setQuery] = React.useState(null);
 	const [isSubmitting, setIsSubmitting] = React.useState(false);
 	const [step, setStep] = React.useState(0);
@@ -42,17 +60,23 @@ const AdminDocumentRequest = () => {
 		postcode: "2000"
 	};
 
-	const part_c = {
-		occupation: "Software Engineer",
-		employed: true,
-		income: "100000"
-	};
-
 	const prompts = [
 		{
 			c_3: "What is your current occupation?"
+			// What is the name of your employer?
 		}
 	];
+
+	useEffect(() => {
+		getPartC();
+	}, []);
+
+	const getPartC = async () => {
+		const { data } = await api.open.get(`/finstatement/part_c`);
+		console.log(data);
+		setData(data);
+		return data;
+	};
 
 	// Post the .csv to the backend to parse
 	const parseData = async () => {
@@ -123,35 +147,7 @@ const AdminDocumentRequest = () => {
 					</Formik>
 				</Card>
 
-				<Card>
-					<Alert variant="info">
-						<Alert.Heading>Part C: Your employment details</Alert.Heading>
-					</Alert>
-
-					<Formik initialValues={initialValues} onSubmit={onSubmit}>
-						{({ isSubmitting, errors }) => (
-							<Form style={{ flex: 1, width: "100%" }}>
-								<Input name="family_name" label="3: What is your current occupation?" value={income?.response} />
-
-								<p>4: Are you employed?</p>
-								<Toggle className="float-right" value={employed} setValue={() => setEmployed(!employed)} />
-
-								<Input disabled={!employed} name="employer_name" label="5: What is the name of your employer?" />
-								<Input disabled={!employed} name="employer_address" label="6: What is the address of your employer?" />
-
-								<Input name="employer_duration" label="7: How long have you been at this place?" />
-
-								<p>8: Are you self-employed?</p>
-								<Toggle className="float-right" value={selfEmployed} setValue={() => setSelfEmployed(!selfEmployed)} />
-
-								<Input disabled={!selfEmployed} name="self_employed" label="STATE THE NAME OF THE BUSINESS / COMPANY / PARTNERSHIP / TRUST" />
-								{/* <ErrorMessage error={errors.hidden} />
-								<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
-								<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
-							</Form>
-						)}
-					</Formik>
-				</Card>
+				
 
 				{/* <Button>Next</Button> */}
 
@@ -161,4 +157,4 @@ const AdminDocumentRequest = () => {
 	);
 };
 
-export default AdminDocumentRequest;
+export default FinStatement;
