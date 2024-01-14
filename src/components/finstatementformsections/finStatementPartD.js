@@ -11,15 +11,32 @@ import Toggle from "components/forms/Toggle";
 import "./finStatementPartD.scss";
 
 const initialValues = {
-	fs_partD_salary_before_tax: "E $45,000", // This has a specific initial value
-	fs_partD_investment_income_1: "", // Assuming default as empty
-	fs_partD_investment_income_1_paidby: "", // Assuming default as empty
-	fs_partD_investment_income_2: "", // Assuming default as empty
-	fs_partD_investment_income_2_paidby: "", // Assuming default as empty
-	partD_nameOfBusiness: "", // Assuming default as empty
-	partD_addressOfBusiness: "", // Assuming default as empty
-	partD_stateOfBusiness: "", // Assuming default as empty
-	partD_postcodeOfBusiness: "" // Assuming default as empty
+	fs_partD_salary_before_tax: "E $45,000", // Existing value
+	fs_partD_investment_income_1: "",
+	fs_partD_investment_income_1_paidby: "",
+	fs_partD_investment_income_2: "",
+	fs_partD_investment_income_2_paidby: "",
+	fs_partD_business_income_2_paidby: "", // Added for the business income section
+	fs_partD_nameOfBusiness: "",
+	fs_partD_addressOfBusiness: "",
+	fs_partD_stateOfBusiness: "",
+	fs_partD_postcodeOfBusiness: "",
+	fs_partD_government_benefits_1_type: "", // Added for the government benefits section
+	fs_partD_government_benefits_1_amount: "",
+	fs_partD_government_benefits_2_type: "",
+	fs_partD_government_benefits_2_amount: "",
+	fs_partD_spousalMaintenceOrChildSupport_1_type: "", // Added for the spousal maintenance or child support section
+	fs_partD_spousalMaintenceOrChildSupport_1_amount: "",
+	fs_partD_spousalMaintenceOrChildSupport_2_type: "",
+	fs_partD_spousalMaintenceOrChildSupport_2_amount: "",
+	fs_partD_benefitsBusinessOrEmployment_1_type: "", // Added for the employment/business benefits section
+	fs_partD_benefitsBusinessOrEmployment_1_amount: "",
+	fs_partD_benefitsBusinessOrEmployment_2_type: "",
+	fs_partD_benefitsBusinessOrEmployment_2_amount: "",
+	fs_partD_otherIncome_1_type: "", // Added for the other income section
+	fs_partD_otherIncome_1_amount: "",
+	fs_partD_otherIncome_2_type: "",
+	fs_partD_otherIncome_2_amount: "",
 };
 
 const parseSubmitValues = (v) => ({
