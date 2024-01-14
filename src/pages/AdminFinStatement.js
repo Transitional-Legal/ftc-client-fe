@@ -3,10 +3,23 @@ import { Formik, Form, Field } from "formik";
 import Input from "components/forms/Input";
 import Layout from "components/layout/Layout";
 import Card from "components/Card";
-import { Alert, Button } from "react-bootstrap";
+import { Alert, Button, Row, Col } from "react-bootstrap";
 import api from "apis/api";
 import useSWR, { mutate } from "swr";
 import Toggle from "components/forms/Toggle";
+
+import FinStatementPartD from "components/finstatementformsections/finStatementPartD";
+
+// Developer Note:
+// For consistent naming of form fields across all form sections, please follow this pattern:
+// fs_partA_field_name
+// fs_partB_field_name
+// fs_partC_field_name
+// fs_partD_field_name
+// etc.
+// This pattern helps in maintaining uniformity and readability in our form field naming conventions.
+
+import "./AdminFinStatement.scss";
 
 const initialValues = {
 	title: "",
@@ -22,7 +35,26 @@ const parseSubmitValues = (v) => ({
 	deadline: v.deadline
 });
 
-const AdminDocumentRequest = () => {
+const FinStatement = () => {
+	// Save scroll position before refreshing the page
+	window.addEventListener("beforeunload", () => {
+		console.log("saving scroll position");
+
+		localStorage.setItem("scrollPosition", window.scrollY);
+		console.log(localStorage.getItem("scrollPosition"));
+	});
+
+	// Restore scroll position after the page is reloaded
+	window.addEventListener("load", () => {
+		console.log("restoring scroll position");
+		const scrollPosition = localStorage.getItem("scrollPosition");
+		console.log(scrollPosition);
+		if (scrollPosition) {
+			window.scrollTo(0, parseInt(scrollPosition));
+			localStorage.removeItem("scrollPosition");
+		}
+	});
+
 	// get the document summary
 
 	const [data, setData] = React.useState(null);
@@ -32,6 +64,7 @@ const AdminDocumentRequest = () => {
 
 	const [employed, setEmployed] = React.useState(false);
 	const [selfEmployed, setSelfEmployed] = React.useState(false);
+	const [incomeFromBusiness, setIncomeFromBusiness] = React.useState(false);
 
 	const part_a = {
 		family_name: "Smith",
@@ -90,19 +123,6 @@ const AdminDocumentRequest = () => {
 			<div className="container py-5">
 				<h1>Create a new Financial Statement</h1>
 
-				{/* <Card>
-					<Card.Body>
-						<Card.Title>Part A</Card.Title>
-						<Card.Text>
-							<p>Part A is the personal details of the person who is filling out the form.</p>
-							<p>These details are used to identify the person who is filling out the form.</p>
-							<Alert variant="info">
-								<p>Data pulled from our file. Please confirm they're correct</p>
-							</Alert>
-						</Card.Text>
-					</Card.Body>
-				</Card> */}
-
 				<Card>
 					<Alert variant="info">
 						<Alert.Heading>Part A: About you</Alert.Heading>
@@ -153,6 +173,8 @@ const AdminDocumentRequest = () => {
 					</Formik>
 				</Card>
 
+				<FinStatementPartD></FinStatementPartD>
+
 				{/* <Button>Next</Button> */}
 
 				<Button onClick={query}>Query documents</Button>
@@ -161,4 +183,4 @@ const AdminDocumentRequest = () => {
 	);
 };
 
-export default AdminDocumentRequest;
+export default FinStatement;
