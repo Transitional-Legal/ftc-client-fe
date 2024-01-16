@@ -91,14 +91,6 @@ const FinStatement = () => {
 		}
 	];
 
-	// Post the .csv to the backend to parse
-	const parseData = async () => {
-		const { data } = await api.open.post(`/finstatement/parse`);
-		console.log(data);
-		setData(data);
-		return data;
-	};
-
 	const query = async () => {
 		const prompt = "What is Sarah's current occupation?";
 		const { data } = await api.open.get(`http://localhost:8000/query/${prompt}`);
