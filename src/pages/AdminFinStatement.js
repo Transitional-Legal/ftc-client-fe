@@ -14,6 +14,7 @@ import FinStatementPartD from "components/finstatementformsections/finStatementP
 
 import "./AdminFinStatement.scss";
 import FinStatementPartC from "components/finstatementformsections/finStatementPartC";
+import FinStatementPartE from "components/finstatementformsections/finStatementPartE";
 
 // Developer Note:
 // For consistent naming of form fields across all form sections, please follow this pattern:
@@ -130,6 +131,8 @@ const FinStatement = () => {
 				<FinStatementPartC></FinStatementPartC>
 
 				<FinStatementPartD></FinStatementPartD>
+
+				<FinStatementPartE></FinStatementPartE>
 
 				{/* <Button>Next</Button> */}
 
