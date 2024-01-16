@@ -7,8 +7,8 @@ import axios from "axios";
 import "./finStatementSCSS.scss";
 
 const initialValues = {
-	family_name: "",
-	given_names: ""
+	fs_partA_family_name: "",
+	fs_partA_given_names: ""
 };
 
 const FinStatementPartA = () => {
@@ -25,8 +25,8 @@ const FinStatementPartA = () => {
 				console.log("RESPONSE PARTA");
 				console.log(response);
 				setFormData({
-					family_name: response.data.family_name,
-					given_names: response.data.given_name
+					fs_partA_family_name: response.data.family_name,
+					fs_partA_given_names: response.data.given_name
 				});
 			})
 			.catch((error) => setError(error))
@@ -72,10 +72,10 @@ const FinStatementPartA = () => {
 						<Form>
 							<Row>
 								<Col md={6}>
-									<Input name="family_name" label="Family Name" placeholder="Enter your family name" />
+									<Input name="fs_partA_family_name" label="Family Name" placeholder="Enter your family name" />
 								</Col>
 								<Col md={6}>
-									<Input name="given_names" label="Given Names" placeholder="Enter your given names" />
+									<Input name="fs_partA_given_names" label="Given Names" placeholder="Enter your given names" />
 								</Col>
 							</Row>
 
