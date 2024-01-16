@@ -23,7 +23,6 @@ const FinStatementPartE = () => {
 		fs_partE_otherIncomeEarner3_wk_income: "E $45,000"
 	};
 
-
 	const onSubmit = (values, actions) => {
 		console.log("Form Values:", values);
 		actions.setSubmitting(false);

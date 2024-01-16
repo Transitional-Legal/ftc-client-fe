@@ -60,10 +60,6 @@ const FinStatementPartD = () => {
 		fs_partD_otherIncome: false
 	};
 
-
-
-	
-
 	const [formData, setFormData] = useState(initialValues);
 
 	useEffect(() => {
@@ -83,7 +79,6 @@ const FinStatementPartD = () => {
 			console.log("Form Values:", values);
 			await api.open.post("/finstatement", parsedValues);
 			// history.push("/");
-
 		} catch (e) {
 			console.log(e);
 			actions.setErrors({ hidden: e });

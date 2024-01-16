@@ -111,9 +111,6 @@ const FinStatement = () => {
 		}
 	};
 
-	// const { data: income } = useSWR(`http://localhost:8000/query/test`);
-	// console.log(income);
-
 	return (
 		<Layout navLinks={[]}>
 			<div className="container py-5">

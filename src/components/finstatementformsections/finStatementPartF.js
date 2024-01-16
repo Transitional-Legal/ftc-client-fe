@@ -55,17 +55,29 @@ const FinStatementPartF = () => {
 									<div className="incomeEarnerSection">
 										<Row className="mb-3">
 											<Col>
-												<Input name="fs_partF_weekly_expenes_paid_by_others_1_paidby" label="Paid By"  disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}/>
+												<Input
+													name="fs_partF_weekly_expenes_paid_by_others_1_paidby"
+													label="Paid By"
+													disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}
+												/>
 											</Col>
 										</Row>
 										<Row className="mb-3">
 											<Col>
-												<Input name="fs_partF_weekly_expenes_paid_by_others_1_type" label="Type of Expense" disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}/>
+												<Input
+													name="fs_partF_weekly_expenes_paid_by_others_1_type"
+													label="Type of Expense"
+													disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}
+												/>
 											</Col>
 										</Row>
 										<Row className="mb-3">
 											<Col>
-												<Input name="fs_partF_weekly_expenes_paid_by_others_1_amount" label="Weekly Amount" disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}/>
+												<Input
+													name="fs_partF_weekly_expenes_paid_by_others_1_amount"
+													label="Weekly Amount"
+													disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}
+												/>
 											</Col>
 										</Row>
 									</div>
@@ -74,17 +86,29 @@ const FinStatementPartF = () => {
 									<div className="incomeEarnerSection">
 										<Row className="mb-3">
 											<Col>
-												<Input name="fs_partF_weekly_expenes_paid_by_others_2_paidby" label="Paid By" disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}/>
+												<Input
+													name="fs_partF_weekly_expenes_paid_by_others_2_paidby"
+													label="Paid By"
+													disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}
+												/>
 											</Col>
 										</Row>
 										<Row className="mb-3">
 											<Col>
-												<Input name="fs_partF_weekly_expenes_paid_by_others_2_type" label="Type of Expense" disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}/>
+												<Input
+													name="fs_partF_weekly_expenes_paid_by_others_2_type"
+													label="Type of Expense"
+													disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}
+												/>
 											</Col>
 										</Row>
 										<Row className="mb-3">
 											<Col>
-												<Input name="fs_partF_weekly_expenes_paid_by_others_2_amount" label="Weekly Amount" disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}/>
+												<Input
+													name="fs_partF_weekly_expenes_paid_by_others_2_amount"
+													label="Weekly Amount"
+													disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}
+												/>
 											</Col>
 										</Row>
 									</div>
@@ -93,17 +117,29 @@ const FinStatementPartF = () => {
 									<div className="incomeEarnerSection">
 										<Row className="mb-3">
 											<Col>
-												<Input name="fs_partF_weekly_expenes_paid_by_others_3_paidby" label="Paid By" disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}/>
+												<Input
+													name="fs_partF_weekly_expenes_paid_by_others_3_paidby"
+													label="Paid By"
+													disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}
+												/>
 											</Col>
 										</Row>
 										<Row className="mb-3">
 											<Col>
-												<Input name="fs_partF_weekly_expenes_paid_by_others_3_type" label="Type of Expense" disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}/>
+												<Input
+													name="fs_partF_weekly_expenes_paid_by_others_3_type"
+													label="Type of Expense"
+													disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}
+												/>
 											</Col>
 										</Row>
 										<Row className="mb-3">
 											<Col>
-												<Input name="fs_partF_weekly_expenes_paid_by_others_3_amount" label="Weekly Amount" disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}/>
+												<Input
+													name="fs_partF_weekly_expenes_paid_by_others_3_amount"
+													label="Weekly Amount"
+													disabled={!values.fs_partF_weekly_expenes_paid_by_others_in_aud}
+												/>
 											</Col>
 										</Row>
 									</div>
