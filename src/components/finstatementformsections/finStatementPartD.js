@@ -8,7 +8,7 @@ import api from "apis/api";
 import useSWR, { mutate } from "swr";
 import Toggle from "components/forms/Toggle";
 
-import "./finStatementPartD.scss";
+import "./finStatementSCSS.scss";
 
 const initialValues = {
 	fs_partD_salary_before_tax: "E $45,000", // Existing value

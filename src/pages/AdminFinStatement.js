@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import Input from "components/forms/Input";
 import Layout from "components/layout/Layout";
@@ -7,8 +7,13 @@ import { Alert, Button, Row, Col } from "react-bootstrap";
 import api from "apis/api";
 import useSWR, { mutate } from "swr";
 import Toggle from "components/forms/Toggle";
+import axios from "axios";
 
+import FinStatementPartA from "components/finstatementformsections/finStatementPartA";
 import FinStatementPartD from "components/finstatementformsections/finStatementPartD";
+
+import "./AdminFinStatement.scss";
+import FinStatementPartC from "components/finstatementformsections/finStatementPartC";
 
 // Developer Note:
 // For consistent naming of form fields across all form sections, please follow this pattern:
@@ -19,13 +24,12 @@ import FinStatementPartD from "components/finstatementformsections/finStatementP
 // etc.
 // This pattern helps in maintaining uniformity and readability in our form field naming conventions.
 
-import "./AdminFinStatement.scss";
-
 const initialValues = {
 	title: "",
 	their_ref: "",
 	issued: "",
-	deadline: ""
+	deadline: "",
+	income: ""
 };
 
 const parseSubmitValues = (v) => ({
@@ -62,8 +66,6 @@ const FinStatement = () => {
 	const [isSubmitting, setIsSubmitting] = React.useState(false);
 	const [step, setStep] = React.useState(0);
 
-	const [employed, setEmployed] = React.useState(false);
-	const [selfEmployed, setSelfEmployed] = React.useState(false);
 	const [incomeFromBusiness, setIncomeFromBusiness] = React.useState(false);
 
 	const part_a = {
@@ -115,63 +117,17 @@ const FinStatement = () => {
 		}
 	};
 
-	const { data: income } = useSWR(`http://localhost:8000/query/test`);
-	console.log(income);
+	// const { data: income } = useSWR(`http://localhost:8000/query/test`);
+	// console.log(income);
 
 	return (
 		<Layout navLinks={[]}>
 			<div className="container py-5">
 				<h1>Create a new Financial Statement</h1>
 
-				<Card>
-					<Alert variant="info">
-						<Alert.Heading>Part A: About you</Alert.Heading>
-						<p>This data has been pulled from our file. Please confirm it's correct.</p>
-					</Alert>
+				<FinStatementPartA></FinStatementPartA>
 
-					<Formik initialValues={initialValues} onSubmit={onSubmit}>
-						{({ isSubmitting, errors }) => (
-							<Form style={{ flex: 1, width: "100%" }}>
-								<Input name="family_name" label="What is your family name as used now?" value={part_a?.family_name} />
-								<Input name="given_names" label="Given names?" value={part_a?.given_names} />
-
-								{/* <ErrorMessage error={errors.hidden} />
-							<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
-							<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
-							</Form>
-						)}
-					</Formik>
-				</Card>
-
-				<Card>
-					<Alert variant="info">
-						<Alert.Heading>Part C: Your employment details</Alert.Heading>
-					</Alert>
-
-					<Formik initialValues={initialValues} onSubmit={onSubmit}>
-						{({ isSubmitting, errors }) => (
-							<Form style={{ flex: 1, width: "100%" }}>
-								<Input name="family_name" label="3: What is your current occupation?" value={income?.response} />
-
-								<p>4: Are you employed?</p>
-								<Toggle className="float-right" value={employed} setValue={() => setEmployed(!employed)} />
-
-								<Input disabled={!employed} name="employer_name" label="5: What is the name of your employer?" />
-								<Input disabled={!employed} name="employer_address" label="6: What is the address of your employer?" />
-
-								<Input name="employer_duration" label="7: How long have you been at this place?" />
-
-								<p>8: Are you self-employed?</p>
-								<Toggle className="float-right" value={selfEmployed} setValue={() => setSelfEmployed(!selfEmployed)} />
-
-								<Input disabled={!selfEmployed} name="self_employed" label="STATE THE NAME OF THE BUSINESS / COMPANY / PARTNERSHIP / TRUST" />
-								{/* <ErrorMessage error={errors.hidden} />
-								<SubmitSpinnerButton submitText="Upload a document" isSubmitting={isSubmitting} />
-								<SubmitSpinnerButton submitText="Submit" isSubmitting={isSubmitting} /> */}
-							</Form>
-						)}
-					</Formik>
-				</Card>
+				<FinStatementPartC></FinStatementPartC>
 
 				<FinStatementPartD></FinStatementPartD>
 
