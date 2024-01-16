@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import Input from "components/forms/Input";
 import Layout from "components/layout/Layout";
@@ -10,8 +10,6 @@ import Toggle from "components/forms/Toggle";
 
 import "./finStatementSCSS.scss";
 
-
-
 const parseSubmitValues = (v) => ({
 	title: v.title,
 	their_ref: v.their_ref,
@@ -20,7 +18,6 @@ const parseSubmitValues = (v) => ({
 });
 
 const FinStatementPartD = () => {
-	const [partD_weeklyIncomeFromInvestments, setWeeklyIncomeFromInvestments] = React.useState(true);
 	const [partD_incomeFromBusiness, setIncomeFromBusiness] = React.useState(true);
 	const [partD_govBenefits, setGovBenefits] = React.useState(false);
 	const [partD_spousalMaintenceOrChildSupport, setSpousalMaintenceOrChildSupport] = React.useState(false);
@@ -29,6 +26,7 @@ const FinStatementPartD = () => {
 
 	const initialValues = {
 		fs_partD_salary_before_tax: "E $45,000", // Existing value
+		fs_partD_weeklyIncomeFromInvestments: true,
 		fs_partD_investment_income_1: "E $350",
 		fs_partD_investment_income_1_paidby: "Rental Tennants",
 		fs_partD_investment_income_2: "no",
@@ -46,42 +44,46 @@ const FinStatementPartD = () => {
 		fs_partD_spousalMaintenceOrChildSupport_1_amount: "",
 		fs_partD_spousalMaintenceOrChildSupport_2_type: "",
 		fs_partD_spousalMaintenceOrChildSupport_2_amount: "",
-		fs_partD_benefitsBusinessOrEmployment_1_type: "", // Added for the employment/business benefits section
-		fs_partD_benefitsBusinessOrEmployment_1_amount: "",
-		fs_partD_benefitsBusinessOrEmployment_2_type: "",
+		fs_partD_benefitsBusinessOrEmployment_1_type: "Frige beneftis", // Added for the employment/business benefits section
+		fs_partD_benefitsBusinessOrEmployment_1_amount: "E $53",
+		fs_partD_benefitsBusinessOrEmployment_2_type: "no",
 		fs_partD_benefitsBusinessOrEmployment_2_amount: "",
 		fs_partD_otherIncome_1_type: "", // Added for the other income section
 		fs_partD_otherIncome_1_amount: "",
 		fs_partD_otherIncome_2_type: "",
-		fs_partD_otherIncome_2_amount: ""
+		fs_partD_otherIncome_2_amount: "",
+		// New state values with fs_ prefix
+		fs_partD_incomeFromBusiness: true,
+		fs_partD_govBenefits: false,
+		fs_partD_spousalMaintenceOrChildSupport: false,
+		fs_partD_benefitsBusinessOrEmployment: true,
+		fs_partD_otherIncome: false
 	};
-
-
-	const [formData, setFormData] = useState(initialValues);
 
 
 
 	
+
+	const [formData, setFormData] = useState(initialValues);
+
 	useEffect(() => {
 		const mockResponse = {
 			// occupation: "Software Developer",
-		
 		};
 
 		setFormData({
-			...initialValues,
+			...initialValues
 			// new values
 		});
 	}, []);
 
-
-
-
 	const onSubmit = async (values, actions) => {
 		try {
 			const parsedValues = parseSubmitValues(values);
+			console.log("Form Values:", values);
 			await api.open.post("/finstatement", parsedValues);
 			// history.push("/");
+
 		} catch (e) {
 			console.log(e);
 			actions.setErrors({ hidden: e });
@@ -99,8 +101,8 @@ const FinStatementPartD = () => {
 					<Alert.Heading>Part D: Your income</Alert.Heading>
 				</Alert>
 
-				<Formik initialValues={initialValues} onSubmit={onSubmit}>
-					{({ isSubmitting, errors }) => (
+				<Formik initialValues={initialValues} onSubmit={onSubmit} enableReinitialize={true}>
+					{({ isSubmitting, errors, values, setFieldValue }) => (
 						<Form style={{ flex: 1, width: "100%" }}>
 							<div className="subSection">
 								<b>
@@ -115,19 +117,19 @@ const FinStatementPartD = () => {
 								</b>
 								<Toggle
 									className="float-right"
-									value={partD_weeklyIncomeFromInvestments}
-									setValue={() => setWeeklyIncomeFromInvestments(!partD_weeklyIncomeFromInvestments)}
+									value={values.fs_partD_weeklyIncomeFromInvestments}
+									setValue={(value) => setFieldValue("fs_partD_weeklyIncomeFromInvestments", value)}
 								/>
 
 								<div className="indentLeft">
 									<div>
 										<Input
-											disabled={!partD_weeklyIncomeFromInvestments}
+											disabled={!values.fs_partD_weeklyIncomeFromInvestments}
 											name="fs_partD_investment_income_1"
 											label="What is your weekly income from all your investments after tax? (e.g. rent, interest, divident)"
 										/>
 										<Input
-											disabled={!partD_weeklyIncomeFromInvestments}
+											disabled={!values.fs_partD_weeklyIncomeFromInvestments}
 											name="fs_partD_investment_income_1_paidby"
 											label="Who is this income paid by? (e.g. bank, mortgagor, company, tenant)"
 										/>
@@ -136,12 +138,12 @@ const FinStatementPartD = () => {
 									<br></br>
 									<div>
 										<Input
-											disabled={!partD_weeklyIncomeFromInvestments}
+											disabled={!values.fs_partD_weeklyIncomeFromInvestments}
 											name="fs_partD_investment_income_2"
 											label="Do you get any other weekly income from any other investments? (e.g. rent, interest, divident)"
 										/>
 										<Input
-											disabled={!partD_weeklyIncomeFromInvestments}
+											disabled={!values.fs_partD_weeklyIncomeFromInvestments}
 											name="fs_partD_investment_income_2_paidby"
 											label="Who is additional this income paid by? (e.g. bank, mortgagor, company, tenant)"
 										/>
@@ -154,33 +156,37 @@ const FinStatementPartD = () => {
 
 							<div className="subSection">
 								<b>
-									<p>11. Do you get any weekly income from businesses, partnerships, companyes or trusts? (e.g. rent, interest, divident) </p>
+									<p>11. Do you get any weekly income from businesses, partnerships, companies, or trusts? (e.g. rent, interest, dividend) </p>
 								</b>
-								<Toggle className="float-right" value={partD_incomeFromBusiness} setValue={() => setIncomeFromBusiness(!partD_incomeFromBusiness)} />
+								<Toggle
+									className="float-right"
+									value={values.fs_partD_incomeFromBusiness}
+									setValue={(value) => setFieldValue("fs_partD_incomeFromBusiness", value)}
+								/>
 
 								<div className="indentLeft">
 									<Input
 										name="fs_partD_business_income_2_paidby"
 										label="If so who is this income paid by? (e.g. bank, mortgagor, company, tenant)"
-										disabled={!partD_incomeFromBusiness}
+										disabled={!values.fs_partD_incomeFromBusiness}
 									/>
 									<Input
 										name="fs_partD_investment_income_1_paidby"
 										label="What type of business does this income come from?"
-										disabled={!partD_incomeFromBusiness}
+										disabled={!values.fs_partD_incomeFromBusiness}
 									/>
 									<Input
 										name="fs_partD_nameOfBusiness"
-										label="What is the name of this busines/company/partnership/trust?"
-										disabled={!partD_incomeFromBusiness}
+										label="What is the name of this business/company/partnership/trust?"
+										disabled={!values.fs_partD_incomeFromBusiness}
 									/>
-									<Input name="fs_partD_addressOfBusiness" label="What is the address?" disabled={!partD_incomeFromBusiness} />
+									<Input name="fs_partD_addressOfBusiness" label="What is the address?" disabled={!values.fs_partD_incomeFromBusiness} />
 									<Row>
 										<Col>
-											<Input name="fs_partD_stateOfBusiness" label="State" disabled={!partD_incomeFromBusiness} />
+											<Input name="fs_partD_stateOfBusiness" label="State" disabled={!values.fs_partD_incomeFromBusiness} />
 										</Col>
 										<Col>
-											<Input name="fs_partD_postcodeOfBusiness" label="Postcode" disabled={!partD_incomeFromBusiness} />
+											<Input name="fs_partD_postcodeOfBusiness" label="Postcode" disabled={!values.fs_partD_incomeFromBusiness} />
 										</Col>
 									</Row>
 								</div>
@@ -190,18 +196,22 @@ const FinStatementPartD = () => {
 								<b>
 									<p>12. Do you get any type of government benefits? </p>
 								</b>
-								<Toggle className="float-right" value={partD_govBenefits} setValue={() => setGovBenefits(!partD_govBenefits)} />
+								<Toggle className="float-right" value={values.fs_partD_govBenefits} setValue={(value) => setFieldValue("fs_partD_govBenefits", value)} />
 
 								<div className="indentLeft">
 									<div>
-										<Input disabled={!partD_govBenefits} name="fs_partD_government_benefits_1_type" label="What type of govermnet benefit do you get?" />
-										<Input disabled={!partD_govBenefits} name="fs_partD_government_benefits_1_amount" label="How much do you get per week?" />
+										<Input
+											disabled={!values.fs_partD_govBenefits}
+											name="fs_partD_government_benefits_1_type"
+											label="What type of government benefit do you get?"
+										/>
+										<Input disabled={!values.fs_partD_govBenefits} name="fs_partD_government_benefits_1_amount" label="How much do you get per week?" />
 									</div>
 									<br></br>
 									<br></br>
 									<div>
-										<Input disabled={!partD_govBenefits} name="fs_partD_government_benefits_2_type" label="Any other types government benefits?" />
-										<Input disabled={!partD_govBenefits} name="fs_partD_government_benefits_2_amount" label="And how much do you get per week?" />
+										<Input disabled={!values.fs_partD_govBenefits} name="fs_partD_government_benefits_2_type" label="Any other types of government benefits?" />
+										<Input disabled={!values.fs_partD_govBenefits} name="fs_partD_government_benefits_2_amount" label="And how much do you get per week?" />
 									</div>
 								</div>
 
@@ -211,23 +221,23 @@ const FinStatementPartD = () => {
 
 							<div className="subSection">
 								<b>
-									<p>13. Do you get spousal maintence or child support? </p>
+									<p>13. Do you get spousal maintenance or child support? </p>
 								</b>
 								<Toggle
 									className="float-right"
-									value={partD_spousalMaintenceOrChildSupport}
-									setValue={() => setSpousalMaintenceOrChildSupport(!partD_spousalMaintenceOrChildSupport)}
+									value={values.fs_partD_spousalMaintenceOrChildSupport}
+									setValue={(value) => setFieldValue("fs_partD_spousalMaintenceOrChildSupport", value)}
 								/>
 
 								<div className="indentLeft">
 									<div>
 										<Input
-											disabled={!partD_spousalMaintenceOrChildSupport}
+											disabled={!values.fs_partD_spousalMaintenceOrChildSupport}
 											name="fs_partD_spousalMaintenceOrChildSupport_1_type"
-											label="What type of maintence do you get?"
+											label="What type of maintenance do you get?"
 										/>
 										<Input
-											disabled={!partD_spousalMaintenceOrChildSupport}
+											disabled={!values.fs_partD_spousalMaintenceOrChildSupport}
 											name="fs_partD_spousalMaintenceOrChildSupport_1_amount"
 											label="How much do you get per week?"
 										/>
@@ -236,12 +246,12 @@ const FinStatementPartD = () => {
 									<br></br>
 									<div>
 										<Input
-											disabled={!partD_spousalMaintenceOrChildSupport}
+											disabled={!values.fs_partD_spousalMaintenceOrChildSupport}
 											name="fs_partD_spousalMaintenceOrChildSupport_2_type"
-											label="Any other types of maintence?"
+											label="Any other types of maintenance?"
 										/>
 										<Input
-											disabled={!partD_spousalMaintenceOrChildSupport}
+											disabled={!values.fs_partD_spousalMaintenceOrChildSupport}
 											name="fs_partD_spousalMaintenceOrChildSupport_2_amount"
 											label="And how much do you get per week?"
 										/>
@@ -258,33 +268,33 @@ const FinStatementPartD = () => {
 								</b>
 								<Toggle
 									className="float-right"
-									value={partD_benefitsBusinessOrEmployment}
-									setValue={() => setBenefitsBusinessOrEmployment(!partD_benefitsBusinessOrEmployment)}
+									value={values.fs_partD_benefitsBusinessOrEmployment}
+									setValue={(value) => setFieldValue("fs_partD_benefitsBusinessOrEmployment", value)}
 								/>
 
 								<div className="indentLeft">
 									<div>
 										<Input
-											disabled={!partD_benefitsBusinessOrEmployment}
+											disabled={!values.fs_partD_benefitsBusinessOrEmployment}
 											name="fs_partD_benefitsBusinessOrEmployment_1_type"
 											label="What type of benefits do you get?"
 										/>
 										<Input
-											disabled={!partD_benefitsBusinessOrEmployment}
+											disabled={!values.fs_partD_benefitsBusinessOrEmployment}
 											name="fs_partD_benefitsBusinessOrEmployment_1_amount"
-											label="How much in benfits do you get?"
+											label="How much in benefits do you get?"
 										/>
 									</div>
 									<br></br>
 									<br></br>
 									<div>
 										<Input
-											disabled={!partD_benefitsBusinessOrEmployment}
+											disabled={!values.fs_partD_benefitsBusinessOrEmployment}
 											name="fs_partD_benefitsBusinessOrEmployment_2_type"
 											label="Any other types of benefits?"
 										/>
 										<Input
-											disabled={!partD_benefitsBusinessOrEmployment}
+											disabled={!values.fs_partD_benefitsBusinessOrEmployment}
 											name="fs_partD_benefitsBusinessOrEmployment_2_amount"
 											label="And how much do you get per week?"
 										/>
@@ -299,22 +309,22 @@ const FinStatementPartD = () => {
 								<b>
 									<p>15. Is there any other types of income we have missed? </p>
 								</b>
-								<Toggle className="float-right" value={partD_otherIncome} setValue={() => setOtherIncome(!partD_otherIncome)} />
+								<Toggle className="float-right" value={values.fs_partD_otherIncome} setValue={(value) => setFieldValue("fs_partD_otherIncome", value)} />
 
 								<div className="indentLeft">
 									<div>
-										<Input disabled={!partD_otherIncome} name="fs_partD_otherIncome_1_type" label="What other type of income is this?" />
-										<Input disabled={!partD_otherIncome} name="fs_partD_otherIncome_1_amount" label="How much of this income do you get per week?" />
+										<Input disabled={!values.fs_partD_otherIncome} name="fs_partD_otherIncome_1_type" label="What other type of income is this?" />
+										<Input disabled={!values.fs_partD_otherIncome} name="fs_partD_otherIncome_1_amount" label="How much of this income do you get per week?" />
 									</div>
 									<br></br>
 									<br></br>
 									<div>
 										<Input
-											disabled={!partD_otherIncome}
+											disabled={!values.fs_partD_otherIncome}
 											name="fs_partD_otherIncome_2_type"
-											label="Any other types of income? antying else? (crypto currency, etc)"
+											label="Any other types of income? anything else? (cryptocurrency, etc)"
 										/>
-										<Input disabled={!partD_otherIncome} name="fs_partD_otherIncome_2_amount" label="And how much do you get per week?" />
+										<Input disabled={!values.fs_partD_otherIncome} name="fs_partD_otherIncome_2_amount" label="And how much do you get per week?" />
 									</div>
 								</div>
 
@@ -331,8 +341,6 @@ const FinStatementPartD = () => {
 					)}
 				</Formik>
 			</Card>
-
-			
 		</div>
 	);
 };
