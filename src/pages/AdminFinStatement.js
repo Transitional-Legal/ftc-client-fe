@@ -137,8 +137,6 @@ const FinStatement = () => {
 
 				<FinStatementPartF></FinStatementPartF>
 
-
-
 				{/* <Button>Next</Button> */}
 
 				<Button onClick={query}>Query documents</Button>

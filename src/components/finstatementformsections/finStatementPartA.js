@@ -63,7 +63,7 @@ const FinStatementPartA = () => {
 		<div className="container py-5">
 			<Card>
 				<Alert variant="info">
-					<Alert.Heading>Part A: About You</Alert.Heading>
+					<Alert.Heading>Part A: About you</Alert.Heading>
 					<p>This data has been pulled from our file. Please confirm it's correct.</p>
 				</Alert>
 
