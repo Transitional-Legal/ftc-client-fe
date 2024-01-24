@@ -10,7 +10,7 @@ import VerifyEmailPage from "pages/VerifyEmailPage";
 import RefreshLoginModal from "components/auth/RefreshLoginModal";
 import DocumentRequest from "pages/DocumentRequest";
 import AdminDocumentRequest from "pages/AdminDocumentRequest";
-import FinStatement from "pages/FinStatement";
+import FinStatement from "pages/AdminFinStatement";
 
 const Router = () => (
 	<BrowserRouter>
