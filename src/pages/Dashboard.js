@@ -45,8 +45,6 @@ const Dashboard = () => {
 	const { data: summary, error: fetchSummaryError } = useSWR(`/users/${user.email}/summary`);
 	const { data: invoices } = useSWR(`/invoices/${user.email}`);
 
-	const { data: matter, error: fetchMatterError } = useSWR(`/matters/${user.email}`);
-
 	// model for update details
 	const [show, setShow] = useState(false);
 	const [showCrypto, setShowCrypto] = useState(false);
@@ -126,7 +124,7 @@ const Dashboard = () => {
 				<div className="container">
 					<div className="row text-center justify-content-center mb-5">
 						<div className="col-xl-12 col-lg-12">
-							<h2>{matter[0]?.description || "No matter assigned"}</h2>
+							<h2>{summary?.matter || "No matter assigned"}</h2>
 						</div>
 					</div>
 				</div>
