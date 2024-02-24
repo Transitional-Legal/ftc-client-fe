@@ -11,6 +11,7 @@ import Loader from "components/Loader";
 import { AuthContext } from "components/auth/Auth";
 import UserDetailsForm from "../components/forms/UserDetailsForm";
 import QRCode from "qrcode.react";
+// import Input from "components/forms/Input";
 
 import Card from "components/Card";
 import "./Dashboard.scss";
@@ -23,7 +24,12 @@ import api from "../apis/api";
 import Summary from "components/Summary";
 
 const Dashboard = () => {
-	const { user } = useContext(AuthContext);
+	// const { user } = useContext(AuthContext);
+
+	const user = {
+		email: "lucas@lucascullen.com"
+	};
+
 	const [year, setYear] = useState(new Date().getFullYear());
 	const [transactionsDownload, setTransactionsDowload] = useState([]);
 	const [downloadError, setDownloadError] = useState({
@@ -34,10 +40,12 @@ const Dashboard = () => {
 	const csvRef = useRef();
 
 	const { data: userDetails, error: fetchDetailsError } = useSWR(`/users/${user.email}`);
-	const { data: interactions, error: fetchInteractionsError } = useSWR(`/email/${user.email}`);
+	const { data: communications, error: fetchCommunicationsError } = useSWR(`/email/${user.email}`);
 	const { data: documents, error: fetchDocumentsError } = useSWR(`/documents/${user.email}`);
 	const { data: summary, error: fetchSummaryError } = useSWR(`/users/${user.email}/summary`);
 	const { data: invoices } = useSWR(`/invoices/${user.email}`);
+
+	const { data: matter, error: fetchMatterError } = useSWR(`/matters/${user.email}`);
 
 	// model for update details
 	const [show, setShow] = useState(false);
@@ -118,7 +126,7 @@ const Dashboard = () => {
 				<div className="container">
 					<div className="row text-center justify-content-center mb-5">
 						<div className="col-xl-12 col-lg-12">
-							<h2>{summary?.matter || "No matter assigned"}</h2>
+							<h2>{matter[0]?.description || "No matter assigned"}</h2>
 						</div>
 					</div>
 				</div>
@@ -128,8 +136,7 @@ const Dashboard = () => {
 					<aside className="col-lg-5">
 						<section>
 							<Card>
-								<h4>Account Details</h4>
-								<ErrorMessage error={fetchDetailsError} />
+								<h4>My Details</h4>
 								<Loader loading={isFetching} />
 								<UserDetails details={userDetails} />
 							</Card>
@@ -169,7 +176,6 @@ const Dashboard = () => {
 						<section>
 							<Card>
 								<h4>Invoices</h4>
-								<ErrorMessage error={fetchDetailsError} />
 								<Loader loading={isFetching} />
 
 								<CurrentInvoice invoice={invoices?.last}></CurrentInvoice>
@@ -240,8 +246,22 @@ const Dashboard = () => {
 					</aside>
 					<section className="content col-lg-7">
 						<section style={{ position: "relative" }}>
-							<Summary summary={summary} setShow={setShow}></Summary>
+							<Card className="card text-white bg-danger mb-3">
+								<div className="card-header">Client Agreement</div>
+								<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							</Card>
+
 							<Card>
+								<div className="d-flex flex-row">
+									<div className="mr-auto p-2">
+										<h4>Next Steps</h4>
+										<p>Please complete the following tasks to progress your matter. </p>
+									</div>
+								</div>
+							</Card>
+
+							<Summary summary={summary} setShow={setShow}></Summary>
+							{/* <Card>
 								<div className="d-flex flex-row">
 									<div className="mr-auto p-2">
 										<h4>Interactions</h4>
@@ -266,29 +286,37 @@ const Dashboard = () => {
 									</div>
 								</div>
 								{downloadError.show && <Alert variant="danger">{downloadError.message}</Alert>}
-								<ErrorMessage error={fetchInteractionsError} />
+								
 								<Loader loading={isFetching} />
 								<TransactionTable transactions={interactions} />
-							</Card>
+							</Card> */}
+
 							<Card>
+								<div className="d-flex flex-row">
+									<div className="mr-auto p-2">
+										<h4>Chat</h4>
+										<p>Roger: Hi, how are you?</p>
+
+									</div>
+								</div>
+							</Card>
+
+							{/* <Card>
 								<div className="d-flex flex-row">
 									<div className="mr-auto p-2">
 										<h4>Documents</h4>
 									</div>
 									<div className="p-2">
-										{/* Modified code for file upload button */}
 										<input type="file" id="fileUpload" hidden onChange={handleUploadDocuments} />
 										<label htmlFor="fileUpload" className="btn btn-primary">
 											Upload Documents
 										</label>
 									</div>
 								</div>
-								{/* New code to display success notification */}
 								{uploadSuccess && <Alert variant="success">File was successfully uploaded!</Alert>}
-								<ErrorMessage error={fetchDocumentsError} />
 								<Loader loading={isFetching} />
 								<DocumentTable documents={documents} />
-							</Card>
+							</Card> */}
 						</section>
 					</section>
 				</section>

@@ -7,7 +7,7 @@ export default function WorkUpdate({ update }) {
 
 	return (
 		<div>
-			<p>Next Steps:</p>
+			{/* <p>Next Steps:</p> */}
 
 			{update?.length > 0 && (
 				<ul>

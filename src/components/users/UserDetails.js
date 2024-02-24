@@ -4,9 +4,9 @@ import LabelledTable from "components/LabelledTable";
 
 const flattenData = (data) => {
   return {
-    name: data?.name,
-    email: data?.email,
-    brc: data?.brc || "Pending Case Formalisation",
+    name: data?.name || "Unknown",
+    email: data?.email || "Unknown",
+    brc: data?.brc || "NA",
     trust: data?.trust || 0,
   };
 };
