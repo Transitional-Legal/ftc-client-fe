@@ -141,9 +141,11 @@ const Dashboard = () => {
 						</section>
 
 						<section>
-							<Button block variant="primary" onClick={handleShow} className="mt-2">
+							<Button variant="primary" onClick={handleShow} className="mt-2">
 								Update my details
 							</Button>
+
+							{/* <button className="btn btn-primary">Update my details</button> */}
 
 							<Modal show={show} onHide={handleClose}>
 								<Modal.Header closeButton>
@@ -162,12 +164,6 @@ const Dashboard = () => {
 									</Button>
 								</Modal.Footer>
 							</Modal>
-
-							<a href="https://transitionallegal.com.au/index.php/consult/" target="_blank" rel="noopener noreferrer">
-								<Button block className="mt-2">
-									Book a call
-								</Button>
-							</a>
 						</section>
 
 						{/* <section style={{ position: "relative" }}> */}
@@ -253,7 +249,7 @@ const Dashboard = () => {
 								<div className="d-flex flex-row">
 									<div className="mr-auto p-2">
 										<h4>Next Steps</h4>
-										<p>The following tasks are required to progress your matter.  Please action these by Friday, 25th December.</p>
+										<p>The following tasks are required to progress your matter. Please action these by Friday, 25th December.</p>
 									</div>
 								</div>
 							</Card>
@@ -294,7 +290,6 @@ const Dashboard = () => {
 									<div className="mr-auto p-2">
 										<h4>Chat</h4>
 										<p>Roger: Hi, how are you?</p>
-
 									</div>
 								</div>
 							</Card>
