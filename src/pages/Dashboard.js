@@ -253,12 +253,12 @@ const Dashboard = () => {
 								<div className="d-flex flex-row">
 									<div className="mr-auto p-2">
 										<h4>Next Steps</h4>
-										<p>Please complete the following tasks to progress your matter. </p>
+										<p>The following tasks are required to progress your matter.  Please action these by Friday, 25th December.</p>
 									</div>
 								</div>
 							</Card>
 
-							<Summary summary={summary} setShow={setShow}></Summary>
+							{/* <Summary summary={summary} setShow={setShow}></Summary> */}
 							{/* <Card>
 								<div className="d-flex flex-row">
 									<div className="mr-auto p-2">
